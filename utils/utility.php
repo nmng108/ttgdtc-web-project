@@ -49,11 +49,11 @@ function getUserToken() {
 		return $_SESSION['user'];
 	}
 	$token = getCookie('token');
-	$sql = "select * from Tokens where token = '$token'";
+	$sql = "select * from tokens where token = '$token'";
 	$item = executeResult($sql, true);
 	if($item != null) {
 		$userId = $item['user_id'];
-		$sql = "select * from User where id = '$userId' and deleted = 0";
+		$sql = "select * from Users where id = '$userId' ";
 		$item = executeResult($sql, true);
 		if($item != null) {
 			$_SESSION['user'] = $item;
