@@ -41,7 +41,7 @@
                 <p>
                     Chào mừng bạn đến với trung tâm giáo dục thể chất Đại học Quốc gia Hà Nội
                 </p>
-                <a href="login.php" class="hero-btn">Login</a>
+                <a href="admin/authen/login.php" class="hero-btn">Login</a>
             </div>
             
         </section>

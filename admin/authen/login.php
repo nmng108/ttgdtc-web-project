@@ -23,9 +23,8 @@ $pass = getPost('password');
 
 $sql = "select * from users where email = '$user_name' and password_ = '$pass' and role_id = '1'";
 $userExist = executeResult($sql, true);
-if($userExist != null ) {
-
-    
+if($userExist == null) {
+    $msg = 'Đăng nhập không thanh công, vui long kiểm tra email hoặc mật khẩu!!!';
 } else {
     //login thanh cong
     $token = getSecurityMD5($userExist['email'].time());

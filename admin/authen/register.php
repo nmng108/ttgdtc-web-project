@@ -21,12 +21,7 @@ if(!empty($_POST)) {
     $phone_number = getPost('phone_number');
     $userExist = executeResult("select * from users where email = '$email'", true);
     if($userExist != null) {
-        
-        echo
-        '<script>
-        alert("Email đã được đăng kí trên hệ thống")
-        </script>';
-
+        $msg = 'Email đã được đăng ký trên hệ thống';
     } else {
         $created_at = $updated_at = date('Y-m-d H:i:s');
         //Su dung ma hoa 1 chieu -> md5 -> hack
