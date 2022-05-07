@@ -6,6 +6,7 @@ if(!empty($_POST)) {
 	$phone_number = getPost('phone_number');
 	$address = getPost('address');
 	$password = getPost('password');
+	$student_ID = getPost('student_ID');
 	
 	
 	$created_at = $updated_at = date("Y-m-d H:i:s");
@@ -21,9 +22,9 @@ if(!empty($_POST)) {
 			$msg = 'Email này đã tồn tại trong tài khoản khác, vui lòng kiểm tra lại!!!';
 		} else {
 			if($password != '') {
-				$sql = "update Users set f_name = '$fullname', email = '$email', phone_number = '$phone_number', address_ = '$address', password_ = '$password', updated_at = '$updated_at', role_id = $role_id where id = $id";
+				$sql = "update Users set f_name = '$fullname', email = '$email', phone_number = '$phone_number', address_ = '$address', password_ = '$password', student_ID = '$student_ID', updated_at = '$updated_at', role_id = $role_id where id = $id";
 			} else {
-				$sql = "update Users set f_name = '$fullname', email = '$email', phone_number = '$phone_number', address_ = '$address', updated_at = '$updated_at', role_id = $role_id where id = $id";
+				$sql = "update Users set f_name = '$fullname', email = '$email', phone_number = '$phone_number', address_ = '$address', updated_at = '$updated_at', student_ID = '$student_ID', role_id = $role_id where id = $id";
 			}
 			execute($sql);
 			header('Location: index.php');
@@ -35,7 +36,7 @@ if(!empty($_POST)) {
 		//insert
 		if($userItem == null) {
 			//insert
-			$sql = "insert into Users(f_name, email, phone_number, address_, password_, role_id, created_at, updated_at, deleted) values ('$fullname', '$email', '$phone_number', '$address', '$password', '$role_id', '$created_at', '$updated_at', 0)";
+			$sql = "insert into Users(f_name, email, phone_number, address_, student_ID password_, role_id, created_at, updated_at, deleted) values ('$fullname', '$email', '$phone_number', '$address', '$student_ID' '$password', '$role_id', '$created_at', '$updated_at', 0)";
 			execute($sql);
 			header('Location: index.php');
 			die();

@@ -3,7 +3,7 @@
 	$baseUrl = '../';
 	require_once('../layouts/header.php');
 
-	$id = $msg = $fullname = $email = $phone_number = $address = $role_id = '';
+	$id = $msg = $fullname = $email = $phone_number = $student_ID = $address = $role_id = '';
 	require_once('form_save.php');
 
 	$id = getGet('id');
@@ -16,6 +16,7 @@
 			$phone_number = $userItem['phone_number'];
 			$address = $userItem['address_'];
 			$role_id = $userItem['role_id'];
+			$student_ID = $userItem['student_ID'];
 		} else {
 			$id = 0;
 		}
@@ -63,6 +64,10 @@
 					<div class="form-group">
 					  <label for="phone_number">SĐT:</label>
 					  <input required="true" type="tel" class="form-control" id="phone_number" name="phone_number" value="<?=$phone_number?>">
+					</div>
+					<div class="form-group">
+					  <label for="pstudent_ID">Mã sinh viên:</label>
+					  <input required="true" type="tel" class="form-control" id="student_ID" name="student_ID" value="<?=$student_ID?>">
 					</div>
 					<div class="form-group">
 					  <label for="address">Địa Chỉ:</label>

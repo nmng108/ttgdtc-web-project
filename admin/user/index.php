@@ -21,6 +21,7 @@
 					<th>Email</th>
 					<th>SĐT</th>
 					<th>Địa Chỉ</th>
+					<th>Mã sinh viên</th>
 					<th>Quyền</th>
 					<th style="width: 50px"></th>
 					<th style="width: 50px"></th>
@@ -36,6 +37,7 @@
 					<td>'.$item['email'].'</td>
 					<td>'.$item['phone_number'].'</td>
 					<td>'.$item['address_'].'</td>
+					<td>'.$item['student_ID'].'</td>
 					<td>'.$item['role_name'].'</td>
 					<td style="width: 50px">
 						<a href="editor.php?id='.$item['id'].'"><button class="btn btn-warning">Sửa</button></a>
