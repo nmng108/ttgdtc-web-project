@@ -8,7 +8,7 @@
 
 	$id = getGet('id');
 	if($id != '' && $id > 0) {
-		$sql = "select * from Users where ID = '$id'";
+		$sql = "select * from Users where id = '$id'";
 		$userItem = executeResult($sql, true);
 		if($userItem != null) {
 			$fullname = $userItem['f_name'];
@@ -29,7 +29,7 @@
 
 <div class="row" style="margin-top: 20px;">
 	<div class="col-md-12 table-responsive">
-		<h3>Thêm Tài Khoản Người Dùng</h3>
+		<h3>Thêm/Sửa Tài Khoản Người Dùng</h3>
 		<div class="panel panel-primary">
 			<div class="panel-heading">
 				<h5 style="color: red;"><?=$msg?></h5>

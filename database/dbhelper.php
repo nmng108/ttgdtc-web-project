@@ -1,39 +1,40 @@
 <?php
-require_once ('config.php');
+require_once('config.php');
 
-/**
- * Su dung cho lenh: insert/update/delete
- */
+// insert, update, delete, select
+// SQL: insert, update, delete
 function execute($sql) {
-	// Them du lieu vao database
-	//B1. Mo ket noi toi database
-	$connect = mysqli_connect(HOST, USERNAME, PASSWORD, DATABASE);
-	mysqli_set_charset($connect, 'utf8');
-
-	//B2. Thuc hien truy van insert
-	mysqli_query($connect, $sql);
-
-	//B3. Dong ket noi database
-	mysqli_close($connect);
-}
-/**
- * Su dung cho lenh: select
- */
-function executeResult($sql) {
-	// Them du lieu vao database
-	//B1. Mo ket noi toi database
+	//open connection
 	$conn = mysqli_connect(HOST, USERNAME, PASSWORD, DATABASE);
 	mysqli_set_charset($conn, 'utf8');
 
-	//B2. Thuc hien truy van insert
-	$resultset = mysqli_query($conn, $sql);
-	$data      = [];
+	//query
+	mysqli_query($conn, $sql);
 
-	while (($row = mysqli_fetch_array($resultset, 1)) != null) {
-		$data[] = $row;
+	//close connection
+	mysqli_close($conn);
+}
+
+// SQL: select -> lay du lieu dau ra (select danh sach ban ghi, lay 1 ban ghi)
+function executeResult($sql, $isSingle = false) {
+	$data = null;
+
+	//open connection
+	$conn = mysqli_connect(HOST, USERNAME, PASSWORD, DATABASE);
+	mysqli_set_charset($conn, 'utf8');
+
+	//query
+	$resultset = mysqli_query($conn, $sql);
+	if($isSingle) {
+		$data = mysqli_fetch_array($resultset, 1);
+	} else {
+		$data = [];
+		while(($row = mysqli_fetch_array($resultset, 1)) != null) {
+			$data[] = $row;
+		}
 	}
 
-	//B3. Dong ket noi database
+	//close connection
 	mysqli_close($conn);
 
 	return $data;

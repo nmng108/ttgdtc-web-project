@@ -70,7 +70,7 @@
           </li>
           
           <li class="nav-item">
-            <a class="nav-link" href="user/index.php">
+            <a class="nav-link" href="<?=$baseUrl?>user">
               <i class="bi bi-people-fill"></i>
               Quản Lý Người Dùng
             </a>

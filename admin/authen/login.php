@@ -32,7 +32,7 @@ if($userExist == null) {
     $created_at = date('Y-m-d H:i:s');
 
     $_SESSION['user'] = $userExist;
-    $userId = $userExist['ID'];
+    $userId = $userExist['id'];
     $sql = "insert into Tokens (user_id, token, created_at) values ('$userId', '$token', '$created_at')";
     execute($sql);
     header('Location: ../');
