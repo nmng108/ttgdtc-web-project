@@ -1,16 +1,14 @@
 <?php include "register.html";
-
 session_start();
-require_once ('../../utils/utility.php');
-require_once ('../../database/dbhelper.php');
+require_once ('../utils/utility.php');
+require_once ('../database/dbhelper.php');
 $user = getUserToken();
 if($user != null) {
-    header('Location: ../');
+    header('Location: ../admin');
     die();
 }
-
 //day DL da nhap len server
-$email = $student_id = $cf_password = $password = $address = $name= $phone_number=$msg='';
+$email = $student_id = $cf_password = $password = $address = $name = $phone_number = $msg='';
 if(!empty($_POST)) {
     $email = getPost('email');
     $address = getPost('address');
@@ -22,6 +20,13 @@ if(!empty($_POST)) {
     $userExist = executeResult("select * from users where email = '$email'", true);
     if($userExist != null) {
         $msg = 'Email đã được đăng ký trên hệ thống';
+        echo '<script >
+        $(function() {
+                
+        alert("Email đã tồn tại trên hệ thống!!")
+               
+        })	
+    </script>';
     } else {
         $created_at = $updated_at = date('Y-m-d H:i:s');
         //Su dung ma hoa 1 chieu -> md5 -> hack

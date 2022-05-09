@@ -5,7 +5,7 @@
 
   $user = getUserToken();
   if($user == null) {
-    header('Location: '.$baseUrl.'authen/login.php');
+    header('Location: '.$baseUrl.'account/login.php');
     die();
   }
 ?>
@@ -40,7 +40,7 @@
   
   <ul class="navbar-nav px-3">
     <li class="nav-item text-nowrap">
-      <a class="nav-link " style="color: white;" href="<?=$baseUrl?>authen/logout.php">Thoát</a>
+      <a class="nav-link " style="color: white;" href="<?=$baseUrl?>../account/logout.php">Thoát</a>
     </li>
   </ul>
 </nav>	
@@ -70,7 +70,7 @@
           </li>
           
           <li class="nav-item">
-            <a class="nav-link" href="<?=$baseUrl?>user">
+            <a class="nav-link" href="<?=$baseUrl?>infor_user">
               <i class="bi bi-people-fill"></i>
               Quản Lý Người Dùng
             </a>
