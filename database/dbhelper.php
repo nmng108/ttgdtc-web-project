@@ -7,10 +7,8 @@ function execute($sql) {
 	//open connection
 	$conn = mysqli_connect(HOST, USERNAME, PASSWORD, DATABASE);
 	mysqli_set_charset($conn, 'utf8');
-
 	//query
 	mysqli_query($conn, $sql);
-
 	//close connection
 	mysqli_close($conn);
 }

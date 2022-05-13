@@ -1,24 +1,21 @@
 <?php include "login.html";
 session_start();
-
-// if (isset($_COOKIE['login']) && $_COOKIE['login'] == 'true') {
-//     header('Location: user.php');
-//     die();
-// }
 require_once ('../utils/utility.php');
 require_once('../database/dbhelper.php');
-
 $user = getUserToken();
 if($user != null) {
-    header('Location: ../admin');
-    die();
-}
+    if ($user['role_id'] == 2) {
+        header('Location: ../user');
+        
+    } else {
+        header('Location:../admin');
+    }
+} 
 
 $user_name = $pass = $msg = '';
 $res = false;
 $user_name = getPost('email');
 $pass = getPost('password');
-// $pass = getSecurityMD5($pass);
 
 
 $sql = "select * from users where email = '$user_name' and password_ = '$pass' and role_id = '1'";

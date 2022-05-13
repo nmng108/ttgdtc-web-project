@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th5 09, 2022 lúc 08:21 PM
+-- Thời gian đã tạo: Th5 13, 2022 lúc 05:39 PM
 -- Phiên bản máy phục vụ: 10.4.24-MariaDB
 -- Phiên bản PHP: 8.1.5
 
@@ -29,8 +29,24 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `orders` (
   `id` int(11) NOT NULL,
-  `order_date` datetime DEFAULT NULL
+  `order_date` datetime DEFAULT NULL,
+  `user_id` int(11) NOT NULL,
+  `full_name` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `student_ID` varchar(10) NOT NULL,
+  `status` varchar(10) NOT NULL,
+  `borrow_date` date NOT NULL,
+  `borrow_time` time NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Đang đổ dữ liệu cho bảng `orders`
+--
+
+INSERT INTO `orders` (`id`, `order_date`, `user_id`, `full_name`, `email`, `student_ID`, `status`, `borrow_date`, `borrow_time`) VALUES
+(7, '2022-05-12 21:39:19', 11, 'Nguyễn Thị Thanh Huyền', 'huyen@gmail.com', '123456', '1', '2022-05-10', '14:44:00'),
+(8, '2022-05-12 22:53:26', 11, 'Nguyễn Thị Thanh Huyền', 'huyen@gmail.com', '123456', '2', '2022-05-18', '03:59:00'),
+(9, '2022-05-13 05:06:26', 9, 'thuỷ nguyễn thanh', 'thuy@gmail.com', '20020479', '1', '2022-05-24', '03:06:00');
 
 -- --------------------------------------------------------
 
@@ -45,6 +61,16 @@ CREATE TABLE `order_details` (
   `num` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Đang đổ dữ liệu cho bảng `order_details`
+--
+
+INSERT INTO `order_details` (`id`, `order_id`, `product_id`, `num`) VALUES
+(7, 7, 3, 10),
+(8, 7, 4, 5),
+(9, 8, 5, 6),
+(10, 9, 3, 14);
+
 -- --------------------------------------------------------
 
 --
@@ -53,29 +79,21 @@ CREATE TABLE `order_details` (
 
 CREATE TABLE `products` (
   `id` int(11) NOT NULL,
-  `name` varchar(30) NOT NULL,
+  `title` varchar(250) NOT NULL,
+  `thumbnail` varchar(500) DEFAULT NULL,
   `content` longtext DEFAULT NULL,
-  `quantityInStock` int(11) DEFAULT NULL,
-  `created_at` datetime DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL
+  `quantityInStock` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Đang đổ dữ liệu cho bảng `products`
 --
 
-INSERT INTO `products` (`id`, `name`, `content`, `quantityInStock`, `created_at`, `updated_at`) VALUES
-(1, 'Bóng đá', 'môn bóng đá ', 100, NULL, NULL),
-(2, 'Vợt bóng bàn', NULL, 100, NULL, NULL),
-(3, 'Quả bóng bàn', NULL, 100, NULL, NULL),
-(4, 'Bóng chuyền hơi', NULL, 100, NULL, NULL),
-(5, 'Bóng chuyền da', NULL, 100, NULL, NULL),
-(6, 'Bóng rổ', NULL, 100, NULL, NULL),
-(7, 'Vợt cầu lông', NULL, 100, NULL, NULL),
-(8, 'Quả cầu', NULL, 100, NULL, NULL),
-(9, 'Gậy golf', NULL, 10, NULL, NULL),
-(10, 'Bóng golf', NULL, 100, NULL, NULL),
-(11, 'Chướng ngại vật hình nón', NULL, 50, NULL, NULL);
+INSERT INTO `products` (`id`, `title`, `thumbnail`, `content`, `quantityInStock`) VALUES
+(1, 'Bóng chuyền da', '..\\image\\bóng chuuyền da.jpeg', 'Bóng chuyền da', 100),
+(3, 'Bóng golf', '..\\image\\bóng golf.webp', 'Bóng golf', 100),
+(4, 'Gậy golf', '..\\image\\gậy golf.jpeg', 'Gậy golf', 10),
+(5, 'Vợt bóng bàn', '..\\image\\vợt bóng bàn.jpeg', 'vợt bóng bàn', 100);
 
 -- --------------------------------------------------------
 
@@ -95,6 +113,26 @@ CREATE TABLE `role` (
 INSERT INTO `role` (`id`, `name`) VALUES
 (1, 'Admin'),
 (2, 'User');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `status`
+--
+
+CREATE TABLE `status` (
+  `status_id` int(11) DEFAULT NULL,
+  `status_name` varchar(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Đang đổ dữ liệu cho bảng `status`
+--
+
+INSERT INTO `status` (`status_id`, `status_name`) VALUES
+(1, 'Đang chờ'),
+(2, 'Đang mượn'),
+(3, 'Đã trả');
 
 -- --------------------------------------------------------
 
@@ -125,7 +163,6 @@ CREATE TABLE `users` (
   `role_id` int(11) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `deleted` int(11) NOT NULL DEFAULT 0,
-  `deleted_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -133,10 +170,12 @@ CREATE TABLE `users` (
 -- Đang đổ dữ liệu cho bảng `users`
 --
 
-INSERT INTO `users` (`id`, `f_name`, `email`, `password_`, `address_`, `phone_number`, `student_ID`, `role_id`, `created_at`, `deleted`, `deleted_at`, `updated_at`) VALUES
-(9, 'thuỷ nguyễn thanh', 'thuy@gmail.com', '123456', 'thanh hoá', '123456', '20020479', 1, '2022-05-07 13:04:47', 0, NULL, '2022-05-07 14:57:08'),
-(10, '', 'th@gmail.com', '', '', '123', NULL, 2, '2022-05-07 13:14:33', 1, NULL, '2022-05-07 14:59:55'),
-(11, 'Nguyễn Thị Thanh Huyền', 'huyen@gmail.com', '123456', 'Thanh Hoá', '1234567', '123456', 2, '2022-05-07 15:02:49', 0, NULL, '2022-05-07 16:17:08');
+INSERT INTO `users` (`id`, `f_name`, `email`, `password_`, `address_`, `phone_number`, `student_ID`, `role_id`, `created_at`, `deleted`, `updated_at`) VALUES
+(9, 'thuỷ nguyễn thanh', 'thuy@gmail.com', '123456', 'ĐH ngoại ngữ', '123456', '20020479', 1, '2022-05-07 13:04:47', 0, '2022-05-07 14:57:08'),
+(10, 'Huyền Nguyễn', 'th@gmail.com', '123456', 'ĐH công nghệ', '0182763', '3745454', 2, '2022-05-07 13:14:33', 1, '2022-05-07 14:59:55'),
+(11, 'Nguyễn Thị Thanh Huyền', 'huyen@gmail.com', '123456', 'Đại học kinh tế', '1234567', '123456', 2, '2022-05-07 15:02:49', 0, '2022-05-07 16:17:08'),
+(12, 'Nguyễn Thị Thanh Thuỷ', 'thanhthuy@gmail.com', '123456', 'Đh công nghệ', '0384186425', '20020479', 2, '2022-05-13 09:22:06', 0, NULL),
+(13, 'Nguyễn Thanh Thuỷ', '20020479@vnu.edu.vn', '123456', 'Đh Ngoại ngữ', '12252653', '20020479', 2, '2022-05-13 09:23:07', 0, NULL);
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -146,13 +185,15 @@ INSERT INTO `users` (`id`, `f_name`, `email`, `password_`, `address_`, `phone_nu
 -- Chỉ mục cho bảng `orders`
 --
 ALTER TABLE `orders`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_user` (`user_id`);
 
 --
 -- Chỉ mục cho bảng `order_details`
 --
 ALTER TABLE `order_details`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `order_id` (`order_id`);
 
 --
 -- Chỉ mục cho bảng `products`
@@ -187,29 +228,47 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT cho bảng `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT cho bảng `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT cho bảng `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
 --
+
+--
+-- Các ràng buộc cho bảng `orders`
+--
+ALTER TABLE `orders`
+  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Các ràng buộc cho bảng `order_details`
+--
+ALTER TABLE `order_details`
+  ADD CONSTRAINT `order_details_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`);
+
+--
+-- Các ràng buộc cho bảng `tokens`
+--
+ALTER TABLE `tokens`
+  ADD CONSTRAINT `tokens_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
 -- Các ràng buộc cho bảng `users`

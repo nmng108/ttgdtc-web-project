@@ -4,13 +4,19 @@ require_once('../../utils/utility.php');
 require_once('../../database/dbhelper.php');
 
 $user = getUserToken();
-if($user == null) {
-	die();
-}
+if($user != null) {
+    if ($user['role_id'] == 2) {
+        header('Location: ../user');
+        die();
+    } else {
+        header('Location:../admin');
+        die();
+
+    }
+} 
 
 if(!empty($_POST)) {
 	$action = getPost('action');
-
 	switch ($action) {
 		case 'delete':
 			deleteUser();

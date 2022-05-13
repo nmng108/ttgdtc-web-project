@@ -2,6 +2,7 @@
 	$title = 'Quản Lý Người Dùng';
 	$baseUrl = '../';
 	require_once('../layouts/header.php');
+	
 
 	$sql = "select Users.*, Role.name as role_name from Users left join Role on Users.role_id = Role.id where Users.deleted = 0";
 	$data = executeResult($sql);
@@ -14,13 +15,13 @@
 		<a href="editor.php"><button class="btn btn-success">Thêm Tài Khoản</button></a>
 
 		<table class="table table-bordered table-hover" style="margin-top: 20px;">
-			<thead>
+			<thead class="table-success">
 				<tr>
 					<th>STT</th>
 					<th>Họ & Tên</th>
 					<th>Email</th>
 					<th>SĐT</th>
-					<th>Địa Chỉ</th>
+					<th>Trường</th>
 					<th>Mã sinh viên</th>
 					<th>Quyền</th>
 					<th style="width: 50px"></th>
@@ -43,7 +44,7 @@
 						<a href="editor.php?id='.$item['id'].'"><button class="btn btn-warning">Sửa</button></a>
 					</td>
 					<td style="width: 50px">';
-		if($user['id'] != $item['id'] && $item['role_id'] != 1) {
+		if($admin['id'] != $item['id'] && $item['role_id'] != 1) {
 			echo '<button onclick="deleteUser('.$item['id'].')" class="btn btn-danger">Xoá</button>';
 		}
 		echo '
@@ -60,7 +61,6 @@
 	function deleteUser(id) {
 		option = confirm('Bạn có chắc chắn muốn xoá tài khoản này không?')
 		if(!option) return;
-
 		$.post('form_api.php', {
 			'id': id,
 			'action': 'delete'

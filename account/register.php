@@ -4,9 +4,15 @@ require_once ('../utils/utility.php');
 require_once ('../database/dbhelper.php');
 $user = getUserToken();
 if($user != null) {
-    header('Location: ../admin');
-    die();
-}
+    if ($user['role'] == 2) {
+        header('Location: ../user');
+        die();
+    } else {
+        header('Location:../admin');
+        die();
+
+    }
+} 
 //day DL da nhap len server
 $email = $student_id = $cf_password = $password = $address = $name = $phone_number = $msg='';
 if(!empty($_POST)) {
@@ -34,7 +40,7 @@ if(!empty($_POST)) {
 
         $sql = "insert into users (f_name, email, phone_number, password_, address_, student_ID, role_id, created_at) 
         values ('$name', '$email', '$phone_number', '$password', '$address', '$student_id', 2, '$created_at')";
-        execute($sql);
+        execute($sql);  
         header('Location: login.php');
         die();
     }

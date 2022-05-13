@@ -1,12 +1,8 @@
-
-
-
 <div class="footer">
     <div class="container">
         <div class="row">
             <div class="footer-col-1">
                 <img src ="../image/logovnu.png" width="250px">
-   
             </div>
             <div class="footer-col-1">
                 <h5>Follow us</h5>
@@ -35,7 +31,20 @@
         </div>
     </div>
 </div>
-       
-   </body>
-   </html>
+<?php
+$cart = [];
+if(isset($_SESSION['cart'])) {
+	$cart = $_SESSION['cart'];
+}
+$count = 0;
+foreach ($cart as $item) {
+	$count += $item['num'];
+}
+?>
+	<span class="cart_icon">
+	<span class="cart_count"><?=$count?></span>
+	<a href="cart.php"><img src="https://gokisoft.com/img/cart.png"></a>
+</span>
+</body>
+</html>
    

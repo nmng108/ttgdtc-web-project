@@ -55,43 +55,56 @@ function getUserToken() {
 		return $_SESSION['users'];
 	}
 	$token = getCookie('token');
-	$sql = "select * from Tokens where token = '$token'";
+	$sql = "select * from Tokens inner join users on tokens.user_id = users.id where token = '$token' and users.deleted = 0";
 	$item = executeResult($sql, true);
 	if($item != null) {
-		$userId = $item['user_id'];
-		$sql = "select * from Users where id = '$userId' and deleted = 0";
-		$item = executeResult($sql, true);
-		if($item != null) {
-			$_SESSION['users'] = $item;
-			return $item;
-		}
+		$_SESSION['users'] = $item;
+		return $item;
 	}
-
 	return null;
 }
 
-function moveFile($key, $rootPath = "../../") {
-	if(!isset($_FILES[$key]) || !isset($_FILES[$key]['name']) || $_FILES[$key]['name'] == '') {
-		return '';
-	}
+// function getAdminToken() {
+// 	if(isset($_SESSION['users'])) {
+// 		return $_SESSION['users'];
+// 	}
+// 	$token = getCookie('token');
+// 	$sql = "select * from Tokens where token = '$token'";
+// 	$item = executeResult($sql, true);
+// 	if($item != null) {
+// 		$userId = $item['user_id'];
+// 		$sql = "select * from Users where id = '$userId' and deleted = 0 and role_id = 1";
+// 		$item = executeResult($sql, true);
+// 		if($item != null) {
+// 			$_SESSION['users'] = $item;
+// 			return $item;
+// 		}
+// 	}
+// 	return null;
+// }
 
-	$pathTemp = $_FILES[$key]["tmp_name"];
+// function moveFile($key, $rootPath = "../../") {
+// 	if(!isset($_FILES[$key]) || !isset($_FILES[$key]['name']) || $_FILES[$key]['name'] == '') {
+// 		return '';
+// 	}
 
-	$filename = $_FILES[$key]['name'];
-	//filename -> remove special character, ..., ...
+// 	$pathTemp = $_FILES[$key]["tmp_name"];
 
-	$newPath="assets/photos/".$filename;
+// 	$filename = $_FILES[$key]['name'];
+// 	//filename -> remove special character, ..., ...
 
-	move_uploaded_file($pathTemp, $rootPath.$newPath);
+// 	$newPath="assets/photos/".$filename;
 
-	return $newPath;
-}
+// 	move_uploaded_file($pathTemp, $rootPath.$newPath);
 
-function fixUrl($thumbnail, $rootPath = "../../") {
-	if(stripos($thumbnail, 'http://') !== false || stripos($thumbnail, 'https://') !== false) {
-	} else {
-		$thumbnail = $rootPath.$thumbnail;
-	}
+// 	return $newPath;
+// }
 
-	return $thumbnail;
-}
+// function fixUrl($thumbnail, $rootPath = "../../") {
+// 	if(stripos($thumbnail, 'http://') !== false || stripos($thumbnail, 'https://') !== false) {
+// 	} else {
+// 		$thumbnail = $rootPath.$thumbnail;
+// 	}
+
+// 	return $thumbnail;
+// }

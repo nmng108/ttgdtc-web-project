@@ -7,10 +7,7 @@ if(!empty($_POST)) {
 	$address = getPost('address');
 	$password = getPost('password');
 	$student_ID = getPost('student_ID');
-	
-	
 	$created_at = $updated_at = date("Y-m-d H:i:s");
-
 	$role_id = getPost('role_id');
 
 	if($id > 0) {

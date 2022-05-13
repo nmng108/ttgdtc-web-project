@@ -3,6 +3,9 @@
     padding: 0;
     box-sizing: border-box;
 } 
+body {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
 .navbar{
     display:flex ; 
     align-items: center;
@@ -29,13 +32,14 @@ a{
 p{
     color : #555;
 }
-.container{
+/* .container{
     max-width: 1300px;
     margin: auto;
     padding-left: 20px ;
     padding-right: 20px;
+   
+} */
 
-}
 .image_background{
     display: flex;
     flex-wrap: wrap;
@@ -57,7 +61,7 @@ p{
 }
 
 .header{
-    background-color: rgb(103, 177, 94);
+    background-color: rgb(204, 217, 203);
 }
 .menu-icon{
     width: 28px;
@@ -77,6 +81,12 @@ p{
    padding:8px 30px;
    margin: 30px 0;
    border-radius: 30px;
+}
+
+.nav-links ul li {
+    font-size: 20px;
+    color: rgb(195, 196, 206);
+    cursor: pointer;
 }
 /*--------------media---------*/
 
@@ -108,7 +118,7 @@ p{
 
 /*-----------footer-----------*/
 .footer{
-    background-color:rgb(113, 161, 118);
+    background-color:rgb(213, 235, 217);
     background-image: none;
 }
  
@@ -196,17 +206,18 @@ select:focus {
 }
 .add{
     display: inline-block; 
-    background: #ff523b;
-    color:#fff;
+    
     padding:8px 30px;
     margin: 30px 0;
-    border-radius: 30px;
+    border-radius: 20px;
+    border-color: rgb(226, 239, 227);
     cursor: pointer;
-    background-color: #ff523b;
+    background-color: rgb(120, 161, 138);
 }
 .add:hover{
-    background: #b65151;
+    background: #6d8f6d;
     color: #fff;
+    cursor: pointer;
 }
 .col-1 input {
     width: 40px;
@@ -299,4 +310,31 @@ td:last-child{
     font-size: 15px;
     text-align: center;
     border: solid 1px black;
+}
+
+/* cart */
+
+.cart_icon {
+    position: fixed;
+    z-index: 999999;
+    right: 0px;
+    top: 45%;
+}
+
+.cart_icon img {
+    width: 45px;
+}
+
+.cart_icon .cart_count {
+    background-color: red;
+    color: white;
+    font-size: 16px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-weight: bold;
+    border-radius: 12px;
+    position: fixed;
+    right: 40px;
 }

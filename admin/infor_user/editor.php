@@ -70,7 +70,7 @@
 					  <input required="true" type="tel" class="form-control" id="student_ID" name="student_ID" value="<?=$student_ID?>">
 					</div>
 					<div class="form-group">
-					  <label for="address">Địa Chỉ:</label>
+					  <label for="address">Trường:</label>
 					  <input required="true" type="text" class="form-control" id="address" name="address" value="<?=$address?>">
 					</div>
 					<div class="form-group">
