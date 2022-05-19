@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 require_once('../utils/utility.php');
 require_once('../database/dbhelper.php');
 
@@ -13,5 +12,4 @@ if($user != null) {
 	setcookie('token', '', time() - 100, '/');
 }
 header('Location: login.php');
-
 session_destroy();

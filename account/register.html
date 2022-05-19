@@ -7,16 +7,9 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Caveat&family=Hurricane&family=Pacifico&family=Palette+Mosaic&display=swap" rel="stylesheet"> 
-	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-
-	<!-- jQuery library -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-	<!-- Popper JS -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-
-	<!-- Latest compiled JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 </head>
 <body >
@@ -24,24 +17,19 @@
 		<div class="signup" >
 			<div class="panel-heading">
 				<h2 class="text-center">Đăng kí</h2>
-				<h5 id ="msg"></h5>
-				
-				
+				<h5 id ="msg"></h5>	
 			</div>
 			<div class="panel-body">
 				<form method="post" id = "RegisterForm" action="register.php">
-
 					<div class="form-group">
 						<label >Email:</label>
 						<input type="email" class="form-control"  name="email" required>
 					</div>
-
 					<!-- tên đầy đủ -->
 					<div class="form-group">
 						<label >Họ tên:</label>
 						<input type="text" class="form-control"  name="name" required>
 					</div>
-
 					<!-- địa chỉ -->
 					<div class = "form-group">
 						<label >Trường:</label>
@@ -78,17 +66,16 @@
 					</p>
 					<button class="button" style="border-radius: 15px;">Đăng kí</button>
 					<h8 style="color: brown;font-style: italic;">*Mật khẩu phải có ít nhất 6 kí tự</h8>
-
 				</form>
 			</div>
 		</div>
 	</div>
-
+<!-- thông báo mật khẩu không khớp -->
 <script type="text/javascript">
 	$(function() {
 		$('#RegisterForm').submit(function() {
 			if($('[name=password]').val() != $('[name=cf_password]').val()) {
-				alert('Password is not matching, please check it again!!!')
+				alert('Mật khẩu không khớp, vui lòng kiểm tra lại!')
 				return false;
 			} 
 			return true;

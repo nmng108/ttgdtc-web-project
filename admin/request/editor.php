@@ -5,7 +5,7 @@
 	$status = $note = '';
 	$id = getGet('id');
 	if($id != '' && $id > 0) {
-		$sql = "select * from orderdetails where id = '$id'";
+		$sql = "select * from requests where id = '$id'";
 		$userItem = executeResult($sql, true);
 		if($userItem != null) {
 			$status = $userItem['status'];
@@ -16,7 +16,7 @@
 	} else {
 		$id = 0;
 	}
-    $sql = "select * from status_order";
+    $sql = "select * from status";
 	$statusItems = executeResult($sql);
 ?>
 <div class="row" style="margin-top: 20px;">
@@ -40,10 +40,10 @@
 					</div>
                     <div class="form-group">
 					  <label for="usr">Ghi chú:</label>
-					  <input  type="text" class="form-control" id="usr" name="note" value="<?=$note?>">
+					  <input required="true" type="text" class="form-control" id="usr" name="note" value="<?=$note?>">
 					  <input type="text" name="id" value="<?=$id?>" hidden="true">
 					</div>
-					<button class="btn btn-success">Xác nhận</button>
+					<button class="btn btn-success">Cofirm</button>
 				</form>
 			</div>
 		</div>
@@ -53,7 +53,7 @@
 if(!empty($_POST) ){
     $status2 = getPost('status_id');
     $note2 = getPost('note');
-    $sql2 = "update orderdetails set status = '$status2', Note = '$note2' where id = $id";
+    $sql2 = "update requests set status = '$status2', Note = '$note2' where id = $id";
     execute($sql2);
     header('Location: index.php');
     die();

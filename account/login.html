@@ -1,23 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Login</title>
+	<title>Đăng nhập</title>
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="../assets/css/login.css">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  
 	<link href="https://fonts.googleapis.com/css2?family=Caveat&family=Hurricane&family=Pacifico&family=Palette+Mosaic&display=swap" rel="stylesheet"> 
-	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-
-	<!-- jQuery library -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-	<!-- Popper JS -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-
-	<!-- Latest compiled JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 </head>
 <body >
@@ -27,19 +19,18 @@
 				<h2 class="text-center">Đăng nhập</h2>
 			</div>
 			<div class="panel-body">
+				<!-- form đăng nhập -->
 				<form method="post" id = "LoginForm" action="">
-				
+					<!-- tên đăng nhập -->
 					<div class="form-group">
 						<label >Email:</label>
 						<input type="email" class="form-control"  name="email" required>
 					</div>
-
 					<!-- mật khẩu -->
 					<div class = "form-group">
 						<label >Mật khẩu:</label>
 						<input type="password" class="form-control"  name="password" required minlength="6">   
 					</div>
-
 					<p>
 						<a href="register.php">Đăng kí</a>
 					</p>

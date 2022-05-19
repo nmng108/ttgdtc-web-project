@@ -13,7 +13,7 @@ if($user != null) {
 
     }
 } 
-//day DL da nhap len server
+//đẩy DL lên database
 $email = $student_id = $cf_password = $password = $address = $name = $phone_number = $msg='';
 if(!empty($_POST)) {
     $email = getPost('email');
@@ -27,17 +27,12 @@ if(!empty($_POST)) {
     if($userExist != null) {
         $msg = 'Email đã được đăng ký trên hệ thống';
         echo '<script >
-        $(function() {
-                
-        alert("Email đã tồn tại trên hệ thống!!")
-               
+        $(function() {       
+        alert("Email đã tồn tại trên hệ thống!!")      
         })	
     </script>';
     } else {
         $created_at = $updated_at = date('Y-m-d H:i:s');
-        //Su dung ma hoa 1 chieu -> md5 -> hack
-        // $password = getSecurityMD5($password);
-
         $sql = "insert into users (f_name, email, phone_number, password_, address_, student_ID, role_id, created_at) 
         values ('$name', '$email', '$phone_number', '$password', '$address', '$student_id', 2, '$created_at')";
         execute($sql);  

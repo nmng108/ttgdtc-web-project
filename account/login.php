@@ -5,8 +5,7 @@ require_once('../database/dbhelper.php');
 $user = getUserToken();
 if($user != null) {
     if ($user['role_id'] == 2) {
-        header('Location: ../user');
-        
+        header('Location: ../user');  
     } else {
         header('Location:../admin');
     }
@@ -16,16 +15,12 @@ $user_name = $pass = $msg = '';
 $res = false;
 $user_name = getPost('email');
 $pass = getPost('password');
-
-
 $sql = "select * from users where email = '$user_name' and password_ = '$pass' and role_id = '1'";
 $sql2 = "select * from users where email = '$user_name' and password_ = '$pass' and role_id = '2'";
-
 $userExist = executeResult($sql, true);
 $userExist2  = executeResult($sql2, true);
 if($userExist == null && $userExist2 == null) {
-    $msg = 'Đăng nhập không thanh công, vui long kiểm tra email hoặc mật khẩu!!!';    
-    
+    $msg = 'Đăng nhập không thanh công, vui long kiểm tra email hoặc mật khẩu!!!';       
 } elseif ($userExist != null){
     //login thanh cong
     $token = getSecurityMD5($userExist['email'].time());

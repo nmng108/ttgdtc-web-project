@@ -2,18 +2,14 @@
 	$title = 'Quản Lý Người Dùng';
 	$baseUrl = '../';
 	require_once('../layouts/header.php');
-	
-
 	$sql = "select Users.*, Role.name as role_name from Users left join Role on Users.role_id = Role.id where Users.deleted = 0";
 	$data = executeResult($sql);
 ?>
-
+<!-- Thông tin của tất cả người dùng -->
 <div class="row" style="margin-top: 20px;">
 	<div class="col-md-12 table-responsive">
 		<h3>Quản Lý Người Dùng</h3>
-
 		<a href="editor.php"><button class="btn btn-success">Thêm Tài Khoản</button></a>
-
 		<table class="table table-bordered table-hover" style="margin-top: 20px;">
 			<thead class="table-success">
 				<tr>

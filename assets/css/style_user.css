@@ -3,9 +3,8 @@
     padding: 0;
     box-sizing: border-box;
 } 
-body {
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-}
+
+
 .navbar{
     display:flex ; 
     align-items: center;
@@ -15,30 +14,31 @@ body {
 nav {
     flex: 1;
     text-align: right;
+    text-decoration: none;
 }
 nav ul {
     display: inline-block;
     list-style-type: none;
+    text-decoration: none;
 }
 nav ul li {
     display: inline-block;
     margin-right : 30px;
     font-size: larger;
+    text-decoration: none;
 }
 a{
     text-decoration: none;
     color: #555;
 }
+ul li :hover {
+    color: green;
+}
 p{
     color : #555;
 }
-/* .container{
-    max-width: 1300px;
-    margin: auto;
-    padding-left: 20px ;
-    padding-right: 20px;
-   
-} */
+
+
 
 .image_background{
     display: flex;
@@ -47,13 +47,12 @@ p{
     max-width: 100%;
     height: 650px;
     padding: 25px 0;
-    background-image: url("../../image/background.jpeg"); 
     background-size: cover;
     background-repeat: no-repeat; 
     background-position: initial ;
 }
 .image_background h1{
-    color: rgb(78, 133, 86);
+    color: rgb(102, 135, 107);
     margin-top: 400px;
     margin-left: 300px;
     text-align: center;
@@ -88,33 +87,8 @@ p{
     color: rgb(195, 196, 206);
     cursor: pointer;
 }
-/*--------------media---------*/
 
-@media only screen and (max-width:800px) {
-    nav ul {
-        position:absolute;
-        top:70px;
-        left:0;
-        width:100%;
-        background: #333;
-        overflow: hidden;
-        transition: max-height 0.5s;
-    }
-    nav ul li {
-        display: block;
-        margin-right: 50px;
-        margin-top: 10px;
-        margin-bottom: 10px;
-    }
-    nav ul li a {
-        color: #fff;
-    }
-   /* .menu-icon{
-        display: block;
-        cursor: pointer;
-    }*/
-}
-  
+
 
 /*-----------footer-----------*/
 .footer{
@@ -166,151 +140,6 @@ p{
 }
 
 
-/*-----------All products--------*/
-body{
-    background-color:rgb(255, 249, 249);
-}
-.row-2 {
-    justify-content: space-between;
-    margin: 100px auto 50px;
-    font-size: large;
-}
-
-.col-1 img{
-    flex-basis : 25%;
-    width: 100%;
-    
-}
-.col-1{
-    color:#ff523b;
-    align-items: center;
-    transition: transform 0.5s ;
-}
-.col-1:hover{
-    transform: translateY(-5px)
-}
-.small-container{
-    max-width: 1050px;
-    margin: auto;
-    padding-left: 25px;
-    padding-right: 25px;
-    min-height: 600px;
-
-}
-select{
-    border: 1px solid #ff523b ;
-    padding: 5px;
-}
-select:focus {
-    outline : none;
-}
-.add{
-    display: inline-block; 
-    
-    padding:8px 30px;
-    margin: 30px 0;
-    border-radius: 20px;
-    border-color: rgb(226, 239, 227);
-    cursor: pointer;
-    background-color: rgb(120, 161, 138);
-}
-.add:hover{
-    background: #6d8f6d;
-    color: #fff;
-    cursor: pointer;
-}
-.col-1 input {
-    width: 40px;
-    height: 30px;
-    padding-left:10px ;
-    font-size: 15px;
-    text-align: center;
-    margin: 10px auto 20px;
-    border: 1px solid #ff523b;
-}
-.col-1 select {
-    margin-left: 5px;
-}
-/*--------cart--------*/
-
-.small-1-container{
-    margin: 40px;
-}
-#cart-container table {
-    width: 100%;
-    border-collapse:collapse;
-    table-layout: fixed;
-}
-#cart-container table thead {
-    font-weight: 700;
-
-}
-#cart-container table thead th {
-    background: #fd8c66;
-    color: #fff;
-    border: none;
-    padding: 6px;
-    margin-top: 50px;
-}
-#cart-container table tbody input{
-    width : 40px;
-    height: 30px;
-    padding-left: 10px;
-    font-size: 15px;
-}
-#cart-container table tbody img{
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-
-}
-
-#cart-container table td {
-    border: 1px solid #b6b3b3;
-    text-align: center;
-}
-#cart-container table tbody td:nth-child(1) {
-    width: 10px;
-    height: 50px;
-}
-#cart-container table tbody td:nth-child(2),
-#cart-container table td:nth-child(3) {
-    width : 200px;
-}
-
-#cart-container table td:nth-child(4),
-#cart-container table td:nth-child(5),
-#cart-container table td:nth-child(6){
-    width : 200px;
-}
-
-.total-cart{
-    display: flex;
-    justify-content: flex-end;
-}
-.total-cart table {
-    margin-top: 50px;
-    border-top: 3px solid #4a9143;
-    width: 100%;
-    max-width: 400px;
-}
-td:last-child{
-    text-align:right;
-}
-.button {
-    display: block;
-    box-sizing: border-box;
-    width: 200px;
-    height: 40px;
-    padding: 20px 0px;
-}
-#cart-container table tbody select{
-    width : 70px;
-    height: 30px;
-    font-size: 15px;
-    text-align: center;
-    border: solid 1px black;
-}
 
 /* cart */
 

@@ -2,10 +2,8 @@
 	$title = 'Thêm/Sửa Tài Khoản Người Dùng';
 	$baseUrl = '../';
 	require_once('../layouts/header.php');
-
 	$id = $msg = $fullname = $email = $phone_number = $student_ID = $address = $role_id = '';
 	require_once('form_save.php');
-
 	$id = getGet('id');
 	if($id != '' && $id > 0) {
 		$sql = "select * from Users where id = '$id'";
