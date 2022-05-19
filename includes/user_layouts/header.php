@@ -8,12 +8,15 @@
 		.main {
 			min-height: 700px;
 		}
+        body {
+            font: 15px Arial, sans-serif;
+        }
 	</style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-sm navbar-dark sticky-top" style="background-color: #5A332F;">
+    <nav class="navbar navbar-expand-sm navbar-dark sticky-top py-1" style="background-color: #5A332F;">
         <a class="navbar-brand" href="<?=$root_dir?>/">
-            <img src="<?=$root_dir?>/assets/images/logovnu.png" width="80px">
+            <img src="<?=$root_dir?>/assets/images/logovnu.png" width="120px">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
             <span class="navbar-toggler-icon"></span>
@@ -27,6 +30,9 @@
                     <a class="nav-link" href="#">Yêu cầu</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="<?=$root_dir?>/cart">Giỏ hàng</a>
+                </li>    
+                <li class="nav-item">
                     <a class="nav-link" href="<?=$root_dir?>/account/logout.php">Đăng xuất</a>
                 </li>    
             </ul>
@@ -35,6 +41,6 @@
 
     <div class="jumbotron text-center" style="margin-bottom:0">
         <h1>Trung tâm giáo dục thể chất, ĐHQGHN</h1>
-        <h3>Web site thuê mượn dụng cụ thể thao</h3> 
+        <h3>Web site cho thuê mượn dụng cụ thể thao</h3> 
     </div>
 	<!-- header END -->

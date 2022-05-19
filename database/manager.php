@@ -7,7 +7,7 @@ define('PASSWORD', '');
 define('DATABASE', 'pec_database');
 //order
 define('ASCENDING', 'ASC');
-define('DESCENDING', 'DES');
+define('DESCENDING', 'DESC');
 
 function get_db_connection() {
     $connection = mysqli_connect(HOSTNAME, USERNAME, PASSWORD, DATABASE);
@@ -16,9 +16,11 @@ function get_db_connection() {
 
 function run_mysql_query(string $query) {
     $connection = get_db_connection();
-    $query = mysqli_real_escape_string($connection, $query);
+    
+    $query = str_replace("\\", "", $query);
 	mysqli_set_charset($connection, 'utf8mb4');
     $result = mysqli_query($connection, $query);
+    
     mysqli_close($connection);
 
     return $result;
@@ -31,7 +33,7 @@ function get_data_from_all_columns(string $table_name, string $condition = NULL,
     $condition = is_null_or_empty_string($condition) ? "" : trim(mysqli_real_escape_string($connection, $condition));
     $order_by = is_null_or_empty_string($order_by) ? "" : trim(mysqli_real_escape_string($connection, $order_by));
     $order = is_null_or_empty_string($order) ? "" : trim(mysqli_real_escape_string($connection, $order));
-    
+
     mysqli_close($connection);
 
     if (($order != ASCENDING && $order != DESCENDING)

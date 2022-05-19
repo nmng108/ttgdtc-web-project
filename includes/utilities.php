@@ -1,6 +1,5 @@
-<!-- Specify the correct variables $root_dir base on the calling file before requiring/including this file. -->
-
 <?php
+// Specify the correct variables $root_dir base on the calling file before requiring/including this file.
 // a session stores id, email, name of user.
 define('USERID', 'user_id');
 define('EMAIL', 'email');
@@ -22,7 +21,7 @@ function get_secure_md5($pwd) {
 }
 
 function is_null_or_empty_string($str) {
-    return $str === null || trim($str) === '';
+    return ($str === null || trim($str) === '');
 }
 
 function user_defined_uniqid() {
