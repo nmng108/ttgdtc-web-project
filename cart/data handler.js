@@ -5,21 +5,28 @@ function switch_edit_mode(button_element) {
     const QUANTITY_INPUT = document.getElementById('quantity_input_' + ITEM_CODE);
     
     var quantity_validation = function() {
-        $.ajax({
-            type : "POST",  // type of method
-            url  : "validate_quantity.php",  // your page
-            data : { item_code : ITEM_CODE }, // passing the values
-            // dataType: 'json',
-            success: function(res){ 
-                if (+res < +QUANTITY_INPUT.value) {
-                    $("#quantity_warning_" + ITEM_CODE).html("Số lượng lớn hơn hiện có");
-                    button_element.disabled = true;
-                } else {
-                    $("#quantity_warning_" + ITEM_CODE).html("");
-                    button_element.disabled = false;
+        if (QUANTITY_INPUT.value === "0")  {
+            $("#quantity_warning_" + ITEM_CODE).html("Số lượng tối thiểu là 1");
+            button_element.disabled = true;
+        } else if (QUANTITY_INPUT.value == "") {
+            button_element.disabled = true;
+        } else {
+            $.ajax({
+                type : "POST",  // type of method
+                url  : "validate_quantity.php",  // your page
+                data : { item_code : ITEM_CODE }, // passing the values
+                // dataType: 'json',
+                success: function(res){ 
+                    if (+res < +QUANTITY_INPUT.value) {
+                        $("#quantity_warning_" + ITEM_CODE).html("Số lượng lớn hơn hiện có");
+                        button_element.disabled = true;
+                    } else {
+                        $("#quantity_warning_" + ITEM_CODE).html("");
+                        button_element.disabled = false;
+                    }
                 }
-            }
-        });
+            });
+        }
     };
         
     if (split_id[0] == "edit"){
@@ -49,8 +56,12 @@ var delete_item = function(element) {
         type : "POST",  // type of method
         url  : "delete_item.php",  // your page
         data : { item_code : ITEM_CODE }, // passing the values
+        dataType : "json",
         success: function(res){ 
-            console.log(res); 
+            console.log(res);
+            if (res['total'] == 0) {
+                document.getElementById("category_" + res['category']).remove();
+            }
         }
     });
 
@@ -76,3 +87,37 @@ function adjust_quantity(item_code) {
     return true;
 }
 
+/**
+ * Use this function to validate the quantity(and more in the future) before entering checkout step.
+ * @todo: make changes to this function in future updates.
+ */
+function process_cart(button_element, category) {
+    // $.ajax({
+    //     type : "POST",  // type of method
+    //     url  : "adjust_quantity.php",  // your page
+    //     data : { category : category }, // passing the values
+    //     success: function(res){ 
+    //         console.log(res); 
+    //     }
+    // });
+    return true;
+
+    // $.ajax({
+    //     type : "POST",  // type of method
+    //     url  : ".php",  // your page
+    //     data : { item_code : item_code, new_quantity : new_quantity }, // passing the values
+        
+    //     success: function(res){ 
+    //         console.log(res); 
+    //     }
+    // });
+}
+
+/**
+ * Use this function to validate all quantities of the items(and maybe others) before submitting request/order.
+ * @todo: make changes to this function in future updates.
+ */
+ function process_submission() {
+    
+    return true;
+}

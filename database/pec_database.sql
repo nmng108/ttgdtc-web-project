@@ -139,7 +139,7 @@ CREATE TABLE IF NOT EXISTS `Products` (
   `itemCode` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `itemName` VARCHAR(45) NOT NULL,
   `availableQuantity` INT UNSIGNED NOT NULL,
-  `category` ENUM('SPORT EQUIPMENT', 'UNIFORM') NOT NULL DEFAULT 'SPORT EQUIPMENT',
+  `category` ENUM('SPORT_EQUIPMENT', 'UNIFORM') NOT NULL DEFAULT 'SPORT_EQUIPMENT',
   `primaryImage` VARCHAR(100),
   `description` TEXT(100) NULL,
   `createdAt` DATETIME NOT NULL DEFAULT NOW(),
@@ -157,7 +157,8 @@ CREATE TABLE IF NOT EXISTS `Carts` (
   `userID` INT UNSIGNED NOT NULL,
   `itemCode` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `quantity` INT UNSIGNED NOT NULL,
-  PRIMARY KEY (`userID`, `itemCode`),
+  `type` VARCHAR(5) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`userID`, `itemCode`, `type`),
   CONSTRAINT `userID_Carts_fk`
     FOREIGN KEY (`userID`)
     REFERENCES `Students` (`studentID`)
@@ -199,8 +200,9 @@ CREATE TABLE IF NOT EXISTS `Requests` (
   `requestNumber` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `studentID` INT UNSIGNED NOT NULL,
   `requestDate` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(),
-  `startTime` TIME NOT NULL,
+  `startTime` DATETIME NOT NULL,
   `endTime` DATETIME NULL,
+  `classCode` VARCHAR(11) NULL,
   `status` ENUM('SENT', 'APPROVED', 'RETURNED') NOT NULL DEFAULT 'SENT',
   `note` TEXT(50) NULL,
   `modifiedAt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP() ON UPDATE CURRENT_TIMESTAMP,
@@ -401,10 +403,10 @@ USE `pec_database`;
 INSERT INTO `Products` (`itemCode`, `itemName`, `availableQuantity`, `category`, `description`) VALUES (1, 'Áo Polo', 100, 'UNIFORM', NULL);
 INSERT INTO `Products` (`itemCode`, `itemName`, `availableQuantity`, `category`, `description`) VALUES (2, 'Quần Thể Thao', 100, 'UNIFORM', NULL);
 INSERT INTO `Products` (`itemCode`, `itemName`, `availableQuantity`, `category`, `description`) VALUES (3, 'Áo Khoác', 100, 'UNIFORM', NULL);
-INSERT INTO `Products` (`itemCode`, `itemName`, `availableQuantity`, `category`, `description`) VALUES (4, 'Bóng Rổ', 150, 'SPORT EQUIPMENT', NULL);
-INSERT INTO `Products` (`itemCode`, `itemName`, `availableQuantity`, `category`, `description`) VALUES (5, 'Cầu Lông', 150, 'SPORT EQUIPMENT', NULL);
-INSERT INTO `Products` (`itemCode`, `itemName`, `availableQuantity`, `category`, `description`) VALUES (6, 'Bóng Đá', 150, 'SPORT EQUIPMENT', NULL);
-INSERT INTO `Products` (`itemCode`, `itemName`, `availableQuantity`, `category`, `description`) VALUES (7, 'Bóng Chuyền', 150, 'SPORT EQUIPMENT', NULL);
+INSERT INTO `Products` (`itemCode`, `itemName`, `availableQuantity`, `category`, `description`) VALUES (4, 'Bóng Rổ', 150, 'SPORT_EQUIPMENT', NULL);
+INSERT INTO `Products` (`itemCode`, `itemName`, `availableQuantity`, `category`, `description`) VALUES (5, 'Cầu Lông', 150, 'SPORT_EQUIPMENT', NULL);
+INSERT INTO `Products` (`itemCode`, `itemName`, `availableQuantity`, `category`, `description`) VALUES (6, 'Bóng Đá', 150, 'SPORT_EQUIPMENT', NULL);
+INSERT INTO `Products` (`itemCode`, `itemName`, `availableQuantity`, `category`, `description`) VALUES (7, 'Bóng Chuyền', 150, 'SPORT_EQUIPMENT', NULL);
 
 COMMIT;
 

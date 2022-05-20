@@ -6,6 +6,8 @@ define('EMAIL', 'email');
 define('NAME', 'name');
 define('ROLE', 'role');
 
+date_default_timezone_set("Asia/Bangkok");
+
 function fix_sql_inject($sql) {
 	$sql = str_replace('\\', '\\\\', $sql);
 	$sql = str_replace('\'', '\\\'', $sql);
