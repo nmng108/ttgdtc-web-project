@@ -12,22 +12,22 @@ include_once('layouts/header.php');
         </div>
         <div class="col" style="margin-top: 10px;">
         <h2>Số lượng</h2>
-            <div> size M:
+            <div> Size M:
                 <input type="number" value="0" name = "sizeM" style="width:60px;" onchange="fixNum1()" required >
             </div>
-            <div> size L:
+            <div> Size L:
                 <input type="number" value="0" name="sizeL" step="1" id="" style="width: 60px;" onchange="fixNum2()" required>
             </div>
-            <div> size XL:
+            <div> Size XL:
                 <input type="number" value="0" name="sizeXL" step="1" id="" style="width: 60px;" onchange="fixNum3()" required>
             </div>
-            <div> size XXL:
+            <div> Size XXL:
                 <input type="number" value="0" name="sizeXXL" step="1" id="" style="width: 60px;" onchange="fixNum4()" required>
             </div>
-            <div> size XXXL:
+            <div> Size XXXL:
                 <input type="number" value="0" name="sizeXXXL" step="1" id="" style="width: 60px;" onchange="fixNum5()" required>
             </div>
-            <div> ngoại cỡ:
+            <div> Oversize:
                 <input type="number" value="0" name="size0" step="1" id="" style="width: 60px;" onchange="fixNum()" required>
             </div>
         </div>
@@ -68,8 +68,8 @@ include_once('layouts/header.php');
     <a href="check-order.php">
     <button>Confirm</button>
 </a>
-
 </form>
+
 
 <script type="text/javascript">
     function fixNum1() {

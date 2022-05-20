@@ -23,33 +23,6 @@
 
 </head>
 <body>
-<style>
-		button{
-        margin: 30px 0;
-        margin-left: 90px;
-        width: 120px;
-        height: 50px;
-        background-color: rgb(245, 249, 245);
-        border: 1px solid;
-        cursor: pointer;
-        border-radius: 15px;
-        }
-        button:hover {
-        transition: 0.5s;
-        background-color: rgb(213, 235, 217);
-        }
-
-        input{
-        width: 50%;
-        height: 50px;
-        text-align: center;
-        vertical-align: middle;
-        margin: 8px 0;
-        margin-left: 25px;
-        border: 2px solid rgb(189, 197, 189);
-        border-radius: 25px;
-        }
-	</style>
 <nav class="navbar fixed-top flex-md-nowrap p-0 shadow" style="background: #53925f;">
   <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#" style="color:white; ">ADMIN</a>
   

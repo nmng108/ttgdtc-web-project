@@ -35,7 +35,7 @@ $product = executeResult($sql, true);
 	function fixCartNum() {
 		$('[name = num').val(Math.abs($('[name = num').val()));
 	}
-	function addToCart(id,num, date, time) {
+	function addToCart(id,num) {
 		$.post('api/api-product.php', {
 			'action': 'add',
 			'id': id,

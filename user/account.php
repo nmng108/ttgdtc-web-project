@@ -35,8 +35,9 @@ $data1 = executeResult($sql1);
 					<th>Thời gian</th>
 					<th>Ngày</th>
 					<th>Trạng thái</th>
-					<th>Ghi chú</th>
 					<th>Lớp</th>
+					<th>Ghi chú</th>
+
 				</tr>
 			</thead>
 			<tbody>
@@ -51,8 +52,9 @@ $data1 = executeResult($sql1);
                     <td>'.$item['borrow_time'].'</td>
                     <td>'.$item['borrow_date'].'</td>
 					<td>'.$item['status_name'].'</td>	
+					<td>'.$item['class'].'</td>	
 					<td>'.$item['Note'].'</td>	
-					<td>'.$item['class'].'</td>			
+		
 				</tr>';
 	}
 ?>
@@ -77,7 +79,7 @@ $data1 = executeResult($sql1);
                     <th>Oversize</th>
                     <th>Trạng thái</th>
                     <th>Tổng đơn</th>
-					<th>Note</th>
+					<th>Ghi chú</th>
 				</tr>
 			</thead>
 			<tbody>

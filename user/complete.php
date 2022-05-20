@@ -12,7 +12,6 @@ include_once('layouts/header.php');
 ?>
 <div class="" >
 <h1 style="text-align: center;">Hoàn thành yêu cầu</h1>
-
 	<div class="infor">
 		<h3>Nếu có bất kì vấn đề gì vui lòng liên hệ:<br></h3>
 		<ul style="margin-left: 10px;">

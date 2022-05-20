@@ -32,8 +32,8 @@ include_once('layouts/header.php');
 
 <!-- body -->
 <h3 >Chi tiết đơn đặt đồng phục</h3>
-<div class="row" style="margin-bottom:200px;">
-    <table class= "table table-bordered table-hover" >
+<div class="row" style="margin-bottom:20px;">
+    <table class= "table table-bordered table-hover" style="width: 200px;" >
         <tr class="table-success">
             <th>Size M</th>
             <th> Size L</th>
@@ -56,6 +56,17 @@ include_once('layouts/header.php');
         </body>
     </table>
 </div>
+	<div class="infor" >
+        <h3>Yêu cầu sẽ được xử lí trong 3-5 ngày tới</h3>
+		<h4>Nếu có bất kì vấn đề gì vui lòng liên hệ:<br></h4>
+		<ul style="margin-left: 10px;font-style: italic;">
+			<li>Cô Hương(SĐT: 0911911199)</li>
+			<li>Thầy Huyền(SĐT: 0984838166)</li>
+			<li>Hoặc đến gặp trực tiếp giáo viên tại: Phòng 101 </li>
+		</ul>
+		<h4>Phòng nhận đồng phục: Phòng 104</h4>
+		<h6 style="color: brown;font-style: italic;">*Địa chỉ: Nhà đa năng khu GDTC số 2 Phạm Văn Đồng</h6>
+	</div>
 
 <!-- footer -->
 <?php

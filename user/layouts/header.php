@@ -63,7 +63,6 @@ if($user == null) {
         border-radius: 25px;
     }
     .row{
-        width: 100%;
         margin-bottom: auto;
     }
     .infor{
