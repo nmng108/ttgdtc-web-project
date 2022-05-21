@@ -65,12 +65,10 @@ include_once('layouts/header.php');
             </table>
         </div>
     </div>
-    <a href="check-order.php">
-    <button>Confirm</button>
-</a>
+    
+    <button>Xác nhận</button>
+
 </form>
-
-
 <script type="text/javascript">
     function fixNum1() {
 		$('[name = sizeM').val(Math.abs($('[name = sizeM').val()));

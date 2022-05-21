@@ -67,9 +67,19 @@
 					  <label for="pstudent_ID">Mã sinh viên:</label>
 					  <input required="true" type="tel" class="form-control" id="student_ID" name="student_ID" value="<?=$student_ID?>">
 					</div>
-					<div class="form-group">
-					  <label for="address">Trường:</label>
-					  <input required="true" type="text" class="form-control" id="address" name="address" value="<?=$address?>">
+					<div class = "form-group">
+					</select>
+					<label for=" ">Trường:</label>
+					<select  name = "address" id = "" class="form-control">
+						<option value="Đại Học Công Nghệ">Đại Học Công Nghệ</option>
+						<option value="Đại Học Ngoại Ngữ">Đại Học Ngoại Ngữ</option>
+						<option value="Đại Học Y Dược">Đại Học Y Dược</option>
+						<option value="Quốc Tế ">Quốc Tế </option>
+						<option value="Đại Học Khoa Học Xã Hội Và Nhân Văn ">Đại học Khoa Học Xã Hội Và Nhân Văn</option>
+						<option value="Đại Học Khoa Học Tự Nhiên ">Đại Học Khoa Học Tự Nhiên</option>
+						<option value="Đại học Giáo Dục ">Đại Học Giáo Dục</option>
+					</select>
+					</select>  
 					</div>
 					<div class="form-group">
 					  <label for="pwd">Mật Khẩu:</label>

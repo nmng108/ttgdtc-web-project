@@ -24,6 +24,11 @@ include_once('layouts/header.php');
             values ('$fullname', '$email', '$student_id',1, '$sizeM', '$sizeL', '$sizeXL', '$sizeXXL', '$sizeXXXL', '$size0', '$order_date', '$bill','$user_id')";
         execute($sql);  
         } else { 
+            echo '<script >
+        $(function() {       
+        alert("Email đã tồn tại trên hệ thống!!")      
+        })	
+    </script>';
             header('Location: order.php');
             die();
         }
