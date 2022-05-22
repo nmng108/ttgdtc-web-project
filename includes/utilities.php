@@ -34,3 +34,23 @@ function user_defined_uniqid() {
 	$bytes = random_bytes(ceil($lenght / 2));
     return date("Ymdhis", strtotime("now")) . substr(bin2hex($bytes), 0, $lenght);
 }
+
+/**
+ * Original format: Y/m/d H:i:s .
+ */
+function format_datetime_to_display(string $mysql_datetime) : string {
+	return date_create($mysql_datetime)->format('H:i m/d/Y');
+}
+?>
+<script>
+	var invalid_characters = ["-", "+", "e"];
+
+	var prevent_unexpected_characters = function(event) {
+		// (on)keydown
+		if (invalid_characters.includes(event.key)) {
+			e.preventDefault();
+		}
+		// (on)input -> dont need to use the event parameter.
+		// this.value = this.value.replace(/[e\+\-]/gi, "");
+	}
+</script>

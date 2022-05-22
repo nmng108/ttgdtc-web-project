@@ -28,10 +28,11 @@ CREATE TABLE IF NOT EXISTS `Students` (
   `firstName` VARCHAR(30) NULL,
   `lastName` VARCHAR(30) NOT NULL,
   `email` VARCHAR(255) NOT NULL,
-  `phoneNumber` INT(10) NOT NULL,
+  `phoneNumber` VARCHAR(15) NOT NULL,
   `password` VARCHAR(255) NOT NULL,
   `school` ENUM('UET', 'ULIS', 'IS', 'UEd', 'UEB', 'SoL') NOT NULL,
   `createdAt` DATETIME NOT NULL DEFAULT NOW(),
+  `modifiedAt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP() ON UPDATE CURRENT_TIMESTAMP,  
   PRIMARY KEY (`studentID`))
 ENGINE = InnoDB;
 
@@ -69,9 +70,10 @@ CREATE TABLE IF NOT EXISTS `Admins` (
   `firstName` VARCHAR(30) NULL,
   `lastName` VARCHAR(30) NOT NULL,
   `email` VARCHAR(255) NOT NULL,
-  `phoneNumber` INT(10) NOT NULL,
+  `phoneNumber` VARCHAR(15) NOT NULL,
   `password` VARCHAR(255) NOT NULL,
-  `createdAt` DATETIME NOT NULL DEFAULT NOW())
+  `createdAt` DATETIME NOT NULL DEFAULT NOW(),
+  `modifiedAt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP() ON UPDATE CURRENT_TIMESTAMP)
 ENGINE = InnoDB;
 
 
@@ -203,7 +205,7 @@ CREATE TABLE IF NOT EXISTS `Requests` (
   `startTime` DATETIME NOT NULL,
   `endTime` DATETIME NULL,
   `classCode` VARCHAR(11) NULL,
-  `status` ENUM('SENT', 'APPROVED', 'RETURNED') NOT NULL DEFAULT 'SENT',
+  `status` ENUM('SENT', 'APPROVED', 'RETURNED', 'CANCEL') NOT NULL DEFAULT 'SENT',
   `note` TEXT(50) NULL,
   `modifiedAt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP() ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`requestNumber`),
@@ -344,6 +346,30 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `RequestStatus`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `RequestStatus` ;
+
+CREATE TABLE IF NOT EXISTS `RequestStatus` (
+  `statusID` TINYINT(2) UNSIGNED NOT NULL,
+  `statusName` VARCHAR(20) NOT NULL,
+  PRIMARY KEY (`statusID`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `OrderStatus`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `OrderStatus` ;
+
+CREATE TABLE IF NOT EXISTS `OrderStatus` (
+  `statusID` TINYINT(2) UNSIGNED NOT NULL,
+  `statusName` VARCHAR(20) NOT NULL,
+  PRIMARY KEY (`statusID`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Data for table `Weekdays`
 -- -----------------------------------------------------
 START TRANSACTION;
@@ -388,9 +414,9 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `pec_database`;
-INSERT INTO `Students` (`studentID`, `username`, `firstName`, `lastName`, `email`, `phoneNumber`, `password`, `school`, `createdAt`) VALUES (20020001, 'std', 'Qwe', 'rty', 'qwe@gmail.com', 0123456789, '123', 'UET', DEFAULT);
-INSERT INTO `Students` (`studentID`, `username`, `firstName`, `lastName`, `email`, `phoneNumber`, `password`, `school`, `createdAt`) VALUES (20020002, 'std1', 'yjh', 'Otyu', 'vbn@gmail.com', 0987654321, '123', 'ULIS', DEFAULT);
-INSERT INTO `Students` (`studentID`, `username`, `firstName`, `lastName`, `email`, `phoneNumber`, `password`, `school`, `createdAt`) VALUES (20020003, 'std2', NULL, 'thn', 'thn@outlook.com', 0111222333, '321', 'UET', DEFAULT);
+INSERT INTO `Students` (`studentID`, `username`, `firstName`, `lastName`, `email`, `phoneNumber`, `password`, `school`, `createdAt`) VALUES (20020001, 'std', 'Qwe', 'rty', 'qwe@gmail.com', '0123456789', '123', 'UET', DEFAULT);
+INSERT INTO `Students` (`studentID`, `username`, `firstName`, `lastName`, `email`, `phoneNumber`, `password`, `school`, `createdAt`) VALUES (20020002, 'std1', 'yjh', 'Otyu', 'vbn@gmail.com', '0987654321', '123', 'ULIS', DEFAULT);
+INSERT INTO `Students` (`studentID`, `username`, `firstName`, `lastName`, `email`, `phoneNumber`, `password`, `school`, `createdAt`) VALUES (20020003, 'std2', NULL, 'thn', 'thn@outlook.com', '0111222333', '321', 'UET', DEFAULT);
 
 COMMIT;
 
@@ -476,7 +502,35 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `pec_database`;
-INSERT INTO `Admins` (`adminID`, `username`, `firstName`, `lastName`, `email`, `phoneNumber`, `password`, `createdAt`) VALUES (1001, 'admin', 'Abc', 'Def', 'abc@gmail.com', 0999888777, '123', DEFAULT);
+INSERT INTO `Admins` (`adminID`, `username`, `firstName`, `lastName`, `email`, `phoneNumber`, `password`, `createdAt`) VALUES (1001, 'admin', 'Abc', 'Def', 'abc@gmail.com', '0999888777', '123', DEFAULT);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `RequestStatus`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `pec_database`;
+INSERT INTO `RequestStatus` (`statusID`, `statusName`) VALUES (1, 'SENT');
+INSERT INTO `RequestStatus` (`statusID`, `statusName`) VALUES (2, 'APPROVED');
+INSERT INTO `RequestStatus` (`statusID`, `statusName`) VALUES (3, 'RETURNED');
+INSERT INTO `RequestStatus` (`statusID`, `statusName`) VALUES (4, 'CANCELED');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `OrderStatus`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `pec_database`;
+INSERT INTO `OrderStatus` (`statusID`, `statusName`) VALUES (1, 'SENT');
+INSERT INTO `OrderStatus` (`statusID`, `statusName`) VALUES (2, 'PREPARING');
+INSERT INTO `OrderStatus` (`statusID`, `statusName`) VALUES (3, 'READY');
+INSERT INTO `OrderStatus` (`statusID`, `statusName`) VALUES (4, 'RECEIVED');
+INSERT INTO `OrderStatus` (`statusID`, `statusName`) VALUES (5, 'CANCELED');
+INSERT INTO `OrderStatus` (`statusID`, `statusName`) VALUES (6, 'RETURNED');
 
 COMMIT;
 

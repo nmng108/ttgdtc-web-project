@@ -1,7 +1,7 @@
 
 <?php
 	$title = 'Dashboard Page';
-	$baseUrl = '';
+	$root_dir = "..";
 	require_once('layouts/header.php');
 ?>
 

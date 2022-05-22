@@ -1,18 +1,24 @@
 <?php
-if(!empty($_POST)) {
-	$id = getPost('id');
-	$fullname = getPost('fullname');
-	$email = getPost('email');
-	$phone_number = getPost('phone_number');
-	$address = getPost('address');
-	$password = getPost('password');
-	$student_ID = getPost('student_ID');
-	$created_at = $updated_at = date("Y-m-d H:i:s");
-	$role_id = getPost('role_id');
+/* 
+ * No longer use this file
+ */
+$root_dir = "../..";
 
-	if($id > 0) {
+include_once("$root_dir/includes/utilities.php");
+include_once("$root_dir/database/manager.php");
+
+if(isset($_POST)) {
+	$student_id = $_POST['student_id'];
+	$fullname = $_POST['firstName'];
+	$fullname = $_POST['lastName'];
+	$email = $_POST['email'];
+	$phone_number = $_POST['phone_number'];
+	// $address = $_POST['address'];
+	$password = $_POST['password'];
+
+	if($student_id > 0) {
 		//update
-		$sql = "select * from Users where email = '$email' and id <> $id";
+		$query = "select * from Users where email = '$email' and id <> $id";
 		$userItem = executeResult($sql, true);
 
 		if($userItem != null) {
