@@ -47,8 +47,8 @@ function format_datetime_to_display(string $mysql_datetime) : string {
 
 	var prevent_unexpected_characters = function(event) {
 		// (on)keydown
-		if (invalid_characters.includes(event.key)) {
-			e.preventDefault();
+		if (invalid_characters.includes(event.which)) {
+			event.preventDefault();
 		}
 		// (on)input -> dont need to use the event parameter.
 		// this.value = this.value.replace(/[e\+\-]/gi, "");

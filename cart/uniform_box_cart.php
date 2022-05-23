@@ -11,7 +11,7 @@ include_once("$root_dir/cart/manager.php");
 		<div class="card-body">
 
 			<div class="row">
-				<div class="container" style="width: 75vw;">
+				<div class="container  table-responsive-lg" style="width: 75vw;">
 					<table class="table table-hover" style="width: 95%; text-align: center;">
 						<thead class="table-info">
 							<tr>
@@ -72,13 +72,23 @@ include_once("$root_dir/cart/manager.php");
 								</tr>
 								<?php
 							}
+							$query = "SELECT SUM(u.priceEach * c.quantity) AS totalPrice FROM Carts c, Uniforms u WHERE u.itemCode = c.itemCode";
+							$result = run_mysql_query($query)->fetch_all(MYSQLI_ASSOC);
+							if (count($result) == 1) {
+								$result = $result[0]['totalPrice'];
+							}
 							?>
+							<tr class="table-dark" style="color: darkslategrey; font-weight: bold; font-size: 16px;">
+								<td colspan="6">Tổng</td>
+								<td><?=number_format($result * 1000, 0, ',', '.')?> VNĐ</td>
+								<td class="total-price-sub-cols" colspan="2"></td>
+							</tr>
 						</tbody>
 					</table>
 					<p id="notif_<?=UNIFORM?>" style="font-size: 26px; color: red">
 					
 					</p>
-					<a href="./checkout.php?cat=<?=UNIFORM?>" class="checkout-button">
+					<a href="./checkout?cat=<?=UNIFORM?>" class="checkout-button">
 						<button class="btn checkout-button" id="checkout_button_<?=UNIFORM?>" style="align-content: right; color: goldenrod" onclick="return process_cart(this)">Tiếp tục</button>
 					</a>
 				</div>

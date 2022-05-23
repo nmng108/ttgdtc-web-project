@@ -4,6 +4,7 @@
 <html>
 <head>
 	<?=include_once("$root_dir/includes/headtag.php");?>
+    <link rel="stylesheet" href="<?=$root_dir?>/assets/css/style_user.css">
 	<style type="text/css">
 		.main {
 			min-height: 700px;

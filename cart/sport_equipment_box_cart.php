@@ -11,7 +11,7 @@ include_once("$root_dir/cart/manager.php");
 		<div class="card-body">
 
 			<div class="row">
-				<div class="container" style="width: 75vw;">
+				<div class="container table-responsive-lg" style="width: 75vw;">
 					<table class="table table-hover" style="width: 95%; text-align: center;">
 						<thead class="table-info">
 							<tr>
@@ -70,7 +70,7 @@ include_once("$root_dir/cart/manager.php");
 					<p id="notif_<?=SPORT_EQUIPMENT?>" style="font-size: 26px; color: red">
 					
 					</p>
-					<a href="./checkout.php?cat=<?=SPORT_EQUIPMENT?>" class="checkout-button">
+					<a href="./checkout?cat=<?=SPORT_EQUIPMENT?>" class="checkout-button">
 						<button class="btn checkout-button" id="checkout_button_<?=SPORT_EQUIPMENT?>" style="align-content: right; color: goldenrod" onclick="return process_cart(this, <?=$_SESSION[USERID]?>)">Tiếp tục</button>
 					</a>
 				</div>
