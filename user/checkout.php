@@ -1,8 +1,7 @@
 <?php 
 $title = 'Trang yêu cầu';
+include('layouts/layout.php');
 include_once('layouts/header.php');
-require_once('api/form-checkout.php');
-
 ?>
 <div class="panel-body">
 	<form method="post">
@@ -10,16 +9,15 @@ require_once('api/form-checkout.php');
 			<label >Thời gian mượn:</label>
 			<input type="time" class=""  name="time" required>
 		</div>
+
+		<!-- mật khẩu -->
 		<div class = "form-group">
 			<label >Ngày mượn:</label>
 			<input type="date" class=""  name="date" required >   
 		</div>	
-		<div class = "form-group">
-		<label for="address">Address <font color="red">*</font>:</label>
-		  <input required="true" type="text" class="form-control" id="address" name="class">
-		</div>	
 <!-- body START -->
 <div class="row">
+	
 	<div class="col-md-7">
 		<table class="table table-bordered">
 			<thead>
@@ -49,9 +47,12 @@ foreach ($cart as $item) {
 			<td>'.$item['num'].'></td>
 		</tr>';
 }
+
+
 ?>
 			</tbody>
 		</table>
+		
 		<button class="" >Complete</button>
 	</div>
 </div>
@@ -59,6 +60,42 @@ foreach ($cart as $item) {
 </div>
 <!-- body END -->
 <?php
+if(!empty($_POST)) {
+	$date = getPost('date');
+	$time = getPost('time');
+	$order_date = date('Y-m-d H:i:s');
+	$fullname = $user['f_name'];
+	$email = $user['email'];
+	$student_ID = $user['student_ID'];
+	$id = $user['id'];
+	$cart = [];
+	if(isset($_SESSION['cart'])) {
+		$cart = $_SESSION['cart'];
+	}
+	if($cart == null || count($cart) == 0) {
+		header('Location: products.php');
+		die();
+	}
 
+	$sql = "insert into orders (full_name, email, student_ID, borrow_date, borrow_time, order_date, user_id, status) values ('$fullname', '$email','$student_ID','$date', '$time', '$order_date','$id', 1)";
+	execute($sql);
+
+	$sql = "select * from orders where order_date = '$order_date'";
+	$order = executeResult($sql, true);
+
+	$orderId = $order['id'];
+
+	foreach ($cart as $item) {
+		$product_id = $item['id'];
+		$num = $item['num'];
+		$sql = "insert into order_details(order_id, product_id, num) values ($orderId, $product_id, $num)";
+		execute($sql);
+	}
+
+	unset($_SESSION['cart']);
+
+	header('Location: complete.php');
+	die();
+}
 include_once('layouts/footer.php');
 ?>

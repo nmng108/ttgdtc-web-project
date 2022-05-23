@@ -5,7 +5,7 @@ require_once('config.php');
 // SQL: insert, update, delete
 function execute($sql) {
 	//open connection
-	$conn = mysqli_connect(HOST, USERNAME, PASSWORD, DATABASE);
+	$conn = mysqli_connect(HOSTNAME, USERNAME, PASSWORD, DATABASE);
 	mysqli_set_charset($conn, 'utf8');
 	//query
 	mysqli_query($conn, $sql);
@@ -18,7 +18,7 @@ function executeResult($sql, $isSingle = false) {
 	$data = null;
 
 	//open connection
-	$conn = mysqli_connect(HOST, USERNAME, PASSWORD, DATABASE);
+	$conn = mysqli_connect(HOSTNAME, USERNAME, PASSWORD, DATABASE);
 	mysqli_set_charset($conn, 'utf8');
 
 	//query
@@ -34,6 +34,5 @@ function executeResult($sql, $isSingle = false) {
 
 	//close connection
 	mysqli_close($conn);
-
 	return $data;
 }

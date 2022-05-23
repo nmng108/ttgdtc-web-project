@@ -1,9 +1,5 @@
 <?php
-//https://gokisoft.com/share-code-huong-dan-login-multi-platform-login-multi-devices-multi-browsers-session--cookie-trong-lap-trinh-phpmysql.html#dbhelper-php
-//$sql = "insert into Role(name) values ('Admin')";
-//$sql = "insert into Role(name) values ('$name')"; => $name = 'Admin => sql injection => join => framework (Laravel) => fix
-//$name = 'Admin => \'Admin
-//fix sql injection => $sql = "ghi cau lenh sql vao"
+
 function fixSqlInject($sql) {
 	$sql = str_replace('\\', '\\\\', $sql);
 	$sql = str_replace('\'', '\\\'', $sql);
@@ -51,14 +47,14 @@ function getSecurityMD5($pwd) {
 }
 
 function getUserToken() {
-	if(isset($_SESSION['users'])) {
-		return $_SESSION['users'];
+	if(isset($_SESSION['students'])) {
+		return $_SESSION['students'];
 	}
 	$token = getCookie('token');
-	$sql = "select * from Tokens inner join users on tokens.user_id = users.id where token = '$token' and users.deleted = 0";
+	$sql = "select * from Tokens inner join students on tokens.user_id = students.studentID where token = '$token' ";
 	$item = executeResult($sql, true);
 	if($item != null) {
-		$_SESSION['users'] = $item;
+		$_SESSION['students'] = $item;
 		return $item;
 	}
 	return null;
