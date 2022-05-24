@@ -36,7 +36,7 @@ include_once("$root_dir/cart/manager.php");
 								<tr class="<?=$class_value?>" id="row_item_<?=$item['itemCode']?>">
 									<td class="sequence-number"><?=$i + 1?></td>
 									
-									<td class="item-image"><img src="<?=PRODUCT_IMAGE_SOURCE . $item['primaryImage']?>" style="width: 100%"></td>
+									<td class="item-image"><img src="<?=UPLOADED_IMAGE_DIR . $item['primaryImage']?>" style="width: 100%"></td>
 									
 									<td class="item-name"><?=$item['itemName']?></td>
 																	

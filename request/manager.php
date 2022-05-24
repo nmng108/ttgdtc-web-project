@@ -1,5 +1,4 @@
 <?php
-include_once("$root_dir/includes/user_layouts/header.php");
 include_once("$root_dir/includes/utilities.php");
 include_once("$root_dir/database/manager.php");
 

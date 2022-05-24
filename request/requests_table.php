@@ -19,12 +19,12 @@ $result = get_all_requests($_SESSION[USERID]);
 						<thead class="table-info">
 							<tr>
 								<th class="col-sm-2 sequence-number">STT</th>
-								<th class="col-sm-2 item-image">Thời gian gửi</th>
-								<th class="col-sm-2 item-name">Chỉnh sửa gần nhất</th>
-								<th class="col-sm-2 item-size">Thời gian bắt đầu</th>
-								<th class="col-sm-2 available-quantity">Thời gian kết thúc</th>
-								<th class="col-sm-2 item-quantity">Ghi chú</th>
-								<th class="col-sm-2 item-price-each">Trạng thái</th>
+								<th class="col-sm-2 request-date">Thời gian gửi</th>
+								<th class="col-sm-2 modified-date">Chỉnh sửa gần nhất</th>
+								<th class="col-sm-2 start-date">Thời gian bắt đầu</th>
+								<th class="col-sm-2 end-date">Thời gian kết thúc</th>
+								<th class="col-sm-3 note">Ghi chú</th>
+								<th class="col-sm-2 request-status">Trạng thái</th>
 								<th class="col-sm-2 detail-button"></th>
 								<th class="col-sm-2 cancel-button"></th>
 							</tr>
@@ -37,17 +37,17 @@ $result = get_all_requests($_SESSION[USERID]);
 								<tr class="item-info" id="item_<?=$item['requestNumber']?>" style="text-align: center;">
 									<td class="sequence-number"><?=$i + 1?></td>
 									
-									<td class="item-image"><?=$item['requestDate']?></td>
+									<td class="request-date"><?=$item['requestDate']?></td>
 									
-									<td class="item-name"><?=$item['modifiedAt']?></td>
+									<td class="modified-date"><?=$item['modifiedAt']?></td>
 																	
-									<td class="item-size"><?=$item['startTime']?></td>
+									<td class="start-date"><?=$item['startTime']?></td>
 																	
-									<td class="available-quantity"><?=$item['endTime']?></td>
+									<td class="end-date"><?=$item['endTime']?></td>
 
-									<td class="item-quantity"><?=$item['note']?></td>
+									<td class="note"><?=$item['note']?></td>
 									
-									<td class="item-price-each"><?=$item['statusName']?></td>
+									<td class="request-status"><?=$item['statusName']?></td>
 									
 									<td class="cancel-button">
 										<button class="btn" id="detail_button_<?=$item['requestNumber']?>" onclick="return false">Chi tiết</button>

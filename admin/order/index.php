@@ -3,9 +3,11 @@ $title = 'Quản Lý Đơn Đặt Đồng Phục';
 $root_dir = '../..';
 
 include_once("$root_dir/admin/layouts/header.php");
+include_once("$root_dir/order/manager.php");
 
 $query = "SELECT * FROM OrderStatus";
 $all_status = run_mysql_query($query)->fetch_all(MYSQLI_ASSOC);
+$item_count = 0;
 
 for ($i = 0; $i < count($all_status); $i++) {
 	$status = $all_status[$i];
@@ -15,7 +17,7 @@ for ($i = 0; $i < count($all_status); $i++) {
 	$sql = 
 		"SELECT o.orderNumber, o.orderDate, o.studentID, o.modifiedAt,
 				CONCAT(IF(s.firstName IS NULL, '', s.firstName), ' ', s.lastName) AS fullName,
-				statusName AS `status`, o.note 
+				statusName, o.note 
 		FROM Orders o
 		JOIN OrderStatus os ON o.statusID = os.statusID
 		LEFT JOIN Students s ON s.studentID = o.studentID
@@ -52,11 +54,12 @@ for ($i = 0; $i < count($all_status); $i++) {
 				<tr>
                     <th>STT</th>
                     <th>Thời gian tạo</th>
+					<th>Chỉnh sửa gần nhất</th>
 					<th>Họ tên sinh viên</th>
                     <th>Mã sinh viên</th>
+                    <th>Tổng giá tiền</th>
                     <th>Trạng thái</th>
 					<th>Note</th>
-					<th>Chỉnh sửa gần nhất</th>
 					<th>Chi tiết</th>
                     <th></th>
 				</tr>
@@ -65,17 +68,18 @@ for ($i = 0; $i < count($all_status); $i++) {
 				<?php
 				$index = 0;
 				foreach($result as $order) {
-						?>
+					$item_count ++;
+					?>
 					<tr>
 						<th><?=($sequence_number++)?></th>
 						<td><?=format_datetime_to_display($order['orderDate'])?></td>
+						<td><?=format_datetime_to_display($order['modifiedAt'])?></td>
 						<td><?=$order['fullName']?></td>
 						<td><?=$order['studentID']?></td>
+						<td><?=get_order_total_price($order['orderNumber'])?></td>
 						<!-- status column is no longer nessesary to display -->
-						<!-- Can use $status['statusName'] instead -->
-						<td><?=$order['status']?></td>
+						<td><?=$order['statusName']?></td>
 						<td><?=$order['note']?></td>	
-						<td><?=format_datetime_to_display($order['modifiedAt'])?></td>
 						<td>
 							<button class="btn btn-warning">Chi tiết</button>
 						</td>	
@@ -98,5 +102,10 @@ for ($i = 0; $i < count($all_status); $i++) {
 ?>
 <br>
 <?php
-	require_once('../layouts/footer.php');
+if ($item_count == 0) {
+	?>
+	Không có đơn nào
+	<?php
+}
+require_once('../layouts/footer.php');
 ?>

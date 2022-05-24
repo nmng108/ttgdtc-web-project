@@ -11,7 +11,7 @@ $result = run_mysql_query($query)->fetch_all(MYSQLI_ASSOC);
 <div class="row" style="margin-top: 20px;">
 	<div class="col-md-12 table-responsive">
 		<h3>Quản Lý Dụng Cụ Trong Kho</h3>
-		<button>Thêm mới</button>
+		<button class="btn btn-primary" onclick="window.location.href='./upload.php'">Thêm mới</button>
 
 		<table class="table table-bordered table-hover" style="margin-top: 20px; text-align: center;">
 			<thead class="table-success">
@@ -34,7 +34,7 @@ $result = run_mysql_query($query)->fetch_all(MYSQLI_ASSOC);
 		<tr>
 			<th><?=(++$index)?></th>
 			<td><?=$item['itemName']?></td>
-			<td><img src="../<?=$item['primaryImage']?>" style="width: 100px"></td>					
+			<td><img src="<?=get_uploaded_image_link($item['primaryImage'])?>" style="width: 100px"></td>					
 			<td><?=$item['availableQuantity']?></td>	
 			<td><?=$item['description']?></td>	
 			<td><?=format_datetime_to_display($item['createdAt'])?></td>	

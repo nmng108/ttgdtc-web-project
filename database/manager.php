@@ -12,7 +12,7 @@ define('DESCENDING', 'DESC');
 define('SPORT_EQUIPMENT', 'SPORT_EQUIPMENT');
 define('UNIFORM', 'UNIFORM');
 
-define('PRODUCT_IMAGE_SOURCE', "$root_dir/uploads/images/");
+define('UPLOADED_IMAGE_DIR', "$root_dir/uploads/images/");
 
 function get_db_connection() {
     $connection = mysqli_connect(HOSTNAME, USERNAME, PASSWORD, DATABASE);
@@ -105,4 +105,8 @@ function get_quantity_in_inventory(int $item_code) {
         return $result->fetch_array()['availableQuantity'];
     }
     return NULL;
+}
+
+function get_uploaded_image_link($file_name) {
+    return UPLOADED_IMAGE_DIR . $file_name;
 }

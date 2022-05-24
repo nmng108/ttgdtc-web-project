@@ -7,6 +7,7 @@ include_once("$root_dir/admin/layouts/header.php");
 // Get all status
 $query = "SELECT * FROM RequestStatus";
 $all_status = run_mysql_query($query)->fetch_all(MYSQLI_ASSOC);
+$item_count = 0;
 
 for ($i = 0; $i < count($all_status); $i++) {
 	$status = $all_status[$i];
@@ -65,6 +66,7 @@ for ($i = 0; $i < count($all_status); $i++) {
 			<tbody>
 				<?php
 					foreach($result as $request) {
+						$item_count ++;
 						?>
 						<tr>
 							<th><?=($sequence_number++)?></th>
@@ -99,5 +101,10 @@ for ($i = 0; $i < count($all_status); $i++) {
 ?>
 <br>
 <?php
-	require_once("$root_dir/admin/layouts/footer.php");
+if ($item_count == 0) {
+	?>
+	Không có yêu cầu nào
+	<?php
+}
+require_once("$root_dir/admin/layouts/footer.php");
 ?>
