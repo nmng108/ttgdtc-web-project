@@ -34,8 +34,7 @@ $product_list = get_products_by_category(SPORT_EQUIPMENT);
                     ?>
                         <div class="col-sm-4 " style="width: 20rem;">
                             <div class="card mb-4 box-shadow bg-info">
-                                <img class="card-img-top" src="<?=$item['primaryImage']?>">
-                                
+                                <img class="card-img-top" src="<?=PRODUCT_IMAGE_SOURCE . $item['primaryImage']?>">
                                 <div class="card-body">
                                     <h5 class="card-title"> <?=$item['itemName']?> </h5>
                                     <div class="d-flex justify-content-between align-items-center">
@@ -96,7 +95,7 @@ $product_list = get_products_by_category(SPORT_EQUIPMENT);
                     ?>
                         <div class="col-sm-4 " style="width: 20rem;">
                             <div class="card mb-4 box-shadow bg-info">
-                                <img class="card-img-top" src="<?=$item['primaryImage']?>">
+                                <img class="card-img-top" src="<?=PRODUCT_IMAGE_SOURCE . $item['primaryImage']?>">
                                 
                                 <div class="card-body">
                                     <h5 class="card-title"> <?=$item['itemName']?> </h5>

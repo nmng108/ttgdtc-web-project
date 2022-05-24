@@ -142,7 +142,7 @@ CREATE TABLE IF NOT EXISTS `Products` (
   `itemName` VARCHAR(45) NOT NULL,
   `availableQuantity` INT UNSIGNED NOT NULL,
   `category` ENUM('SPORT_EQUIPMENT', 'UNIFORM') NOT NULL DEFAULT 'SPORT_EQUIPMENT',
-  `primaryImage` VARCHAR(100),
+  `primaryImage` VARCHAR(255),
   `description` TEXT(100) NULL,
   `createdAt` DATETIME NOT NULL DEFAULT NOW(),
   `modifiedAt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP() ON UPDATE CURRENT_TIMESTAMP,
@@ -205,7 +205,7 @@ CREATE TABLE IF NOT EXISTS `Requests` (
   `startTime` DATETIME NOT NULL,
   `endTime` DATETIME NULL,
   `classCode` VARCHAR(11) NULL,
-  `status` ENUM('SENT', 'APPROVED', 'RETURNED', 'CANCEL') NOT NULL DEFAULT 'SENT',
+  `statusID` TINYINT(2) NOT NULL DEFAULT 1,
   `note` TEXT(50) NULL,
   `modifiedAt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP() ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`requestNumber`),
@@ -254,9 +254,10 @@ CREATE TABLE IF NOT EXISTS `Orders` (
   `studentID` INT UNSIGNED NOT NULL,
   `orderDate` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(),
   `receivedDate` DATETIME NULL,
-  `status` ENUM('SENT', 'PREPARING', 'READY', 'RECEIVED', 'CANCELED') NOT NULL DEFAULT 'SENT',
+  `statusID` TINYINT(2) NOT NULL DEFAULT 1,
   `note` TEXT(100) NULL,
   `modifiedAt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP() ON UPDATE CURRENT_TIMESTAMP,
+  `paymentMethod` ENUM('BANKING, DIRECT') NOT NULL DEFAULT 'DIRECT';
   PRIMARY KEY (`orderNumber`),
   CONSTRAINT `studentID_Orders_fk`
     FOREIGN KEY (`studentID`)
@@ -293,8 +294,9 @@ DROP TABLE IF EXISTS `orderDetails` ;
 CREATE TABLE IF NOT EXISTS `orderDetails` (
   `orderNumber` INT UNSIGNED NOT NULL,
   `itemCode` INT UNSIGNED NOT NULL,
+  `size` VARCHAR(5) NOT NULL,
   `quantity` INT UNSIGNED NOT NULL,
-  PRIMARY KEY (`orderNumber`, `itemCode`),
+  PRIMARY KEY (`orderNumber`, `itemCode`, `size`),
   CONSTRAINT `orderNumber_OrderDetails_fk`
     FOREIGN KEY (`orderNumber`)
     REFERENCES `Orders` (`orderNumber`)
@@ -352,7 +354,7 @@ DROP TABLE IF EXISTS `RequestStatus` ;
 
 CREATE TABLE IF NOT EXISTS `RequestStatus` (
   `statusID` TINYINT(2) UNSIGNED NOT NULL,
-  `statusName` VARCHAR(20) NOT NULL,
+  `statusName` VARCHAR(20) NOT NULL UNIQUE,
   PRIMARY KEY (`statusID`))
 ENGINE = InnoDB;
 
@@ -364,9 +366,38 @@ DROP TABLE IF EXISTS `OrderStatus` ;
 
 CREATE TABLE IF NOT EXISTS `OrderStatus` (
   `statusID` TINYINT(2) UNSIGNED NOT NULL,
-  `statusName` VARCHAR(20) NOT NULL,
+  `statusName` VARCHAR(20) NOT NULL UNIQUE,
   PRIMARY KEY (`statusID`))
 ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Payments`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `Payments` ;
+
+CREATE TABLE IF NOT EXISTS `Payments` (
+  `PaymentID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `studentID` INT UNSIGNED NOT NULL,
+  `orderNumber` INT UNSIGNED NOT NULL,
+  `paymentDate` DATETIME NOT NULL DEFAULT NOW(),
+  `amount` DOUBLE NOT NULL,
+  PRIMARY KEY (`PaymentID`),
+  CONSTRAINT `studentID_Payments_fk`
+    FOREIGN KEY (`studentID`)
+    REFERENCES `Students` (`studentID`)
+    ON DELETE NO ACTION
+    ON UPDATE CASCADE,
+  CONSTRAINT `orderNumber_Payments_fk`
+    FOREIGN KEY (`orderNumber`)
+    REFERENCES `Orders` (`orderNumber`)
+    ON DELETE NO ACTION
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+CREATE INDEX `userID_Payments_fk_idx` ON `Payments` (`studentID` ASC) VISIBLE;
+
+CREATE INDEX `orderNumber_Payments_fk_idx` ON `Payments` (`orderNumber` ASC) VISIBLE;
 
 
 -- -----------------------------------------------------
@@ -426,13 +457,13 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `pec_database`;
-INSERT INTO `Products` (`itemCode`, `itemName`, `availableQuantity`, `category`, `description`) VALUES (1, 'Áo Polo', 100, 'UNIFORM', NULL);
-INSERT INTO `Products` (`itemCode`, `itemName`, `availableQuantity`, `category`, `description`) VALUES (2, 'Quần Thể Thao', 100, 'UNIFORM', NULL);
-INSERT INTO `Products` (`itemCode`, `itemName`, `availableQuantity`, `category`, `description`) VALUES (3, 'Áo Khoác', 100, 'UNIFORM', NULL);
-INSERT INTO `Products` (`itemCode`, `itemName`, `availableQuantity`, `category`, `description`) VALUES (4, 'Bóng Rổ', 150, 'SPORT_EQUIPMENT', NULL);
-INSERT INTO `Products` (`itemCode`, `itemName`, `availableQuantity`, `category`, `description`) VALUES (5, 'Cầu Lông', 150, 'SPORT_EQUIPMENT', NULL);
-INSERT INTO `Products` (`itemCode`, `itemName`, `availableQuantity`, `category`, `description`) VALUES (6, 'Bóng Đá', 150, 'SPORT_EQUIPMENT', NULL);
-INSERT INTO `Products` (`itemCode`, `itemName`, `availableQuantity`, `category`, `description`) VALUES (7, 'Bóng Chuyền', 150, 'SPORT_EQUIPMENT', NULL);
+INSERT INTO `Products` (`itemCode`, `itemName`, `availableQuantity`, `category`, `primaryImage`, `description`) VALUES (1, 'Áo Polo', 100, 'UNIFORM', 'Áo Polo.jpg', NULL);
+INSERT INTO `Products` (`itemCode`, `itemName`, `availableQuantity`, `category`, `primaryImage`, `description`) VALUES (2, 'Quần Thể Thao', 100, 'UNIFORM', 'Áo Khoác.jpg', NULL);
+INSERT INTO `Products` (`itemCode`, `itemName`, `availableQuantity`, `category`, `primaryImage`, `description`) VALUES (3, 'Áo Khoác', 100, 'UNIFORM', '', NULL);
+INSERT INTO `Products` (`itemCode`, `itemName`, `availableQuantity`, `category`, `primaryImage`, `description`) VALUES (4, 'Bóng Rổ', 150, 'SPORT_EQUIPMENT', 'Bóng Rổ.png', NULL);
+INSERT INTO `Products` (`itemCode`, `itemName`, `availableQuantity`, `category`, `primaryImage`, `description`) VALUES (5, 'Cầu Lông', 150, 'SPORT_EQUIPMENT', 'Cầu Lông.jpg', NULL);
+INSERT INTO `Products` (`itemCode`, `itemName`, `availableQuantity`, `category`, `primaryImage`, `description`) VALUES (6, 'Bóng Đá', 150, 'SPORT_EQUIPMENT', 'Bóng Đá.jpg', NULL);
+INSERT INTO `Products` (`itemCode`, `itemName`, `availableQuantity`, `category`, `primaryImage`, `description`) VALUES (7, 'Bóng Chuyền', 150, 'SPORT_EQUIPMENT', 'Bóng Chuyền.jpg', NULL);
 
 COMMIT;
 

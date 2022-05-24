@@ -23,6 +23,11 @@ if (count($cart) > 0) {
     } else if ($_GET['cat'] == UNIFORM) {
         include_once("$root_dir/cart/uniform_box_cart.php");
     }
+} else {
+    ?>
+    Chưa có sản phẩm
+    <?php
+    exit();
 }
 ?>
 <script>
@@ -49,6 +54,7 @@ include_once("$root_dir/cart/checkout/get_user_info.php");
 <div class="panel-body">
     <h4>Thông tin người gửi</h4>
     <form id="checkout_info" method="post">
+        <!-- common fields -->
         <label for="student_id">Mã sinh viên </label>
         <input type="text" name="student_id" value="<?=$_SESSION[USERID]?>" disabled>
         <br>
@@ -119,13 +125,6 @@ include_once("$root_dir/cart/checkout/get_user_info.php");
                 </div> -->
                 <?php  
             }
-            ?>
-            <label for="note">Ghi chú </label>
-            <input type="text" name="note" value="">
-            <br>
-            <input type="button" class="btn" name="submit" value="Gửi yêu cầu" style="width: 20%;" onclick="process_request_submission()">	
-            <span id="notification"></span>
-        <?php
         }
         if ($_GET['cat'] == UNIFORM) {
             ?>
@@ -137,22 +136,20 @@ include_once("$root_dir/cart/checkout/get_user_info.php");
             </select>
             <br>
             <br>
-            <label for="note">Ghi chú </label>
-            <input type="text" name="note" value="">
-            <br>
-            <input type="button" class="btn" name="submit" value="Gửi yêu cầu" style="width: 20%;" onclick="process_order_submission()">	
-            <span id="notification"></span>
             <?php
         }
-    
         ?>
+        <!-- common fields -->
+        <label for="note">Ghi chú </label>
+        <input type="text" name="note" value="">
+        <br>
+        <!-- Doesn't work with cat = UNIFORM ??? -->
+        <input type="button" class="btn" name="submit" value="Gửi yêu cầu" style="width: 20%;" onclick="process('<?=$_GET['cat']?>')">	
+        <span id="notification"></span>
+    <?php
+    ?>
     </form>
 </div>
-<?php
-if ($_GET['cat'] == UNIFORM) {
-
-}
-?>
 <!-- body START -->
 <script src="<?="$root_dir/cart/data handler.js"?>"></script>
 <?php
@@ -168,6 +165,7 @@ if ($submission_disabled) {
 
 
 ?>
+<script src="process.js"></script>
 <script>
     // $("#checkout_info").submit((event)=> {
     //     $.ajax({
@@ -187,64 +185,38 @@ if ($submission_disabled) {
     //     event.preventDefault();
     // });
 
-function process_request_submission() {
-    $.ajax({
-        type : "POST",
-        url  : "../request/make_new_request.php",
-        data : { student_id : '<?=$_SESSION[USERID]?>', 
-                start_datetime : "<?=$class_info['start_datetime']?>",
-                end_datetime : "<?=$class_info['end_datetime']?>",
-                class_code : "<?=$user_info['classCode']?>",
-                note : $("#checkout_info input[name=note").val(), // get from input
-            },
-        dataType : "json",
-        success : function(result) {
-            console.log(result);
-            if (result['isSuccessful']) {
-                $("#notification").html("Successful. Wait 2s to redirect");
-                $("#notification").css("color", "green");
-                setTimeout(function() {
-                    window.location.href = "../request";
-                }, 2000);
-            } else {
-                $("#notification").html("Failed");
-                $("#notification").css("color", "red");
-                setTimeout(function() {
-                    $("#notification").html("");
-                }, 3000);
-          }
-        }
-    });
-    // return false;
-}
+function process(category) {
+    <?php
+    if (!isset($_SESSION[USERID])) {
+        ?>
+        return;
+        <?php
+    }
+    ?>
 
-function process_order_submission() {
-    $.ajax({
-        type : "POST",
-        url  : "../order/make_new_order.php",
-        data : { student_id : '<?=$_SESSION[USERID]?>', 
-                phone_number : "<?=$user_info['classCode']?>",
-                payment_method : $("#payment_method").val(),
-                note : $("#checkout_info input[name=note]").val(), // get from input
-            },
-        dataType : "json",
-        success : function(result) {
-            console.log(result);
-            if (result['isSuccessful']) {
-                $("#notification").html("Successful. Wait 2s to redirect");
-                $("#notification").css("color", "green");
-                setTimeout(function() {
-                    window.location.href = "../order";
-                }, 2000);
-            } else {
-                $("#notification").html("Failed");
-                $("#notification").css("color", "red");
-                setTimeout(function() {
-                    $("#notification").html("");
-                }, 3000);
-          }
+    let student_id = <?=$_SESSION[USERID]?>;
+    let note = $("#checkout_info input[name=note").val();
+
+    if (category === '<?=SPORT_EQUIPMENT?>') {
+        <?php
+        if (!isset($class_info) || !isset($user_info)) {
+            ?>
+            return;
+            <?php
         }
-    });
-    // return false;
+        ?>
+
+        let start_datetime = '<?=$class_info['start_datetime']?>';
+        let end_datetime = '<?=$class_info['end_datetime']?>';
+        let class_code = '<?=$user_info['classCode']?>';
+
+        process_request_submission(student_id, start_datetime, end_datetime, class_code, note);
+    }
+
+    if (category === '<?=UNIFORM?>') {
+        let payment_method = $("#payment_method").val();
+console.log("pressed");
+        process_order_submission(student_id, payment_method, note);
+    }
 }
 </script>

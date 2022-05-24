@@ -12,6 +12,8 @@ define('DESCENDING', 'DESC');
 define('SPORT_EQUIPMENT', 'SPORT_EQUIPMENT');
 define('UNIFORM', 'UNIFORM');
 
+define('PRODUCT_IMAGE_SOURCE', "$root_dir/uploads/images/");
+
 function get_db_connection() {
     $connection = mysqli_connect(HOSTNAME, USERNAME, PASSWORD, DATABASE);
     return $connection ? $connection : die("Connection failed: " . mysqli_connect_error());

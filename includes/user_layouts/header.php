@@ -1,9 +1,13 @@
-<!-- Specify the correct variables $root_dir and $title base on the calling file before requiring/including this file. -->
+<?php
+// Specify the correct variables $root_dir and $title base on the calling file before requiring/including this file. -->
+include_once("$root_dir/includes/utilities.php");
+require_once("$root_dir/database/manager.php");
+?>
 
 <!DOCTYPE html>
 <html>
 <head>
-	<?=include_once("$root_dir/includes/headtag.php");?>
+	<?php include_once("$root_dir/includes/headtag.php"); ?>
     <link rel="stylesheet" href="<?=$root_dir?>/assets/css/style_user.css">
 	<style type="text/css">
 		.main {
@@ -25,10 +29,10 @@
         <div class="collapse navbar-collapse" id="collapsibleNavbar">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="<?="$root_dir/"?>">Trang chủ</a>
+                    <a class="nav-link" href="<?=$root_dir?>">Trang chủ</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Yêu cầu</a>
+                    <a class="nav-link" href="<?=$root_dir?>/request">Yêu cầu</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="<?=$root_dir?>/cart">Giỏ hàng</a>

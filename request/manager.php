@@ -4,7 +4,8 @@ include_once("$root_dir/includes/utilities.php");
 include_once("$root_dir/database/manager.php");
 
 function get_all_requests($student_id) {
-    $query = "SELECT * FROM Requests WHERE userID = $student_id";
+    $query = "SELECT * FROM Requests r LEFT JOIN RequestStatus rs ON r.statusID = rs.statusID 
+            WHERE studentID = $student_id ORDER BY r.statusID";
     $result = run_mysql_query($query);
     
     if ($result !== false) {
