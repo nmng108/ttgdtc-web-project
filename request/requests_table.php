@@ -1,8 +1,9 @@
 <?php
 include_once("$root_dir/includes/utilities.php");
 include_once("$root_dir/cart/manager.php");
+include_once("$root_dir/request/manager.php");
 
-$result = get_data_from_all_columns("Requests", "studentID = ".$_SESSION[USERID], 'status')->fetch_all(MYSQLI_ASSOC);
+$result = get_all_requests($_SESSION[USERID]);
 ?>
 
 <div id="request_container" class="container">
@@ -13,18 +14,19 @@ $result = get_data_from_all_columns("Requests", "studentID = ".$_SESSION[USERID]
 		<div class="card-body">
 
 			<div class="row">
-				<div class="container" style="width: 75vw;">
+				<div class="container table-responsive-lg" style="width: 75vw;">
 					<table class="table table-hover" style="width: 95%; text-align: center;">
 						<thead class="table-info">
 							<tr>
 								<th class="col-sm-2 sequence-number">STT</th>
-								<th class="col-sm-2 item-image">Thời gian gửi</th>
-								<th class="col-sm-2 item-name">Chỉnh sửa gần nhất</th>
-								<th class="col-sm-2 item-size">Thời gian bắt đầu</th>
-								<th class="col-sm-2 available-quantity">Thời gian kết thúc</th>
-								<th class="col-sm-2 item-quantity">Ghi chú</th>
-								<th class="col-sm-2 item-price-each">Trạng thái</th>
-								<th class="col-sm-2 edit-button"></th>
+								<th class="col-sm-2 request-date">Thời gian gửi</th>
+								<th class="col-sm-2 modified-date">Chỉnh sửa gần nhất</th>
+								<th class="col-sm-2 start-date">Thời gian bắt đầu</th>
+								<th class="col-sm-2 end-date">Thời gian kết thúc</th>
+								<th class="col-sm-3 note">Ghi chú</th>
+								<th class="col-sm-2 request-status">Trạng thái</th>
+								<th class="col-sm-2 detail-button"></th>
+								<th class="col-sm-2 cancel-button"></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -32,24 +34,28 @@ $result = get_data_from_all_columns("Requests", "studentID = ".$_SESSION[USERID]
 							for ($i = 0; $i < count($result); $i++) { 
 								$item = $result[$i];
 								?>
-								<tr class="" id="item_<?=$item['itemCode']?>" style="text-align:center;">
+								<tr class="item-info" id="item_<?=$item['requestNumber']?>" style="text-align: center;">
 									<td class="sequence-number"><?=$i + 1?></td>
 									
-									<td class="item-image"><?=$item['requestDate']?></td>
+									<td class="request-date"><?=$item['requestDate']?></td>
 									
-									<td class="item-name"><?=$item['modifiedAt']?></td>
+									<td class="modified-date"><?=$item['modifiedAt']?></td>
 																	
-									<td class="item-size"><?=$item['startTime']?></td>
+									<td class="start-date"><?=$item['startTime']?></td>
 																	
-									<td class="available-quantity"><?=$item['endTime']?></td>
+									<td class="end-date"><?=$item['endTime']?></td>
 
-									<td class="item-quantity"><?=$item['note']?></td>
+									<td class="note"><?=$item['note']?></td>
 									
-									<td class="item-price-each"><?=$item['status']?></td>
+									<td class="request-status"><?=$item['statusName']?></td>
 									
-									<!-- <td class="edit-button">
-										<button id="edit_button_<?=$item['itemCode']?>" onclick="switch_edit_mode(this)">Sửa</button>
-									</td> -->
+									<td class="cancel-button">
+										<button class="btn" id="detail_button_<?=$item['requestNumber']?>" onclick="return false">Chi tiết</button>
+									</td>
+
+									<td class="cancel-button">
+										<button class="btn" id="cancel_button_<?=$item['requestNumber']?>" onclick="return false">Hủy</button>
+									</td>
 								</tr>
 								<?php
 							}

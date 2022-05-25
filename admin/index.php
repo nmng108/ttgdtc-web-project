@@ -2,7 +2,8 @@
 <?php
 	$title = 'Dashboard Page';
 	$root_dir = "..";
-	require_once('layouts/header.php');
+	
+	require_once("$root_dir/admin/layouts/header.php");
 ?>
 
 <div class="row">

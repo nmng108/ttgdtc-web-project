@@ -15,12 +15,7 @@ if($user == null) {
 <html>
 <head>
 	<style type="text/css">
-		.main {
-			min-height: 700px;
-		}
-        body {
-            font: 15px Arial, sans-serif;
-        }
+		
 	</style>
 </head>
 <body>

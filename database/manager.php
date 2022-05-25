@@ -2,6 +2,8 @@
 include_once("$root_dir/includes/utilities.php");
 
 include_once('config.php');
+define('UPLOADED_IMAGE_DIR', "$root_dir/uploads/images/");
+
 
 function get_db_connection() {
     $connection = mysqli_connect(HOSTNAME, USERNAME, PASSWORD, DATABASE);
