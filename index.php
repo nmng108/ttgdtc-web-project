@@ -21,11 +21,43 @@ $product_list = get_products_by_category(SPORT_EQUIPMENT);
 
 </div> -->
 
+<!-- slide show -->
+<div id="demo" class="carousel slide" data-ride="carousel">
+  <!-- Indicators -->
+  <ul class="carousel-indicators">
+    <li data-target="#demo" data-slide-to="0" class="active"></li>
+    <li data-target="#demo" data-slide-to="1"></li>
+    <li data-target="#demo" data-slide-to="2"></li>
+  </ul>
+  <div style="margin-left: 80px; margin-top:10px;">
+  <div class="carousel-inner" >
+    <div class="carousel-item active">
+      <img src="assets\images\slide1.jpg" >
+    </div>
+    <div class="carousel-item" >
+      <img src="assets\images\slide2.jpg" >
+    </div>
+    <div class="carousel-item">
+      <img src="assets\images\slide3.jpg" >
+    </div>
+  </div>
+
+  <!-- Left and right controls -->
+  <a class="carousel-control-prev" href="#demo" data-slide="prev"  >
+    <span class="carousel-control-prev-icon"></span>
+  </a>
+  <a class="carousel-control-next" href="#demo" data-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </a>
+</div>
+</div>
+
+
 <div class="album py-3 bg-light">
     <div class="container">
         <div class="card">
             <div class="card-header">
-                <b>Dụng cụ thể thao</b>
+                <b style="color: green;">DỤNG CỤ THỂ THAO</b>
             </div>
             <div class="card-body">
                 <div class="row justify-content-center align-self-center">
@@ -35,7 +67,7 @@ $product_list = get_products_by_category(SPORT_EQUIPMENT);
                     ?>
                         <div class="col-sm-4 " style="width: 20rem;">
                             <div class="card mb-4 box-shadow " style="background-color: b3d8ba;">
-                                <img class="card-img-top" src="'.$item['primaryImage'].'">
+                                <img class="card-img-top" src="<?=$item['primaryImage']?>">
 
                                 <div class="card-body">
                                     <h5 class="card-title"> <?=$item['itemName']?> </h5>
@@ -89,7 +121,7 @@ $product_list = get_products_by_category(SPORT_EQUIPMENT);
         ?>
         <div class="card">
             <div class="card-header">
-                <b>Đồng phục</b>
+                <b style="color: green;">ĐỒNG PHỤC</b>
             </div>
             <div class="card-body">
                 <div class="row justify-content-center align-self-center">
@@ -142,7 +174,7 @@ $product_list = get_products_by_category(SPORT_EQUIPMENT);
                                                     
                                                 </script>
                                             
-                                            <button type="<?php 
+                                            <button style="width: 100%;"type="<?php 
                                                         if ($item['availableQuantity'] > 0 && isset($_SESSION[USERID])) {
                                                             echo "submit";
                                                         } else {

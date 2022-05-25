@@ -97,3 +97,6 @@ function get_quantity_in_inventory(int $item_code) {
     }
     return NULL;
 }
+function get_uploaded_image_link($file_name) {
+    return UPLOADED_IMAGE_DIR . $file_name;
+}

@@ -11,9 +11,9 @@ include_once("$root_dir/cart/manager.php");
 		<div class="card-body">
 
 			<div class="row">
-				<div class="container table-responsive-lg" style="width: 75vw;">
+				<div class="container" style="width: 75vw;">
 					<table class="table table-hover" style="width: 95%; text-align: center;">
-						<thead class="table-info">
+						<thead class="table-success">
 							<tr>
 								<th class="col-sm-1 sequence-number">STT</th>
 								<th class="col-sm-2 item-image">Hình ảnh</th>
@@ -36,7 +36,7 @@ include_once("$root_dir/cart/manager.php");
 								<tr class="<?=$class_value?>" id="row_item_<?=$item['itemCode']?>">
 									<td class="sequence-number"><?=$i + 1?></td>
 									
-									<td class="item-image"><img src="<?=UPLOADED_IMAGE_DIR . $item['primaryImage']?>" style="width: 100%"></td>
+									<td class="item-image"><img src="<?=$item['primaryImage']?>" style="width: 30px"></td>
 									
 									<td class="item-name"><?=$item['itemName']?></td>
 																	
@@ -70,8 +70,8 @@ include_once("$root_dir/cart/manager.php");
 					<p id="notif_<?=SPORT_EQUIPMENT?>" style="font-size: 26px; color: red">
 					
 					</p>
-					<a href="./checkout?cat=<?=SPORT_EQUIPMENT?>" class="checkout-button">
-						<button class="btn checkout-button" id="checkout_button_<?=SPORT_EQUIPMENT?>" style="align-content: right; color: goldenrod" onclick="return process_cart(this, <?=$_SESSION[USERID]?>)">Tiếp tục</button>
+					<a href="./checkout.php?cat=<?=SPORT_EQUIPMENT?>" class="checkout-button">
+						<button class="" id="checkout_button_<?=SPORT_EQUIPMENT?>"  onclick="return process_cart(this, <?=$_SESSION[USERID]?>)">Tiếp tục</button>
 					</a>
 				</div>
 			</div>

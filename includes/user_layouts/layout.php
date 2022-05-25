@@ -8,16 +8,17 @@
 		button{
         margin: 30px 0;
         margin-left: 20px;
-        background-color: rgb(245, 249, 245);
+        background-color: #53925f;
+        width: 60px;
         height: 40px;
         border: 1px solid;
         cursor: pointer;
         border-radius: 5px;
         border-color:  rgb(245, 249, 245);
+        text-align: center;
         }
         button:hover {
         transition: 0.5s;
-        background-color: rgb(213, 235, 217);
         }
         select{
             border-radius: 10px;
