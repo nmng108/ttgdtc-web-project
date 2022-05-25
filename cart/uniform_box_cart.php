@@ -63,11 +63,11 @@ include_once("$root_dir/cart/manager.php");
 									<td class="item-price-each"><?=$item['priceEach']?></td>
 
 									<td class="delete-button">
-										<button id="delete_button_<?=$item['itemCode']?>" onclick="delete_item(this)" hidden>Xóa</button>
+										<button class="btn btn-danger" id="delete_button_<?=$item['itemCode']?>" onclick="delete_item(this)" hidden>Xóa</button>
 									</td>
 									
 									<td class="edit-button">
-										<button id="edit_button_<?=$item['itemCode']?>" onclick="switch_edit_mode(this)">Sửa</button>
+										<button class="btn btn-warning" id="edit_button_<?=$item['itemCode']?>" onclick="switch_edit_mode(this)">Sửa</button>
 									</td>
 								</tr>
 								<?php

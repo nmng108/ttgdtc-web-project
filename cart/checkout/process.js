@@ -37,9 +37,10 @@ function process_request_submission(student_id, start_datetime, end_datetime, cl
             }, 3000);
         });
 
-        $ajax_request.fail(function() {
+        $ajax_request.fail(function(jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR);
             $("#notification").css("color", "red");
-            $("#notification").html("Gửi yêu cầu thất bại.");
+            $("#notification").html("Gửi yêu cầu thất bại.(0)" + ", " + errorThrown);
         });
     });
 }
@@ -58,21 +59,25 @@ function request_details_insertion(student_id, request_number, first_message) {
         });
     
         $ajax_request.done(function(response) {
+            console.log(response);
             if (response['hasSucceeded'] === true) {
                 $("#notification").css("color", "green");            
-                $("#notification").html(first_message + ". Đợi 2 giây để chuyển hướng");
+                $("#notification").html(first_message + ". Đang chuyển hướng");
                 $("#checkout_info input[name='submit']").prop('disabled', true);
                 setTimeout(function() {
                     window.location.href = "../../request";
-                }, 1500);
+                }, 1000);
             } else {
                 delete_lastest_request(student_id);
             }
         });
     
-        $ajax_request.fail(function() {
+        $ajax_request.fail(function(jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR);
+            console.log(textStatus);
+            console.log(errorThrown);
             $("#notification").css("color", "red");            
-            $("#notification").html(first_message + ". \nGửi yêu cầu thất bại.");
+            $("#notification").html(first_message + ". \nGửi yêu cầu thất bại.(1)" + errorThrown);
         });
     });
 }
@@ -93,15 +98,15 @@ function delete_lastest_request(student_id, first_message) {
         $ajax_request.done(function(response) {
             console.log(response);
             $("#notification").css("color", "red");
-            $("#notification").html(
-                first_message
-                + ". deletion result is " + response['hasSucceeded'] 
-                + ". " + response['message']);
+            $("#notification").html(first_message + ". deletion result is " + response['hasSucceeded'] + ". " + response['message']+ "(3)");
         });
 
-        $ajax_request.fail(function() {
+        $ajax_request.fail(function(jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR);
+            console.log(textStatus);
+            console.log(errorThrown);
             $("#notification").css("color", "red");            
-            $("#notification").html(first_message + ". \nGửi yêu cầu thất bại.");
+            $("#notification").html(first_message + ". \nGửi yêu cầu thất bại.(2)" + errorThrown);
         });
     
     });    
@@ -161,7 +166,7 @@ function order_details_insertion(student_id, order_number, first_message) {
     
                 setTimeout(function() {
                     window.location.href = "../../request";
-                }, 1500);
+                }, 1000);
             } else {
                 delete_lastest_order(student_id, response['message']);
             }

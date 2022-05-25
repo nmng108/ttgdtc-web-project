@@ -5,7 +5,7 @@ $root_dir = '../..';
 include_once("$root_dir/admin/layouts/header.php");
 
 // Get all status
-$query = "SELECT * FROM RequestStatus";
+$query = "SELECT * FROM RequestStatus ORDER BY statusID";
 $all_status = run_mysql_query($query)->fetch_all(MYSQLI_ASSOC);
 $item_count = 0;
 
@@ -15,12 +15,14 @@ for ($i = 0; $i < count($all_status); $i++) {
 
 	// query the database to get request information
 	$query = 
-		"SELECT r.requestNumber, r.requestDate, r.classCode, r.studentID, 
+		"SELECT r.requestNumber, r.requestDate, r.classCode, r.studentID,
+				(SELECT subjectName FROM Subjects WHERE Subjects.subjectCode = c.subjectCode) AS subjectName,
 				CONCAT(IF(s.firstName IS NULL, '', s.firstName), ' ', s.lastName) AS fullName,
-				r.startTime, r.endTime, statusName AS `status`, r.note
+				r.startTime, r.endTime, statusName, r.note
 		FROM Requests r 
 		JOIN RequestStatus os ON r.statusID = os.statusID
 		LEFT JOIN Students s ON s.studentID = r.studentID
+		LEFT JOIN Classes c ON c.classCode = r.classCode
 		WHERE r.statusID = ".$status['statusID']."
 		ORDER BY r.requestDate DESC";
 	$result = run_mysql_query($query)->fetch_all(MYSQLI_ASSOC);
@@ -48,45 +50,55 @@ for ($i = 0; $i < count($all_status); $i++) {
 
 		<table class="table table-bordered table-hover" style="margin-top: 20px; text-align: center;">
 			<thead class="table-success">
-				<tr>
-                    <th>STT</th>
+				<tr class="table-column-name">
+                    <th class="sequence-number">STT</th>
 					<th>Thời gian tạo</th>
-                    <th>Mã sinh viên</th> 
-					<th> Họ Tên</th>
-					<th>Lớp học phần</th>
-                    <th>Thời gian mượn</th>
-                    <th>Thời gian kết thúc</th>
-                    <th>Trạng thái</th>
-					<th>Note</th>
-					<th>Chi tiết</th>
-					<th></th>
-
+                    <th class="col-sm-2">Mã sinh viên</th> 
+					<th class="col-sm-2"> Họ Tên</th>
+					<th class="col-sm-2">Lớp học phần</th>
+                    <th class="col-sm-2">Thời gian mượn</th>
+                    <th class="col-sm-2">Thời gian kết thúc</th>
+                    <th class="col-sm-2">Trạng thái</th>
+					<th class="col-sm-3">Note</th>
+					<th class="detail-button col-sm-2" id="detail_button_<?=$status['statusID']?>"></th>
+					<th class="update-button col-sm-2" id="update_button_<?=$status['statusID']?>"></th>
 				</tr>
 			</thead>
-			<tbody>
+			<tbody class="table-body">
 				<?php
 					foreach($result as $request) {
 						$item_count ++;
+						$row_colorize = "";
+						switch ($request['statusName']) {
+							case 'APPROVED': $row_colorize = "table-info"; break;
+							case 'SENT': $row_colorize = "table-warning"; break;
+						}
 						?>
-						<tr>
+						<tr class="<?=$row_colorize?>" id="request_<?=$request['requestNumber']?>">
 							<th><?=($sequence_number++)?></th>
 							<td><?=format_datetime_to_display($request['requestDate'])?></td>
 							<td><?=$request['studentID']?></td>
 							<td><?=$request['fullName']?></td>
-							<td><?=($request['classCode'] != "") ? $request['classCode'] : "Không"?></td>
+							<td><?=($request['classCode'] != "") ? ($request['subjectName']."<br>".$request['classCode']) : "Không"?></td>
 							<td><?=format_datetime_to_display($request['startTime'])?></td>
-							<td><?=$request['endTime']?></td>
-							<td><?=$request['status']?></td>
+							<td><?=format_datetime_to_display($request['endTime'])?></td>
+							<td><?=translated_status($request['statusName'])?></td>
 							<td><?=$request['note']?></td>	
 							<td>
-								<button class="btn btn-warning">Chi tiết</button>
+								<button id="detail_button_<?=$request['requestNumber']?>" class="btn btn-warning" onclick="open_detail(<?=$request['requestNumber']?>)">Chi tiết</button>
 							</td>	
-							<td style="width: 50px">
-								<!-- Send requestNumber value to edit.php by GET method. -->
-								<a href="edit.php?request=<?=$request['requestNumber']?>">
-									<button class="btn btn-warning">Cập nhật</button>
-								</a>
-							</td>
+							<?php
+							if ($request['statusName'] == 'SENT' || $request['statusName'] == 'APPROVED') {
+								?>
+								<td style="width: 50px">
+									<!-- Send requestNumber value to edit.php by GET method. -->
+									<a href="edit.php?request=<?=$request['requestNumber']?>">
+										<button id="update_button_<?=$request['requestNumber']?>" class="btn btn-warning">Cập nhật</button>
+									</a>
+								</td>
+								<?php
+							}
+							?>
 						</tr>
 						<?php
 					}
@@ -97,6 +109,16 @@ for ($i = 0; $i < count($all_status); $i++) {
 	</div>
 </div>
 <?php
+	// remove update column
+	if ($status['statusName'] == 'RETURNED' || $status['statusName'] == 'CANCELED') {
+		?>
+		<script>
+			$("#update_button_<?=$status['statusID']?>").each(function() {
+				$(this).remove();
+			});
+		</script>
+		<?php
+	}
 }
 ?>
 <br>
@@ -106,5 +128,10 @@ if ($item_count == 0) {
 	Không có yêu cầu nào
 	<?php
 }
-require_once("$root_dir/admin/layouts/footer.php");
+include_once("$root_dir/admin/layouts/footer.php");
 ?>
+<script>
+function open_detail(request_number) {
+	window.location.href = "./detail.php?id=" + request_number;
+}
+</script>

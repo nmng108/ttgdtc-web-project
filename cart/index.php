@@ -46,6 +46,6 @@ if ($category_count == 0) {
 <!-- body END -->
 
 <?php
-include_once("$root_dir/user/layouts/footer.php");
+include_once("$root_dir/includes/user_layouts/footer.php");
 include_once("$root_dir/includes/user_layouts/cart_icon_bubble.php");
 ?>

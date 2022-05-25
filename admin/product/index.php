@@ -8,22 +8,22 @@ $query = "SELECT * FROM Products WHERE category = '".SPORT_EQUIPMENT."'";
 $result = run_mysql_query($query)->fetch_all(MYSQLI_ASSOC);
 ?>
 
-<div class="row" style="margin-top: 20px;">
-	<div class="col-md-12 table-responsive">
+<!-- <div class="row" style="margin-top: 20px;"> -->
+	<div class="col-md-12 table-responsive" style="margin-top: 20px;">
 		<h3>Quản Lý Dụng Cụ Trong Kho</h3>
 		<button class="btn btn-primary" onclick="window.location.href='./upload.php'">Thêm mới</button>
 
 		<table class="table table-bordered table-hover" style="margin-top: 20px; text-align: center;">
 			<thead class="table-success">
 				<tr>
-                    <th>STT</th>
-					<th>Tên</th>
-					<th>Hình ảnh</th>
-					<th>Số lượng còn lại trong kho</th>
-					<th>Mô tả</th>
-					<th>Ngày thêm</th>
-					<th>Lần chỉnh sửa gần nhất</th>
-					<th></th>
+                    <th class=" ">STT</th>
+					<th class="col-sm-2 ">Tên</th>
+					<th class="col-sm-3 ">Hình ảnh</th>
+					<th class="col-sm-1 ">Số lượng còn lại trong kho</th>
+					<th class="col-sm-3 ">Mô tả</th>
+					<th class="col-sm-2 ">Ngày thêm</th>
+					<th class="col-sm-2 ">Lần chỉnh sửa gần nhất</th>
+					<th class="col-sm-2 "></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -56,7 +56,7 @@ $result = run_mysql_query($query)->fetch_all(MYSQLI_ASSOC);
 		</table>
 	</div>
 	
-</div>
+<!-- </div> -->
 
 
 <?php

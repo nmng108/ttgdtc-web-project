@@ -30,13 +30,13 @@ include_once("$root_dir/cart/manager.php");
 								$item = $cart[$i];
 								$class_value = "";
 								if ($item['quantity'] > $item['availableQuantity']) {
-									$class_value = "table-warning";
+									$class_value = "table-danger";
 								}
 								?>
 								<tr class="<?=$class_value?>" id="row_item_<?=$item['itemCode']?>">
 									<td class="sequence-number"><?=$i + 1?></td>
 									
-									<td class="item-image"><img src="<?=UPLOADED_IMAGE_DIR . $item['primaryImage']?>" style="width: 100%"></td>
+									<td class="item-image"><img src="<?=get_uploaded_image_link($item['primaryImage'])?>" style="width: 100%"></td>
 									
 									<td class="item-name"><?=$item['itemName']?></td>
 																	
@@ -55,11 +55,11 @@ include_once("$root_dir/cart/manager.php");
 									</td>
 									
 									<td class="delete-button">
-										<button id="delete_button_<?=$item['itemCode']?>" onclick="delete_item(this)" hidden>Xóa</button>
+										<button class="btn btn-danger" id="delete_button_<?=$item['itemCode']?>" onclick="delete_item(this)" hidden>Xóa</button>
 									</td>
 									
 									<td class="edit-button">
-										<button id="edit_button_<?=$item['itemCode']?>" onclick="switch_edit_mode(this)">Sửa</button>
+										<button class="btn btn-warning" id="edit_button_<?=$item['itemCode']?>" onclick="switch_edit_mode(this)">Sửa</button>
 									</td>
 								</tr>
 								<?php
