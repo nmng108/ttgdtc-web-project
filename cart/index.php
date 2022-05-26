@@ -1,6 +1,4 @@
 <?php 
-session_start();
-
 $title = 'Giỏ đồ';
 $root_dir = "..";
 

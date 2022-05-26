@@ -1,14 +1,10 @@
 <?php
-session_start();
-
 $root_dir = ".";
 $title = 'Trang chủ';
 
 include_once('includes/user_layouts/header.php');
 include_once("includes/utilities.php");
 require_once("database/manager.php");
-
-$_SESSION[USERID] = 20020001;
 
 $product_list = get_products_by_category(SPORT_EQUIPMENT);
 ?>
@@ -24,7 +20,7 @@ $product_list = get_products_by_category(SPORT_EQUIPMENT);
     <li data-target="#demo" data-slide-to="1"></li>
     <li data-target="#demo" data-slide-to="2"></li>
   </ul>
-  <div style="margin-left: 80px; margin-top:10px;">
+  <div style="text-align: center; margin-top:10px;">
   <div class="carousel-inner" >
     <div class="carousel-item active">
       <img src="assets\images\slide1.jpg" >
@@ -54,43 +50,38 @@ $product_list = get_products_by_category(SPORT_EQUIPMENT);
                 <b style="color: green;">DỤNG CỤ THỂ THAO</b>
             </div>
             <div class="card-body">
-                <div class="row justify-content-center align-self-center">
+                <div style="display: flex; align-items:center; flex-wrap: wrap;">
                     <!--show all products from the database-->
                     <?php
                     foreach ($product_list as $item) {
                     ?>
                         <div class="col-sm-4 " style="width: 20rem;">
-                            <div class="card mb-4 box-shadow bg-info">
+                            <div class="card mb-4 box-shadow" style="background-color:darkseagreen;">
                                 <img class="card-img-top" src="<?=get_uploaded_image_link($item['primaryImage'])?>">
-                                <div class="card-body">
+                                <div class="card-body" style="text-align: center;">
                                     <h5 class="card-title"> <?=$item['itemName']?> </h5>
-                                    <div class="d-flex justify-content-between align-items-center">
+                                    <div class="d-flex" style="text-align: center;">
                                         <!--  handle quantity input -->
-                                        <form method="post" onsubmit="return false">
-                                            <div class="btn-group row">
-                                                <label for="quantity">Số lượng: </label>
-                                                <input type="number" class="ml-2 form-control col" name="quantity" id="quantity_input_<?=$item["itemCode"]?>" min="1" max="<?=$item['availableQuantity']?>" value="1" required/>
-                                                <span id="quantity_<?=$item["itemCode"]?>">(còn lại: <?=$item['availableQuantity']?>)</span>
-                                                <button type="<?php 
-                                                            if ($item['availableQuantity'] > 0 && isset($_SESSION[USERID])) {
-                                                                echo "submit";
-                                                            } else {
-                                                                echo "button";
-                                                            }
-                                                            ?>"
-                                                        class="btn btn-sm btn-outline-<?php 
-                                                            if ($item['availableQuantity'] > 0 && isset($_SESSION[USERID])) {
-                                                            echo "primary";
-                                                            } else {
-                                                            echo "disabled";
-                                                            }
-                                                            ?> col"
-                                                        id="add_button_<?=$item['itemCode']?>"
-                                                        onclick="return process_form(<?=$item['itemCode']?>, '<?=SPORT_EQUIPMENT?>')">
-                                                    Add to Cart
-                                                </button>
-                                            </div>
-                                        </form>
+                                        <div class="mr-sm-2 row" style="text-align: center;">
+                                            <label for="quantity_input_<?=$item["itemCode"]?>">Số lượng: </label>
+                                            <input type="number" class="ml-2 form-control col mb-2 mr-sm-2" name="quantity" id="quantity_input_<?=$item["itemCode"]?>" min="1" max="<?=$item['availableQuantity']?>" value="1" required/>
+                                            <span id="quantity_<?=$item["itemCode"]?>" class="mb-2 mr-sm-2">(còn lại: <?=$item['availableQuantity']?>)</span>
+                                        </div>
+                                        <br>
+                                        <div class="mb-2 mr-sm-2">
+                                            <button type="button"
+                                                    class="btn btn-sm btn-outline-<?php 
+                                                        if ($item['availableQuantity'] > 0 && isset($_SESSION[USERID])) {
+                                                        echo "primary";
+                                                        } else {
+                                                        echo "disabled";
+                                                        }
+                                                        ?> col"
+                                                    id="add_button_<?=$item['itemCode']?>"
+                                                    onclick="return process_form(<?=$item['itemCode']?>, '<?=SPORT_EQUIPMENT?>')">
+                                                Thêm
+                                            </button>
+                                        </div>
                                     </div>
                                     <span id="notif_<?=$item['itemCode']?>" style="font-size: 12"></span>
                                 </div>
@@ -115,26 +106,26 @@ $product_list = get_products_by_category(SPORT_EQUIPMENT);
                 <b style="color: green;">ĐỒNG PHỤC</b>
             </div>
             <div class="card-body">
-                <div class="row justify-content-center align-self-center">
+            <div style="display: flex; align-items:center; flex-wrap: wrap;">
                     <!--show all products from the database-->
                     <?php
                     foreach ($product_list as $item) { // Bỏ group by, in mỗi item 1 lần để lấy số lượng/size
                     ?>
                         <div class="col-sm-4 " style="width: 20rem;">
-                            <div class="card mb-4 box-shadow bg-info">
+                            <div class="card mb-4 box-shadow" style="background-color:darkseagreen;">
                                 <img class="card-img-top" src="<?=get_uploaded_image_link($item['primaryImage'])?>">
                                 
                                 <div class="card-body">
                                     <h5 class="card-title"> <?=$item['itemName']?> </h5>
-                                    <div class="d-flex justify-content-between align-items-center">
+                                    <div class="d-flex" style="text-align: center;">
                                         <!--  handle quantity input -->
-                                        <form method="post" onsubmit="return false">
-                                            <div class="btn-group col">
-                                                <label for="quantity">Số lượng: </label>
-                                                <br>
+                                        <form method="post" class="form-inline" onsubmit="return false">
+                                            <div class="form-group form-inline">
+                                                <label for="quantity_input_<?=$item["itemCode"]?>">Số lượng: </label>
                                                 <input class=" form-control" name="quantity" id="quantity_input_<?=$item["itemCode"]?>" type="number" min="1" max="<?=$item['availableQuantity']?>" value="1" required/>
-                                                <br>
-                                                <span class="row" id="quantity_<?=$item["itemCode"]?>">(còn lại: <?=$item['availableQuantity']?>)</span>
+                                                <span id="quantity_<?=$item["itemCode"]?>" style="margin-left:5px">(còn lại: <?=$item['availableQuantity']?>) </span>
+                                            </div>
+                                            <div class="form-group form-inline">
                                                 <br>
                                                 <label for="size">Kích cỡ: </label>
                                                 <br>
@@ -146,6 +137,7 @@ $product_list = get_products_by_category(SPORT_EQUIPMENT);
                                                     <option value="L">L</option>
                                                     <option value="XL">XL</option>
                                                 </select>
+                                            </div>
                                                 <script>
                                                     document.getElementById("item_size_<?=$item["itemCode"]?>").addEventListener("change", function() {
                                                         let item_code = <?=$item["itemCode"]?>;
@@ -163,14 +155,7 @@ $product_list = get_products_by_category(SPORT_EQUIPMENT);
                                                     });
                                                     
                                                 </script>
-                                            </div>
-                                            <button type="<?php 
-                                                        if ($item['availableQuantity'] > 0 && isset($_SESSION[USERID])) {
-                                                            echo "submit";
-                                                        } else {
-                                                            echo "button";
-                                                        }
-                                                        ?>"
+                                            <button type="button"
                                                     class="btn btn-sm btn-outline-<?php 
                                                         if ($item['availableQuantity'] > 0 && isset($_SESSION[USERID])) {
                                                         echo "primary";
@@ -178,9 +163,9 @@ $product_list = get_products_by_category(SPORT_EQUIPMENT);
                                                         echo "disabled";
                                                         }
                                                         ?> col"
-                                                    id="add_button_<?=$item['itemCode']?>"
+                                                    id="add_button_<?=$item['itemCode']?>" style="margin-left:5%"
                                                     onclick="return process_form(<?=$item['itemCode']?>, '<?=UNIFORM?>')">
-                                                Add to Cart
+                                                Thêm
                                             </button>
 
                                         </form>

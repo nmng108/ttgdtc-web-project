@@ -32,33 +32,26 @@
       <div class="sidebar-sticky">
         <ul class="nav flex-column">
           <li class="nav-item">
-            <a class="nav-link active" href="<?=$root_dir?>/admin">
-              <i class="bi bi-house-fill"></i>
-              Dashboard
-            </a>
-          </li>
-          
-          <li class="nav-item">
-            <a class="nav-link" href="<?=$root_dir?>/admin/product">
+            <a class="nav-link" id="product" href="<?=$root_dir?>/admin/product">
               <i class="bi bi-file-earmark-text"></i>
               Dụng Cụ
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<?=$root_dir?>/admin/request">
+            <a class="nav-link" id="request" href="<?=$root_dir?>/admin/request">
               <i class="bi bi-minecart" ></i>
               Quản Lý Yêu Cầu
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<?=$root_dir?>/admin/order">
+            <a class="nav-link" id="order" href="<?=$root_dir?>/admin/order">
               <i class="bi bi-minecart" ></i>
               Quản Lý Đơn Đặt Đồng Phục
             </a>
           </li>
           
           <li class="nav-item">
-            <a class="nav-link" href="<?=$root_dir?>/admin/user">
+            <a class="nav-link" id="user" href="<?=$root_dir?>/admin/user">
               <i class="bi bi-people-fill"></i>
               Quản Lý Người Dùng
             </a>
@@ -66,5 +59,10 @@
         </ul>
       </div>
     </nav>
-
+    <script>
+        var current_page = document.location.href.split('/')[5];
+        if (current_page == '') current_page = 'homepage';
+        document.getElementById(current_page).className += 'active';
+        document.getElementById(current_page).style.fontWeight = 'bold';
+    </script>
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">

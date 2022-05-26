@@ -1,6 +1,4 @@
 <?php
-session_start();
-
 $root_dir = "..";
 $title = 'Trang chủ';
 

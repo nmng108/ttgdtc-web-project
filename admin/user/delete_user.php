@@ -1,6 +1,4 @@
 <?php
-session_start();
-
 $root_dir = "../..";
 
 require_once("$root_dir/includes/utilities.php");

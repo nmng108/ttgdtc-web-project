@@ -1,6 +1,4 @@
 <?php 
-session_start();
-
 $title = 'Yêu cầu';
 $root_dir = "../..";
 
