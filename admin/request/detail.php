@@ -68,7 +68,8 @@ if (count($result) == 0) {
 
 									<td class="item-quantity">
 										<input type="number" name="quantity" id="quantity_input_<?=$item['itemCode']?>" value="<?=$item['quantity']?>" style="height: 35px;" disabled>
-									</td>
+                                        <span id="quantity_warning_<?=$item['itemCode']?>"></span>
+                                    </td>
 
                                     <td class="available-quantity"><?=$item['availableQuantity']?></td>
                                     
@@ -140,6 +141,7 @@ function edit_mode(button_element) {
             $("#quantity_warning_" + ITEM_CODE).html("Số lượng tối thiểu là 1");
             button_element.disabled = true;
         } else if (QUANTITY_INPUT.value == "") {
+            $("#quantity_warning_" + ITEM_CODE).html("");
             button_element.disabled = true;
         } else {
             $.ajax({

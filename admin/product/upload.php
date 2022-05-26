@@ -123,7 +123,7 @@ include_once("$root_dir/admin/layouts/header.php");
     <label for="<?=ITEM_CATEGORY?>">Danh mục </label>
     <select name="<?=ITEM_CATEGORY?>" value="" required>
         <option value="SPORT_EQUIPMENT">Dụng cụ thể thao</option>
-        <option value="UNIFORM" disabled>Đòng phục</option>
+        <option value="UNIFORM" disabled>Đồng phục</option>
     </select>
     <br>
     <br>
