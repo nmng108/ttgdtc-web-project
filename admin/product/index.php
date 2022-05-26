@@ -39,15 +39,23 @@ $result = run_mysql_query($query)->fetch_all(MYSQLI_ASSOC);
 			<td><?=$item['description']?></td>	
 			<td><?=format_datetime_to_display($item['createdAt'])?></td>	
 			<td><?=format_datetime_to_display($item['modifiedAt'])?></td>	
-			<td>
+			
 				<!-- <button type="button" class="btn btn-primary" style="overflow: hidden; margin-right: 1em;">Sửa</button> -->
-				<button type="button" class="btn btn-primary" style="overflow: hidden;">Sửa</button>
-				<div style="float: right; overflow: hidden; height: 1px;">
-				</div>
-				<hr>
-				<button type="button" class="btn btn-warning" style="overflow: hidden;">Xóa</button>
+			<td style="width: 50px">
+				<a href="edit.php?id=<?=$item['itemCode']?>">
+					<button class="btn btn-warning">Sửa</button>
+				</a>
+			</td>
+			<td style="width: 50px">
+				<?php
+						?>
+			<button onclick="deleteItem(<?=$item['itemCode']?>)" class="btn btn-danger">Xoá</button>
+			<?php
+								
+				?>
+			</td>
 				<!-- <button type="button" class="btn btn-warning" style="overflow: hidden; margin-left: 1em;">Xóa</button> -->
-			</td>	
+			
 		</tr>
 		<?php
 	}
@@ -57,6 +65,21 @@ $result = run_mysql_query($query)->fetch_all(MYSQLI_ASSOC);
 	</div>
 	
 </div>
+
+
+<script type="text/javascript">
+	function deleteItem(id) {
+		option = confirm('Bạn có chắc chắn muốn xoá dụng cụ này không?')
+		if(!option) return;
+		$.post('delete.php', { 
+			'id': id,
+		}, function(data) { //data we got includes all js scripts(may be all text outside php scripts) intergrated in dest file besides information from echo statements.
+			console.log(data);
+			// location.reload();
+		})
+	}
+</script>
+
 
 
 <?php

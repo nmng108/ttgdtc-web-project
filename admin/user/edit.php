@@ -37,27 +37,27 @@ if($id != '' && $id > 0) {
 // $roleItems = executeResult($sql);
 ?>
 
-<div class="row" style="margin-top: 20px;">
+<div class="row" style="margin-top: 20px; ">
 	<div class="col-md-12 table-responsive">
 		<h3>Thêm/Sửa Tài Khoản Người Dùng</h3>
 		<div class="panel panel-primary">
 			<div class="panel-heading">
 				<h5 style="color: red;"><?=$msg?></h5>
 			</div>
-			<div class="panel-body" style="text-align: center;">
+			<div class="panel-body" >
 				<form method="post" action="modify_account.php" onsubmit="return validateForm();">
-					<div class="form-group">
-						<label for="student_ID">Mã sinh viên: </label>
+					<div class="form-group" >
+						<label for="student_ID" style="text-align: left;">Mã sinh viên: </label>
 						<input type="tel" class="form-control" id="student_id" name="student_id" value="<?=$student_id?>" required>
 					</div>
 					<div class="form-group">
-						<label for="first_name">Họ: </label>
+						<label for="first_name" style="text-align: left;">Họ: </label>
 						<input type="text" class="form-control" id="first_name" name="first_name" value="<?=$first_name?>">
-						<label for="last_name">Tên: </label>
+						<label for="last_name" style="text-align: left;">Tên: </label>
 						<input type="text" class="form-control" id="last_name" name="last_name" value="<?=$last_name?>" required>
 					</div>
 					<div class="form-group">
-						<label for="usr">Role: <?=$role?></label>
+						<label for="usr" style="text-align: left;">Role: <?=$role?></label>
 					  <!-- <select class="form-control" name="role_id" id="role_id" required="true">
 					  	<option value="">-- Chọn --</option>
 					  	<?php
@@ -72,15 +72,15 @@ if($id != '' && $id > 0) {
 					  </select> -->
 					</div>
 					<div class="form-group">
-						<label for="email">Email:</label>
+						<label for="email" style="text-align: left;">Email:</label>
 						<input type="email" class="form-control" id="email" name="email" value="<?=$email?>" required>
 					</div>
 					<div class="form-group">
-						<label for="phone_number">SĐT:</label>
+						<label for="phone_number" style="text-align: left;">SĐT:</label>
 						<input type="tel" class="form-control" id="phone_number" name="phone_number" value="<?=$phone_number?>" required>
 					</div>
 					<div class = "form-group">
-						<label for="school">Trường: </label>
+						<label for="school" style="text-align: left;">Trường: </label>
 						<select  name="school" class="form-control" required>
 							<option value="UET">Đại Học Công Nghệ</option>
 							<option value="ULIS">Đại Học Ngoại Ngữ</option>
@@ -90,19 +90,19 @@ if($id != '' && $id > 0) {
 							<option value="UEd">Đại Học Giáo Dục</option>
 						</select>
 					</div>
-					<div class="form-group">
+					<div  class="form-group">
 						<label for="username">Tên đăng nhập: </label>
 						<input type="tel" class="form-control" id="username" name="username" value="<?=$username?>">
 					</div>
 					<div class="form-group">
-						<label for="password">Mật Khẩu:</label>
+						<label for="password" >Mật Khẩu:</label>
 						<input type="password" class="form-control" id="password" name="password">
 					</div>
 					<div class="form-group">
-						<label for="confirmation_pwd">Xác Minh Mật Khẩu:</label>
+						<label for="confirmation_pwd" >Xác Minh Mật Khẩu:</label>
 						<input type="password" class="form-control" id="confirmation_password" disabled>
 					</div>
-					<button type="submit" class="btn btn-success">Đăng Ký</button>
+					<button type="submit"  class="btn btn-success">Đăng Ký</button>
 				</form>
 			</div>
 		</div>

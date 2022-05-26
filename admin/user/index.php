@@ -20,7 +20,7 @@ $result = run_mysql_query($query)->fetch_all(MYSQLI_ASSOC);
 <div class="row" style="margin-top: 20px;">
 	<div class="col-md-12 table-responsive">
 		<h3>Quản Lý Người Dùng</h3>
-		<a href="editor.php"><button class="btn btn-success">Thêm Tài Khoản</button></a>
+		<a href="edit.php"><button class="btn btn-success">Thêm Tài Khoản</button></a>
 		<table class="table table-bordered table-hover" style="margin-top: 20px; text-align: center;">
 			<thead class="table-success">
 				<tr>
@@ -66,7 +66,6 @@ $result = run_mysql_query($query)->fetch_all(MYSQLI_ASSOC);
 							</td>
 							<td style="width: 50px">
 								<?php
-								// if($admin['studentID'] != $user['studentID'] && $user['role_id'] != 1) {
 									?>
 									<button onclick="deleteUser(<?=$user['studentID']?>)" class="btn btn-danger">Xoá</button>
 									<?php
