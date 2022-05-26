@@ -4,42 +4,33 @@ require_once ('../utils/utility.php');
 require_once ('../database/dbhelper.php');
 $user = getUserToken();
 if($user != null) {
-    if ($user['role'] == 2) {
-        header('Location: ../user');
+    
+        header('Location:index.php');
         die();
-    } else {
-        header('Location:../admin');
-        die();
-
     }
-} 
 //day DL da nhap len server
-$email = $student_id = $cf_password = $password = $address = $name = $phone_number = $msg='';
+$email = $student_id = $cf_password = $password = $school = $firstname = $lastname = $phone_number = $msg='';
 if(!empty($_POST)) {
     $email = getPost('email');
-    $address = getPost('address');
+    $aschool = getPost('school');
     $password = getPost('password');
-    $name = getPost('name');
+    $firstname = getPost('firstname');
+    $lastname = getPost('lastname');
     $cf_password = getPost('cf_password');
     $student_id= getPost('student_id');
     $phone_number = getPost('phone_number');
-    $userExist = executeResult("select * from users where email = '$email'", true);
+    $userExist = executeResult("select * from students where studentID = '$student_id' and username = '$email'", true);
     if($userExist != null) {
         $msg = 'Email đã được đăng ký trên hệ thống';
         echo '<script >
-        $(function() {
-                
-        alert("Email đã tồn tại trên hệ thống!!")
-               
+        $(function() {         
+        alert("Email đã tồn tại trên hệ thống!!")    
         })	
     </script>';
     } else {
         $created_at = $updated_at = date('Y-m-d H:i:s');
-        //Su dung ma hoa 1 chieu -> md5 -> hack
-        // $password = getSecurityMD5($password);
-
-        $sql = "insert into users (f_name, email, phone_number, password_, address_, student_ID, role_id, created_at) 
-        values ('$name', '$email', '$phone_number', '$password', '$address', '$student_id', 2, '$created_at')";
+        $sql = "insert into students (username, password, studentID, school, firstName, lastName, phoneNumber) 
+        values ( '$email', '$password', '$student_id', '$school', '$firstname', '$lastname', '$phoneNumber')";
         execute($sql);  
         header('Location: login.php');
         die();

@@ -401,6 +401,19 @@ CREATE INDEX `orderNumber_Payments_fk_idx` ON `Payments` (`orderNumber` ASC) VIS
 
 
 -- -----------------------------------------------------
+-- Table `UserTokens`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `UserTokens` ;
+
+CREATE TABLE IF NOT EXISTS `UserTokens` (
+  `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `userID` INT NOT NULL,
+  `token` varchar(80) NOT NULL,
+  `modifiedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP() ON UPDATE CURRENT_TIMESTAMP)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Data for table `Weekdays`
 -- -----------------------------------------------------
 START TRANSACTION;
