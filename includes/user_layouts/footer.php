@@ -1,4 +1,7 @@
-<div class="footer">
+
+   
+
+<div class="footer" style="margin-top:30px;">
     <div class="container">
         <div class="row">
             <div class="footer-col-1">
@@ -13,24 +16,14 @@
                 </ul>
             </div>
             <div class="footer-col-1">
-                <h5>Connect with us</h5>
-                 <div> 
-                     <h6 class="text-uppercase">Address</h6>
-                     <p> 144 Xuân Thuỷ, Cầu Giấy, Hà Nội </p>
-                 </div>
-                 <div> 
-                   <h6 class="text-uppercase">Phone</h6>
-                   <p> 0956234678 </p>
-               </div>
-               <div> 
-                   <h6 class="text-uppercase">Email</h6>
-                   <p> Ttgdtc@gmail.com</p>
-               </div>
-                   
+                <h5>Contact with us</h5>
+                <ul>
+                    <li>Address: Số 2, Phạm Văn Đồng</li>
+                    <li>Phone number: 0956234678</li>
+                    <li>Email: TTGDTC@GMAIL.COM</li>
+                </ul>
+                
             </div>
         </div>
     </div>
 </div>
-</body>
-</html>
-   

@@ -235,7 +235,6 @@ CREATE TABLE IF NOT EXISTS `pec_database`.`Orders` (
   `statusID` TINYINT(2) NOT NULL DEFAULT 1,
   `note` TEXT(100) NULL DEFAULT NULL,
   `modifiedAt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP() ON UPDATE CURRENT_TIMESTAMP,
-  `paymentMethod` ENUM('BANKING', 'DIRECT') NOT NULL DEFAULT 'DIRECT',
   PRIMARY KEY (`orderNumber`),
   INDEX `studentID_Orders_fk_idx` (`studentID` ASC) VISIBLE,
   INDEX `studentID_Orders_fk` (`studentID` ASC) VISIBLE,
@@ -268,7 +267,6 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `pec_database`.`orderDetails` (
   `orderNumber` INT UNSIGNED NOT NULL,
   `itemCode` INT UNSIGNED NOT NULL,
-  `size` VARCHAR(5) NOT NULL,
   `quantity` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`orderNumber`, `itemCode`, `size`),
   INDEX `itemCode_OrderDetails_fk_idx` (`itemCode` ASC) VISIBLE,
@@ -440,13 +438,13 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `pec_database`;
-INSERT INTO `Products` (`itemCode`, `itemName`, `availableQuantity`, `category`, `primaryImage`, `description`) VALUES (1, 'Áo Polo', 100, 'UNIFORM', 'Áo Polo.jpg', NULL);
-INSERT INTO `Products` (`itemCode`, `itemName`, `availableQuantity`, `category`, `primaryImage`, `description`) VALUES (2, 'Quần Thể Thao', 100, 'UNIFORM', 'Áo Khoác.jpg', NULL);
-INSERT INTO `Products` (`itemCode`, `itemName`, `availableQuantity`, `category`, `primaryImage`, `description`) VALUES (3, 'Áo Khoác', 100, 'UNIFORM', '', NULL);
-INSERT INTO `Products` (`itemCode`, `itemName`, `availableQuantity`, `category`, `primaryImage`, `description`) VALUES (4, 'Bóng Rổ', 150, 'SPORT_EQUIPMENT', 'Bóng Rổ.png', NULL);
-INSERT INTO `Products` (`itemCode`, `itemName`, `availableQuantity`, `category`, `primaryImage`, `description`) VALUES (5, 'Cầu Lông', 150, 'SPORT_EQUIPMENT', 'Cầu Lông.jpg', NULL);
-INSERT INTO `Products` (`itemCode`, `itemName`, `availableQuantity`, `category`, `primaryImage`, `description`) VALUES (6, 'Bóng Đá', 150, 'SPORT_EQUIPMENT', 'Bóng Đá.jpg', NULL);
-INSERT INTO `Products` (`itemCode`, `itemName`, `availableQuantity`, `category`, `primaryImage`, `description`) VALUES (7, 'Bóng Chuyền', 150, 'SPORT_EQUIPMENT', 'Bóng Chuyền.jpg', NULL);
+INSERT INTO `Products` (`itemCode`, `itemName`, `availableQuantity`, `category`, `description`) VALUES (1, 'Áo Polo', 100, 'UNIFORM', NULL);
+INSERT INTO `Products` (`itemCode`, `itemName`, `availableQuantity`, `category`, `description`) VALUES (2, 'Quần Thể Thao', 100, 'UNIFORM', NULL);
+INSERT INTO `Products` (`itemCode`, `itemName`, `availableQuantity`, `category`, `description`) VALUES (3, 'Áo Khoác', 100, 'UNIFORM', NULL);
+INSERT INTO `Products` (`itemCode`, `itemName`, `availableQuantity`, `category`, `description`) VALUES (4, 'Bóng Rổ', 150, 'SPORT_EQUIPMENT', NULL);
+INSERT INTO `Products` (`itemCode`, `itemName`, `availableQuantity`, `category`, `description`) VALUES (5, 'Cầu Lông', 150, 'SPORT_EQUIPMENT', NULL);
+INSERT INTO `Products` (`itemCode`, `itemName`, `availableQuantity`, `category`, `description`) VALUES (6, 'Bóng Đá', 150, 'SPORT_EQUIPMENT', NULL);
+INSERT INTO `Products` (`itemCode`, `itemName`, `availableQuantity`, `category`, `description`) VALUES (7, 'Bóng Chuyền', 150, 'SPORT_EQUIPMENT', NULL);
 
 COMMIT;
 

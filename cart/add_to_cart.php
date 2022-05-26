@@ -19,16 +19,16 @@ if (isset($_POST['quantity']) && isset($_POST['item_code']) && isset($_SESSION[U
         if ($result->num_rows == 1) {
             $result = increase_quantity($_SESSION[USERID], $_POST['item_code'], $_POST['size'], $_POST['quantity']);
             if ($result === true) {
-                echo "Thêm thành công";
+                echo '<h5 style="size: 8px; color: yellow;" >Thêm thành công</h5>';
             } else if ($result === false) {
-                echo "Thêm thất bại.";
+                echo '<h5 style="size: 8px; color: red;" >*Thêm thất bại</h5>';
             } else {
-                echo "Thêm thất bại. Trong giỏ đang chứa ". $result;
+                echo "*Thêm thất bại. Trong giỏ đang chứa:". $result;
             }
         } else if (add_new_to_cart($_SESSION[USERID], $_POST['item_code'], $_POST['size'], $_POST['quantity']) == true) {
-            echo "Thêm thành công";
+            echo '<h5 style="size: 8px; color: yellow;" >Thêm thành công</h5>';
         } else { 
-            echo "Thêm thất bại";
+            echo '<h5 style="size: 8px; color: red;" >*Thêm thất bại</h5>';
         }
     // If the item belongs to SPORT_EQUIPMENT, we will pass NULL to the parameter $size.
     } else if ($_POST['category'] == SPORT_EQUIPMENT) {
@@ -38,18 +38,18 @@ if (isset($_POST['quantity']) && isset($_POST['item_code']) && isset($_SESSION[U
         if ($result->num_rows == 1) {
             $result = increase_quantity($_SESSION[USERID], $_POST['item_code'], NULL, $_POST['quantity']);
             if ($result === true) {
-                echo "Thêm thành công";
+                echo '<h5 style="size: 8px; color: yellow;" >Thêm thành công</h5>';
             } else if ($result === false) {
-                echo "Thêm thất bại.";
+                echo '<h5 style="size: 8px; color: red;" >*Thêm thất bại</h5>';
             } else {
                 echo "Thêm thất bại. Trong giỏ đang chứa ". $result;
             }
         } else if (add_new_to_cart($_SESSION[USERID], $_POST['item_code'], NULL, $_POST['quantity']) == true) {
-            echo "Thêm thành công";
+            echo '<h5 style="size: 8px; color: yellow;" >Thêm thành công</h5>';
         } else { 
-            echo "Thêm thất bại";
+            echo '<h5 style="size: 8px; color: red;" >*Thêm thất bại</h5>';
         }
     }
 } else {
-    echo "Thêm thất bại";
+    echo '<h5 style="size: 8px; color: red;" >*Thêm thất bại</h5>';
 }

@@ -11,9 +11,9 @@ include_once("$root_dir/cart/manager.php");
 		<div class="card-body">
 
 			<div class="row">
-				<div class="container  table-responsive-lg" style="width: 75vw;">
+				<div class="container" style="width: 75vw;">
 					<table class="table table-hover" style="width: 95%; text-align: center;">
-						<thead class="table-info">
+						<thead class="table-success">
 							<tr>
 								<th class="col-sm-2 sequence-number">STT</th>
 								<th class="col-sm-2 item-image">Hình ảnh</th>
@@ -39,7 +39,7 @@ include_once("$root_dir/cart/manager.php");
 								<tr class="<?=$class_value?>" id="item_<?=$item['itemCode']?>" style="text-align:center;">
 									<td class="sequence-number"><?=$i + 1?></td>
 									
-									<td class="item-image"><img src="<?=get_uploaded_image_link($item['primaryImage'])?>" style="width: 100%;"></td>
+									<td class="item-image"><img src="<?=$item['primaryImage']?>" style="width: 30px"></td>
 									
 									<td class="item-name"><?=$item['itemName']?></td>
 																	
@@ -72,24 +72,14 @@ include_once("$root_dir/cart/manager.php");
 								</tr>
 								<?php
 							}
-							$query = "SELECT SUM(u.priceEach * c.quantity) AS totalPrice FROM Carts c, Uniforms u WHERE u.itemCode = c.itemCode";
-							$result = run_mysql_query($query)->fetch_all(MYSQLI_ASSOC);
-							if (count($result) == 1) {
-								$result = $result[0]['totalPrice'];
-							}
 							?>
-							<tr class="table-dark" style="color: darkslategrey; font-weight: bold; font-size: 16px;">
-								<td colspan="6">Tổng</td>
-								<td><?=number_format($result * 1000, 0, ',', '.')?> VNĐ</td>
-								<td class="total-price-sub-cols" colspan="2"></td>
-							</tr>
 						</tbody>
 					</table>
 					<p id="notif_<?=UNIFORM?>" style="font-size: 26px; color: red">
 					
 					</p>
-					<a href="./checkout?cat=<?=UNIFORM?>" class="checkout-button">
-						<button class="btn checkout-button" id="checkout_button_<?=UNIFORM?>" style="align-content: right; color: goldenrod" onclick="return process_cart(this)">Tiếp tục</button>
+					<a href="./checkout.php?cat=<?=UNIFORM?>" class="checkout-button">
+						<button  id="checkout_button_<?=UNIFORM?>"  onclick="return process_cart(this)">Tiếp tục</button>
 					</a>
 				</div>
 			</div>

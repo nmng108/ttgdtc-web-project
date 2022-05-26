@@ -7,29 +7,36 @@
 	<style>
 		button{
         margin: 30px 0;
-        margin-left: 90px;
-        width: 120px;
-        height: 50px;
-        background-color: rgb(245, 249, 245);
+        margin-left: 20px;
+        background-color: #53925f;
+        width: 60px;
+        height: 40px;
         border: 1px solid;
         cursor: pointer;
-        border-radius: 15px;
+        border-radius: 5px;
+        border-color:  rgb(245, 249, 245);
+        text-align: center;
         }
         button:hover {
         transition: 0.5s;
-        background-color: rgb(213, 235, 217);
+        }
+        select{
+            border-radius: 10px;
+            cursor: pointer;
+
         }
 
         input{
-        width: 50%;
-        height: 50px;
+        width: 20%;
+        height: 40px;
         text-align: center;
         vertical-align: middle;
         margin: 8px 0;
         margin-left: 25px;
         border: 2px solid rgb(189, 197, 189);
-        border-radius: 25px;
+        border-radius: 10px;
         }
+
 	</style>
 </body>
 </html>

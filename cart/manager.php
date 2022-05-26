@@ -1,4 +1,5 @@
 <?php
+$root_dir = "..";
 include_once("$root_dir/database/manager.php");
 
 // unused

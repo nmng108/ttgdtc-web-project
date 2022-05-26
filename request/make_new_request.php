@@ -14,7 +14,7 @@ include_once("$root_dir/includes/utilities.php");
 include_once("$root_dir/request/manager.php");
 
 
-if (!isset($_POST)) exit("info is not sent by post method");
+$result_array = [];
 
 $response = [];
 $response['message'] = '';
@@ -33,9 +33,9 @@ if (is_requests_larger_than_limit('CLASS', $_POST['class_code'])) {
     }
 }
 
-//Replace 'T' by ' ' to fill in DATETIME columns in database.
-$_POST['start_datetime'] = str_replace("T", " ", $_POST['start_datetime']);
-$_POST['end_datetime'] = str_replace("T", " ", $_POST['end_datetime']);
+    //Replace 'T' by ' ' in the strings to fill in DATETIME columns in database.
+    $_POST['start_datetime'] = str_replace("T", " ", $_POST['start_datetime']);
+    $_POST['end_datetime'] = str_replace("T", " ", $_POST['end_datetime']);
 
 $last_request_number = make_new_request($_POST['student_id'], $_POST['start_datetime'], 
                         $_POST['end_datetime'], $_POST['class_code'], $_POST['note']);

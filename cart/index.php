@@ -4,8 +4,9 @@ session_start();
 $title = 'Giỏ đồ';
 $root_dir = "..";
 
-include_once("$root_dir/includes/user_layouts/layout.php");
 include_once("$root_dir/includes/user_layouts/header.php");
+include_once("$root_dir/includes/user_layouts/layout.php");
+
 
 include_once("$root_dir/includes/utilities.php");
 include_once("$root_dir/cart/manager.php");
