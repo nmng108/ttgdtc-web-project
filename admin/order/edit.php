@@ -56,7 +56,7 @@ $all_status = run_mysql_query($sql)->fetch_all(MYSQLI_ASSOC);
 		<div class="panel panel-primary">
 			<div class="panel-heading">
 			</div>
-			<div class="panel-body">
+			<div class="panel-body container">
 				<form method="post">
                     <div class="form-group">
 						<label for="status">Trạng thái:</label>
@@ -76,10 +76,10 @@ $all_status = run_mysql_query($sql)->fetch_all(MYSQLI_ASSOC);
 					  </select>
 					</div>
                     <div class="form-group">
-					  <label for="usr">Ghi chú:</label>
-					  <input  type="text" class="form-control" name="note" value="<?=$result['note']?>">
-					  <input type="text" name="order_number" value="<?=$orderNumber?>" hidden>
+					  <label for="note">Ghi chú:</label>
+					  <textarea id=""  type="text" class="form-control" name="note" value="<?=$result['note']?>"></textarea>
 					</div>
+					<input type="text" name="order_number" value="<?=$orderNumber?>" hidden>
 					<button class="btn btn-success">Xác nhận</button>
 				</form>
 			</div>

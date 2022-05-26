@@ -44,7 +44,7 @@ if($id != '' && $id > 0) {
 			<div class="panel-heading">
 				<h5 style="color: red;"><?=$msg?></h5>
 			</div>
-			<div class="panel-body" >
+			<div class="panel-body container" style="text-align: center;">
 				<form method="post" action="modify_account.php" onsubmit="return validateForm();">
 					<div class="form-group" >
 						<label for="student_ID" style="text-align: left;">Mã sinh viên: </label>

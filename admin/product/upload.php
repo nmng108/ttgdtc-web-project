@@ -56,15 +56,38 @@ if (isset($_POST['submit']) && isset($_FILES[ITEM_IMAGE])) {
     $file_name = user_defined_uniqid() . "." . $file_type;
     $file_uri = $file_location . $file_name;
 
+    // Firstly we upload image
     if (move_uploaded_file($file['tmp_name'][0], $file_uri)) {
         if ($item_name != NULL && $item_quantity != NULL && $item_category != NULL) {
-            $query = "INSERT INTO `Products` (`itemName`, `availableQuantity`, `category`, `primaryImage`, `description`) 
-                    VALUES('$item_name', '$item_quantity', '$item_category', '$file_name', '$item_description');";
-            $result = run_mysql_query($query);
-            if ($result === true) {
-                header("Location: ./");
-            } else {
-                echo "Insertion failed.";
+            try{
+                // Then insert new item in the table Products if image is uploaded.
+                $query = "INSERT INTO `Products` (`itemName`, `availableQuantity`, `category`, `primaryImage`, `description`) 
+                        VALUES('$item_name', '$item_quantity', '$item_category', '$file_name', '$item_description');";
+                $result = run_mysql_query($query);
+                
+                if ($result === true) {
+                    $query = "SELECT MAX(itemCode) itemCode FROM Products WHERE category = '".SPORT_EQUIPMENT."'";
+                    $result = run_mysql_query($query)->fetch_array();
+                    
+                    if ($result == null) exit();
+
+                    $item_code = $result['itemCode'];
+                    // Finally we update new item in the table SportEquipments if 2 steps above is done.
+                    $query = "INSERT INTO `SportEquipments` (`itemCode`) 
+                            VALUES('$item_code')";
+                    $result = run_mysql_query($query);
+                    
+                    if ($result == true) {
+                        // Redirect to index.php if all's done.
+                        header("Location: ./");
+                    }
+                } else {
+                    echo "Insertion failed.";
+                    unlink($file_uri);
+                }
+            } catch(Exception $e) {
+                exit($e->getMessage());
+                echo "<br>Insertion failed.";
                 unlink($file_uri);
             }
         }
@@ -133,7 +156,7 @@ button:hover {
     <label for="<?=ITEM_CATEGORY?>">Danh mục </label>
     <select name="<?=ITEM_CATEGORY?>" value="" required>
         <option value="SPORT_EQUIPMENT">Dụng cụ thể thao</option>
-        <option value="UNIFORM" disabled>Đòng phục</option>
+        <option value="UNIFORM" disabled>Đồng phục</option>
     </select>
     </div class="form-group">
     <div class="form-group">

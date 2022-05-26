@@ -34,28 +34,41 @@ $result = get_all_requests($_SESSION[USERID]);
 							for ($i = 0; $i < count($result); $i++) { 
 								$item = $result[$i];
 								?>
-								<tr class="item-info" id="item_<?=$item['requestNumber']?>" style="text-align: center;">
+								<tr class="request-info" id="request_<?=$item['requestNumber']?>" style="text-align: center;">
 									<td class="sequence-number"><?=$i + 1?></td>
 									
-									<td class="request-date"><?=$item['requestDate']?></td>
+									<td class="request-date"><?=format_datetime_to_display($item['requestDate'])?></td>
 									
-									<td class="modified-date"><?=$item['modifiedAt']?></td>
+									<td class="modified-date"><?=format_datetime_to_display($item['modifiedAt'])?></td>
 																	
-									<td class="start-date"><?=$item['startTime']?></td>
+									<td class="start-date"><?=format_datetime_to_display($item['startTime'])?></td>
 																	
-									<td class="end-date"><?=$item['endTime']?></td>
+									<td class="end-date"><?=format_datetime_to_display($item['endTime'])?></td>
 
 									<td class="note"><?=$item['note']?></td>
 									
-									<td class="request-status"><?=$item['statusName']?></td>
+									<td class="status" id="status_<?=$item['requestNumber']?>"><?=translated_status($item['statusName'])?></td>
 									
-									<td class="cancel-button">
-										<button class="btn" id="detail_button_<?=$item['requestNumber']?>" onclick="return false">Chi tiết</button>
+									<td class="detail-button">
+										<button class="btn" id="detail_button_<?=$item['requestNumber']?>" onclick="window.location.href = 'detail.php?id=<?=$item['requestNumber']?>'">Chi tiết</button>
 									</td>
+									<?php
+									if ($item['statusName'] != 'CANCELED') {
+										?>
+										<td class="cancel-button">
+											<button class="btn" id="cancel_button_<?=$item['requestNumber']?>" onclick="process_cancellation(<?=$item['requestNumber']?>)">Hủy</button>
+										</td>
+										<?php
+									}
 
-									<td class="cancel-button">
-										<button class="btn" id="cancel_button_<?=$item['requestNumber']?>" onclick="return false">Hủy</button>
-									</td>
+									if ($item['statusName'] == 'CANCELED') {
+										?>
+										<td class="delete-button">
+											<button class="btn" id="delete_button_<?=$item['requestNumber']?>" onclick="process_deletion(<?=$item['requestNumber']?>)">Xóa</button>
+										</td>
+										<?php
+									}
+									?>
 								</tr>
 								<?php
 							}

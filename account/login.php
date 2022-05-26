@@ -4,48 +4,26 @@ require_once ('../utils/utility.php');
 require_once('../database/dbhelper.php');
 $user = getUserToken();
 if($user != null) {
-    if ($user['role_id'] == 2) {
-        header('Location: ../user');
-        
-    } else {
-        header('Location:../admin');
-    }
+        header('Location:../index.php');
 } 
-
 $user_name = $pass = $msg = '';
 $res = false;
 $user_name = getPost('email');
 $pass = getPost('password');
-
-
-$sql = "select * from users where email = '$user_name' and password_ = '$pass' and role_id = '1'";
-$sql2 = "select * from users where email = '$user_name' and password_ = '$pass' and role_id = '2'";
-
+$sql = "select * from students where username = '$user_name' and password = '$pass' ";
 $userExist = executeResult($sql, true);
-$userExist2  = executeResult($sql2, true);
-if($userExist == null && $userExist2 == null) {
+if($userExist == null ) {
     $msg = 'Đăng nhập không thanh công, vui long kiểm tra email hoặc mật khẩu!!!';    
     
-} elseif ($userExist != null){
-    //login thanh cong
-    $token = getSecurityMD5($userExist['email'].time());
+}  else {
+    $token = getSecurityMD5($userExist['username'].time());
     setcookie('token', $token, time() + 60*24*60*7, '/');
     $created_at = date('Y-m-d H:i:s');
     $_SESSION['user'] = $userExist;
-    $userId = $userExist['id'];
+    $userId = $userExist['studentID'];
     $sql = "insert into Tokens (user_id, token, created_at) values ('$userId', '$token', '$created_at')";
     execute($sql);
-    header('Location: ../admin');
-    die();
-} else {
-    $token = getSecurityMD5($userExist2['email'].time());
-    setcookie('token', $token, time() + 60*24*60*7, '/');
-    $created_at = date('Y-m-d H:i:s');
-    $_SESSION['user'] = $userExist2;
-    $userId = $userExist2['id'];
-    $sql = "insert into Tokens (user_id, token, created_at) values ('$userId', '$token', '$created_at')";
-    execute($sql);
-    header('Location: ../user');
+    header('Location: ../index.php');
     die();
 }
 

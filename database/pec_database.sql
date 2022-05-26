@@ -365,6 +365,189 @@ CREATE TABLE IF NOT EXISTS `pec_database`.`Payments` (
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
+CREATE INDEX `userID_Payments_fk_idx` ON `Payments` (`studentID` ASC) VISIBLE;
+
+CREATE INDEX `orderNumber_Payments_fk_idx` ON `Payments` (`orderNumber` ASC) VISIBLE;
+
+
+-- -----------------------------------------------------
+-- Table `UserTokens`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `UserTokens` ;
+
+CREATE TABLE IF NOT EXISTS `UserTokens` (
+  `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `userID` INT NOT NULL,
+  `token` varchar(80) NOT NULL,
+  `modifiedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP() ON UPDATE CURRENT_TIMESTAMP)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Data for table `Weekdays`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `pec_database`;
+INSERT INTO `Weekdays` (`weekdayNumber`, `dayOfWeek`) VALUES (1, 'Sunday');
+INSERT INTO `Weekdays` (`weekdayNumber`, `dayOfWeek`) VALUES (2, 'Monday');
+INSERT INTO `Weekdays` (`weekdayNumber`, `dayOfWeek`) VALUES (3, 'Tuesday');
+INSERT INTO `Weekdays` (`weekdayNumber`, `dayOfWeek`) VALUES (4, 'Wednesday');
+INSERT INTO `Weekdays` (`weekdayNumber`, `dayOfWeek`) VALUES (5, 'Thursday');
+INSERT INTO `Weekdays` (`weekdayNumber`, `dayOfWeek`) VALUES (6, 'Friday');
+INSERT INTO `Weekdays` (`weekdayNumber`, `dayOfWeek`) VALUES (7, 'Saturday');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `Subjects`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `pec_database`;
+INSERT INTO `Subjects` (`subjectCode`, `subjectName`) VALUES ('PEC2002', 'Bóng bàn');
+INSERT INTO `Subjects` (`subjectCode`, `subjectName`) VALUES ('PEC1090', 'Cầu lông');
+INSERT INTO `Subjects` (`subjectCode`, `subjectName`) VALUES ('PEC2000', 'Bóng rổ');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `Classes`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `pec_database`;
+INSERT INTO `Classes` (`subjectCode`, `classNumber`, `weekdayNumber`, `startTime`, `studyTime`, `numberOfStudents`) VALUES ('PEC2002', 1, 2, '07:00:00', '01:50:00', 2);
+INSERT INTO `Classes` (`subjectCode`, `classNumber`, `weekdayNumber`, `startTime`, `studyTime`, `numberOfStudents`) VALUES ('PEC1090', 4, 2, '09:00:00', '01:50:00', 2);
+INSERT INTO `Classes` (`subjectCode`, `classNumber`, `weekdayNumber`, `startTime`, `studyTime`, `numberOfStudents`) VALUES ('PEC2000', 3, 6, '13:00:00', '01:50:00', 0);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `Students`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `pec_database`;
+INSERT INTO `Students` (`studentID`, `username`, `firstName`, `lastName`, `email`, `phoneNumber`, `password`, `school`, `createdAt`) VALUES (20020001, 'std', 'Qwe', 'rty', 'qwe@gmail.com', '0123456789', '123', 'UET', DEFAULT);
+INSERT INTO `Students` (`studentID`, `username`, `firstName`, `lastName`, `email`, `phoneNumber`, `password`, `school`, `createdAt`) VALUES (20020002, 'std1', 'yjh', 'Otyu', 'vbn@gmail.com', '0987654321', '123', 'ULIS', DEFAULT);
+INSERT INTO `Students` (`studentID`, `username`, `firstName`, `lastName`, `email`, `phoneNumber`, `password`, `school`, `createdAt`) VALUES (20020003, 'std2', NULL, 'thn', 'thn@outlook.com', '0111222333', '321', 'UET', DEFAULT);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `Products`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `pec_database`;
+INSERT INTO `Products` (`itemCode`, `itemName`, `availableQuantity`, `category`, `primaryImage`, `description`) VALUES (1, 'Áo Polo', 100, 'UNIFORM', 'Áo Polo.jpg', NULL);
+INSERT INTO `Products` (`itemCode`, `itemName`, `availableQuantity`, `category`, `primaryImage`, `description`) VALUES (2, 'Quần Thể Thao', 100, 'UNIFORM', 'Áo Khoác.jpg', NULL);
+INSERT INTO `Products` (`itemCode`, `itemName`, `availableQuantity`, `category`, `primaryImage`, `description`) VALUES (3, 'Áo Khoác', 100, 'UNIFORM', '', NULL);
+INSERT INTO `Products` (`itemCode`, `itemName`, `availableQuantity`, `category`, `primaryImage`, `description`) VALUES (4, 'Bóng Rổ', 150, 'SPORT_EQUIPMENT', 'Bóng Rổ.png', NULL);
+INSERT INTO `Products` (`itemCode`, `itemName`, `availableQuantity`, `category`, `primaryImage`, `description`) VALUES (5, 'Cầu Lông', 150, 'SPORT_EQUIPMENT', 'Cầu Lông.jpg', NULL);
+INSERT INTO `Products` (`itemCode`, `itemName`, `availableQuantity`, `category`, `primaryImage`, `description`) VALUES (6, 'Bóng Đá', 150, 'SPORT_EQUIPMENT', 'Bóng Đá.jpg', NULL);
+INSERT INTO `Products` (`itemCode`, `itemName`, `availableQuantity`, `category`, `primaryImage`, `description`) VALUES (7, 'Bóng Chuyền', 150, 'SPORT_EQUIPMENT', 'Bóng Chuyền.jpg', NULL);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `SportEquipments`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `pec_database`;
+INSERT INTO `SportEquipments` (`itemCode`, `category`) VALUES (4, 'BALL');
+INSERT INTO `SportEquipments` (`itemCode`, `category`) VALUES (5, 'BALL');
+INSERT INTO `SportEquipments` (`itemCode`, `category`) VALUES (6, 'BALL');
+INSERT INTO `SportEquipments` (`itemCode`, `category`) VALUES (7, 'BALL');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `Uniforms`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `pec_database`;
+INSERT INTO `Uniforms` (`itemCode`, `priceEach`) VALUES (1, 110);
+INSERT INTO `Uniforms` (`itemCode`, `priceEach`) VALUES (2, 140);
+INSERT INTO `Uniforms` (`itemCode`, `priceEach`) VALUES (3, 120);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `UniformSizes`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `pec_database`;
+INSERT INTO `UniformSizes` (`itemCode`, `size`, `quantity`) VALUES (1, 'XS', 20);
+INSERT INTO `UniformSizes` (`itemCode`, `size`, `quantity`) VALUES (1, 'S', 20);
+INSERT INTO `UniformSizes` (`itemCode`, `size`, `quantity`) VALUES (1, 'M', 20);
+INSERT INTO `UniformSizes` (`itemCode`, `size`, `quantity`) VALUES (1, 'L', 20);
+INSERT INTO `UniformSizes` (`itemCode`, `size`, `quantity`) VALUES (1, 'XL', 20);
+INSERT INTO `UniformSizes` (`itemCode`, `size`, `quantity`) VALUES (2, 'XS', 20);
+INSERT INTO `UniformSizes` (`itemCode`, `size`, `quantity`) VALUES (2, 'S', 20);
+INSERT INTO `UniformSizes` (`itemCode`, `size`, `quantity`) VALUES (2, 'M', 20);
+INSERT INTO `UniformSizes` (`itemCode`, `size`, `quantity`) VALUES (2, 'L', 20);
+INSERT INTO `UniformSizes` (`itemCode`, `size`, `quantity`) VALUES (2, 'XL', 20);
+INSERT INTO `UniformSizes` (`itemCode`, `size`, `quantity`) VALUES (3, 'XS', 20);
+INSERT INTO `UniformSizes` (`itemCode`, `size`, `quantity`) VALUES (3, 'S', 20);
+INSERT INTO `UniformSizes` (`itemCode`, `size`, `quantity`) VALUES (3, 'M', 20);
+INSERT INTO `UniformSizes` (`itemCode`, `size`, `quantity`) VALUES (3, 'L', 20);
+INSERT INTO `UniformSizes` (`itemCode`, `size`, `quantity`) VALUES (3, 'XL', 20);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `AttendingStudents`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `pec_database`;
+INSERT INTO `AttendingStudents` (`studentID`, `subjectCode`, `classNumber`) VALUES (20020001, 'PEC2002', 1);
+INSERT INTO `AttendingStudents` (`studentID`, `subjectCode`, `classNumber`) VALUES (20020002, 'PEC1090', 4);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `Admins`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `pec_database`;
+INSERT INTO `Admins` (`adminID`, `username`, `firstName`, `lastName`, `email`, `phoneNumber`, `password`, `createdAt`) VALUES (1001, 'admin', 'Abc', 'Def', 'abc@gmail.com', '0999888777', '123', DEFAULT);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `RequestStatus`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `pec_database`;
+INSERT INTO `RequestStatus` (`statusID`, `statusName`) VALUES (1, 'SENT');
+INSERT INTO `RequestStatus` (`statusID`, `statusName`) VALUES (2, 'APPROVED');
+INSERT INTO `RequestStatus` (`statusID`, `statusName`) VALUES (3, 'RETURNED');
+INSERT INTO `RequestStatus` (`statusID`, `statusName`) VALUES (4, 'CANCELED');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `OrderStatus`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `pec_database`;
+INSERT INTO `OrderStatus` (`statusID`, `statusName`) VALUES (1, 'SENT');
+INSERT INTO `OrderStatus` (`statusID`, `statusName`) VALUES (2, 'PREPARING');
+INSERT INTO `OrderStatus` (`statusID`, `statusName`) VALUES (3, 'READY');
+INSERT INTO `OrderStatus` (`statusID`, `statusName`) VALUES (4, 'RECEIVED');
+INSERT INTO `OrderStatus` (`statusID`, `statusName`) VALUES (5, 'CANCELED');
+INSERT INTO `OrderStatus` (`statusID`, `statusName`) VALUES (6, 'RETURNED');
+
+COMMIT;
+
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

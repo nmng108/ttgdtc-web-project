@@ -110,3 +110,17 @@ function get_quantity_in_inventory(int $item_code) {
 function get_uploaded_image_link($file_name) {
     return UPLOADED_IMAGE_DIR . $file_name;
 }
+
+function translated_status($status_name) {
+    switch ($status_name) {
+        case 'SENT': return "Đã gửi/Chưa xử lý";
+        case 'APPROVED': return "Đang mượn";
+        case 'RETURNED': return "Đã trả";
+        case 'CANCELED': return "Đã hủy";
+        case 'PREPARING': return "Đang chuẩn bị đơn";
+        case 'READY': return "Sẵn sàng gửi/nhận";
+        case 'RECEIVED': return "Đã hủy";
+    }
+
+    return "Unmatched status name";
+}
