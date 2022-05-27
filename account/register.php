@@ -12,7 +12,7 @@ if($user != null) {
 $email = $student_id = $cf_password = $password = $school = $firstname = $lastname = $phone_number = $msg='';
 if(!empty($_POST)) {
     $email = getPost('email');
-    $aschool = getPost('school');
+    $school = getPost('school');
     $password = getPost('password');
     $firstname = getPost('firstname');
     $lastname = getPost('lastname');
@@ -29,8 +29,8 @@ if(!empty($_POST)) {
     </script>';
     } else {
         $created_at = $updated_at = date('Y-m-d H:i:s');
-        $sql = "insert into students (username, password, studentID, school, firstName, lastName, phoneNumber) 
-        values ( '$email', '$password', '$student_id', '$school', '$firstname', '$lastname', '$phoneNumber')";
+        $sql = "insert into students (email, password, studentID, school, firstName, lastName, phoneNumber) 
+        values ( '$email', '$password', '$student_id', '$school', '$firstname', '$lastname', '$phone_number')";
         execute($sql);  
         header('Location: login.php');
         die();

@@ -1,4 +1,6 @@
 <?php
+// Will be merged into 'namng-branch2' in update 3.0
+
 define('HOSTNAME', 'localhost:3306');
 define('USERNAME', 'root');
 define('PASSWORD', '');

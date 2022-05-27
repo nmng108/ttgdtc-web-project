@@ -1,4 +1,6 @@
 <?php
+// Used in account functions
+// Will be merged into 'namng-branch2' in update 3.0
 
 function fixSqlInject($sql) {
 	$sql = str_replace('\\', '\\\\', $sql);
@@ -51,7 +53,7 @@ function getUserToken() {
 		return $_SESSION['students'];
 	}
 	$token = getCookie('token');
-	$sql = "select * from Tokens inner join students on tokens.user_id = students.studentID where token = '$token' ";
+	$sql = "select * from UserTokens inner join students on userID = students.studentID where token = '$token' ";
 	$item = executeResult($sql, true);
 	if($item != null) {
 		$_SESSION['students'] = $item;

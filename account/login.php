@@ -8,12 +8,12 @@ if($user != null) {
 } 
 $user_name = $pass = $msg = '';
 $res = false;
-$user_name = getPost('email');
+$username = getPost('username');
 $pass = getPost('password');
-$sql = "select * from students where username = '$user_name' and password = '$pass' ";
+$sql = "select * from students where (email = '$username' OR studentID = $username OR username = $username) and password = '$pass' ";
 $userExist = executeResult($sql, true);
 if($userExist == null ) {
-    $msg = 'Đăng nhập không thanh công, vui long kiểm tra email hoặc mật khẩu!!!';    
+    $msg = 'Đăng nhập không thành công, vui long kiểm tra email hoặc mật khẩu!!!';    
     
 }  else {
     $token = getSecurityMD5($userExist['username'].time());
@@ -21,7 +21,7 @@ if($userExist == null ) {
     $created_at = date('Y-m-d H:i:s');
     $_SESSION['user'] = $userExist;
     $userId = $userExist['studentID'];
-    $sql = "insert into Tokens (user_id, token, created_at) values ('$userId', '$token', '$created_at')";
+    $sql = "insert into UserTokens (userId, token) values ('$userId', '$token')";
     execute($sql);
     header('Location: ../index.php');
     die();

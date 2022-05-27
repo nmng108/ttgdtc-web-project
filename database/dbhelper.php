@@ -1,4 +1,6 @@
 <?php
+// Used in account functions
+// Will be merged into 'namng-branch2' in update 3.0
 require_once('config.php');
 
 // insert, update, delete, select
