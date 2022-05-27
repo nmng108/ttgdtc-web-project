@@ -39,11 +39,14 @@ $result = run_mysql_query($query)->fetch_all(MYSQLI_ASSOC);
 						<td><?=format_datetime_to_display($item['modifiedAt'])?></td>	
 						<td>
 							<!-- <button type="button" class="btn btn-primary" style="overflow: hidden; margin-right: 1em;">Sửa</button> -->
-							<button type="button" class="btn btn-primary" style="overflow: hidden;">Sửa</button>
+							<a href="edit.php?id=<?=$item['itemCode']?>">
+							<button class="btn btn-warning">Sửa</button>
+							</a>
 							<div style="float: right; overflow: hidden; height: 1px;">
 							</div>
 							<hr>
-							<button type="button" class="btn btn-warning" style="overflow: hidden;">Xóa</button>
+							<button onclick="deleteItem(<?=$item['itemCode']?>)" class="btn btn-danger">Xoá</button>
+			
 							<!-- <button type="button" class="btn btn-warning" style="overflow: hidden; margin-left: 1em;">Xóa</button> -->
 						</td>	
 					</tr>
@@ -65,6 +68,18 @@ $result = run_mysql_query($query)->fetch_all(MYSQLI_ASSOC);
 <?php
 	require_once('../layouts/footer.php');
 ?>
+
+<script type="text/javascript">
+	function deleteItem(id) {
+		option = confirm('Bạn có chắc chắn muốn xoá dụng cụ này không?')
+		if(!option) return;
+		$.post('delete.php', { 
+			'id': id,
+		}, function(data) { //data we got includes all js scripts(may be all text outside php scripts) intergrated in dest file besides information from echo statements.
+			location.reload()
+		})
+	}
+</script>
 
 <script>
 var itemTotal = <?=count($result)?>;

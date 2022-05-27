@@ -16,7 +16,21 @@ require_once("$root_dir/database/manager.php");
         body {
             font: 15px Arial, sans-serif;
         }
+        .infor{
+
+                text-align: left;
+                width: 600px; 
+                margin: 0px auto; 
+                margin-top: 10px; 
+                margin-left: 75px;
+                margin-bottom: 50px; 
+                background-color: white; 
+                padding: 10px; 
+                border-radius: 5px; 
+                box-shadow: 2px 2px 2px 2px #53925f;
+}
 	</style>
+
 </head>
 <body>
     <nav class="navbar navbar-expand-sm navbar-dark sticky-top py-1" style="background-color: #5A332F;">
