@@ -1,1 +1,0 @@
-# ttgdtc-web-project
