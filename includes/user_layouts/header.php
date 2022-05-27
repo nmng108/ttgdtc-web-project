@@ -10,6 +10,7 @@ if($user == null) {
    header('Location: account/login.php');
    die();
 }
+$student_name = $user['lastName'];
 
 ?>
 
@@ -58,11 +59,17 @@ if($user == null) {
                 </li>
                 <li class="nav-item">
                     <a style="color: black;" class="nav-link" href="<?=$root_dir?>/cart">Giỏ hàng</a>
-                </li>    
+                </li>     
                 <li class="nav-item">
-                    <a style="color: black;" class="nav-link" href="<?=$root_dir?>/account/logout.php">Đăng xuất</a>
+                    <a style="color: black;" class="nav-link" href="<?=$root_dir?>/infor_account">Tài khoản</a>
+                </li>      
+                <li class="nav-item">
                 </li>    
             </ul>
+            <div class="justify-content-end collapse navbar-collapse">
+            <span class="" style="color:lightgray; margin-right:15px">Xin chào, <?=$student_name?> </span> 
+            <a class="nav-link btn btn-secondary" href="<?=$root_dir?>/account/logout.php" style="background-color:dimgray">Đăng xuất</a>
+        </div>       
         </div>  
     </nav>
 	<!-- header END -->

@@ -135,24 +135,20 @@ button:hover {
     background-color: rgb(45, 152, 74);
 }
 .infor{
-
-text-align: left;
-width: 600px; 
-margin: 0px auto; 
-margin-top: 10px; 
-margin-left: 75px;
-margin-bottom: 50px; 
-background-color: white; 
-padding: 10px; 
-border-radius: 5px; 
-box-shadow: 2px 2px 2px 2px #53925f;
-}
-    
+    text-align: left;
+    width: 600px; 
+    margin: 0px auto; 
+    margin-top: 10px; 
+    margin-left: 75px;
+    margin-bottom: 50px; 
+    background-color: white; 
+    padding: 10px; 
+    border-radius: 5px; 
+    box-shadow: 2px 2px 2px 2px #53925f;
+}  
 </style>
 
-
-
-<h3>Đăng Dụng Cụ Thể Thao Mới</h3>
+<h3 style="margin-left: 150px; margin-bottom:30px;margin-top:30px;">Đăng Dụng Cụ Thể Thao Mới</h3>
 <div class="infor">
 <form action="" method="post" enctype='multipart/form-data'>
     <div class="form-group">

@@ -14,6 +14,7 @@ $_SESSION[NAME] = $user['username'];
 $_SESSION[ROLE] = "STUDENT";
 
 
+
 $product_list = get_products_by_category(SPORT_EQUIPMENT);
 ?>
 <!-- body START -->

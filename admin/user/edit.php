@@ -1,54 +1,41 @@
 <?php
-$title = 'Thêm Tài Khoản Người Dùng';
+$title = 'Sửa Tài Khoản Người Dùng';
 $root_dir = '../..';
 
 require_once("$root_dir/admin/layouts/header.php");
-require_once("../../utils/utility.php");
-$email = $student_id = $cf_password = $password = $school = $firstname = $lastname = $phone_number = $msg='';
-if(!empty($_POST)) {
-    $email = getPost('email');
-    $school = getPost('school');
-    $password = getPost('password');
-    $firstname = getPost('firstname');
-    $lastname = getPost('lastname');
-    $cf_password = getPost('cf_password');
-    $student_id= getPost('student_id');
-    $phone_number = getPost('phone_number');
-    switch($school) {
-        case "Đại Học Công Nghệ": 
-            $sc = "UET";
-            break;
-        case "Đại Học Ngoại Ngữ": 
-            $sc = "ULIS";
-            break;
-        case "Đại Học Giáo DỤc": 
-            $sc = "UEd";
-            break;
-        case "Đại Học Kinh Tế": 
-            $sc = "UEB";
-        break;
-        
-        case "Quốc Tế": 
-            $sc = "IS";
-            break;
-    }
-    $userExist = run_mysql_query("select * from students where studentID = '$student_id' or username = '$email'", true);
-    if($userExist != null) {
-        $msg = "*Tài khoản đã tồn tại trên hệ thống";
-    } else {
-        $created_at = $updated_at = date('Y-m-d H:i:s');
-        $sql = "insert into students (email, password, studentID, school, firstName, lastName, phoneNumber) 
-        values ( '$email', '$password', '$student_id', '$sc', '$firstname', '$lastname', '$phoneNumber')";
-        execute($sql);  
-        header('Location: index.php');
-        die();
-    }
-    
-} 
-    
+
+
+if (!isset($_GET['id'])) {
+	header("Location: $root_dir/admin/user");
+}
+
+$id = $msg = $fullname = $email = $phone_number = $student_ID = $address = $role_id = '';
+// require_once('form_save.php');
+
+$id = $_GET['id'];
+// Still only available for student account.
+if($id != '' && $id > 0) {
+	$query = "SELECT *, 'Student' AS `role` from Students where studentID = '$id'";
+	$user = run_mysql_query($query)->fetch_all(MYSQLI_ASSOC)[0];
+	if($user != null) {
+		$student_id = $user['studentID'];
+		$first_name = $user['firstName'];
+		$last_name = $user['lastName'];
+		$username = $user['username'];
+		$email = $user['email'];
+		$phone_number = $user['phoneNumber'];
+		$school = $user['school'];
+		$role = $user['role'];
+	} else {
+		$id = 0;
+	}
+} else {
+	$id = 0;
+}
+
+// $sql = "select * from Role";
+// $roleItems = executeResult($sql);
 ?>
-
-
 <style>
     .infor{
         text-align: left;
@@ -63,32 +50,36 @@ if(!empty($_POST)) {
         box-shadow: 2px 2px 2px 2px #53925f;
     }
 </style>
+
 <div class="row" style="margin-top: 20px;">
-	<div class="col-md-12 table-responsive">
-		<h3 style="text-align: center; margin-bottom: 20px;">Thêm Tài Khoản Người Dùng</h3>
+	<div >
+		<h3 style="text-align: center;">Sửa thông tin tài khoản người dùng</h3>
 		<div class="infor">
 			<div class="panel-heading">
-				<h5 style="color: brown;font-style: italic;"><?=$msg?></h5>
+				<h5 style="color: red;"><?=$msg?></h5>
 			</div>
-			<div class="panel-body container" >
-				<form method="post" action="" onsubmit="return validateForm();">
+			<div class="panel-body">
+				<form method="post" action="modify_account.php" onsubmit="return validateForm();">
 					<div class="form-group">
 						<label for="student_ID">Mã sinh viên: </label>
-						<input type="tel" class="form-control" id="student_id" name="student_id" required>
+						<input type="tel" class="form-control" id="student_id" name="student_id" value="<?=$student_id?>" required>
 					</div>
 					<div class="form-group">
 						<label for="first_name">Họ: </label>
-						<input type="text" class="form-control" id="first_name" name="first_name" >
+						<input type="text" class="form-control" id="first_name" name="first_name" value="<?=$first_name?>">
 						<label for="last_name">Tên: </label>
-						<input type="text" class="form-control" id="last_name" name="last_name"  required>
-			
+						<input type="text" class="form-control" id="last_name" name="last_name" value="<?=$last_name?>" required>
+					</div>
+					<div class="form-group">
+						<label for="usr">Role: <?=$role?></label>
+					</div>
 					<div class="form-group">
 						<label for="email">Email:</label>
-						<input type="email" class="form-control" id="email" name="email"  required>
+						<input type="email" class="form-control" id="email" name="email" value="<?=$email?>" required>
 					</div>
 					<div class="form-group">
 						<label for="phone_number">SĐT:</label>
-						<input type="tel" class="form-control" id="phone_number" name="phone_number"  required>
+						<input type="tel" class="form-control" id="phone_number" name="phone_number" value="<?=$phone_number?>" required>
 					</div>
 					<div class = "form-group">
 						<label for="school">Trường: </label>
@@ -103,7 +94,7 @@ if(!empty($_POST)) {
 					</div>
 					<div class="form-group">
 						<label for="username">Tên đăng nhập: </label>
-						<input type="tel" class="form-control" id="username" name="username" >
+						<input type="tel" class="form-control" id="username" name="username" value="<?=$username?>">
 					</div>
 					<div class="form-group">
 						<label for="password">Mật Khẩu:</label>
@@ -111,7 +102,7 @@ if(!empty($_POST)) {
 					</div>
 					<div class="form-group">
 						<label for="confirmation_pwd">Xác Minh Mật Khẩu:</label>
-						<input type="password" class="form-control" id="confirmation_password" disabled>
+						<input type="password" class="form-control" id="confirmation_password" >
 					</div>
 					<button type="submit" class="btn btn-success">Đăng Ký</button>
 				</form>
