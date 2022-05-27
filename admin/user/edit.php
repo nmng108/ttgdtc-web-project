@@ -60,19 +60,14 @@ if($id != '' && $id > 0) {
 			</div>
 			<div class="panel-body">
 				<form method="post" action="modify_account.php" onsubmit="return validateForm();">
-					<div class="form-group">
-						<label for="student_ID">Mã sinh viên: </label>
-						<input type="tel" class="form-control" id="student_id" name="student_id" value="<?=$student_id?>" required>
-					</div>
+					
 					<div class="form-group">
 						<label for="first_name">Họ: </label>
 						<input type="text" class="form-control" id="first_name" name="first_name" value="<?=$first_name?>">
 						<label for="last_name">Tên: </label>
 						<input type="text" class="form-control" id="last_name" name="last_name" value="<?=$last_name?>" required>
 					</div>
-					<div class="form-group">
-						<label for="usr">Role: <?=$role?></label>
-					</div>
+					
 					<div class="form-group">
 						<label for="email">Email:</label>
 						<input type="email" class="form-control" id="email" name="email" value="<?=$email?>" required>
@@ -81,30 +76,13 @@ if($id != '' && $id > 0) {
 						<label for="phone_number">SĐT:</label>
 						<input type="tel" class="form-control" id="phone_number" name="phone_number" value="<?=$phone_number?>" required>
 					</div>
-					<div class = "form-group">
-						<label for="school">Trường: </label>
-						<select  name="school" class="form-control" required>
-							<option value="UET">Đại Học Công Nghệ</option>
-							<option value="ULIS">Đại Học Ngoại Ngữ</option>
-							<option value="IS">Trường Quốc Tế</option>
-							<option value="SoL">Khoa Luật</option>
-							<option value="UEB">Đại Học Kinh Tế</option>
-							<option value="UEd">Đại Học Giáo Dục</option>
-						</select>
-					</div>
+					
 					<div class="form-group">
 						<label for="username">Tên đăng nhập: </label>
 						<input type="tel" class="form-control" id="username" name="username" value="<?=$username?>">
 					</div>
-					<div class="form-group">
-						<label for="password">Mật Khẩu:</label>
-						<input type="password" class="form-control" id="password" name="password">
-					</div>
-					<div class="form-group">
-						<label for="confirmation_pwd">Xác Minh Mật Khẩu:</label>
-						<input type="password" class="form-control" id="confirmation_password" >
-					</div>
-					<button type="submit" class="btn btn-success">Đăng Ký</button>
+		
+					<button type="submit" class="btn btn-success">Cập nhật</button>
 				</form>
 			</div>
 		</div>

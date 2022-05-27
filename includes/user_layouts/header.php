@@ -15,13 +15,7 @@ if($user == null) {
 $student_name = $user['lastName'];
 
 ?>
-<?php
-$query = "SELECT CONCAT(firstName, ' ', lastName) AS fullName FROM Students WHERE studentID = ".$_SESSION[USERID];
-$student_name = run_mysql_query($query);
-if ($student_name->num_rows == 1) {
-    $student_name = $student_name->fetch_array()['fullName'];
-}
-?>
+
 
 <!DOCTYPE html>
 <html>
@@ -72,7 +66,7 @@ if ($student_name->num_rows == 1) {
             </ul>
         </div> 
         <div class="justify-content-end collapse navbar-collapse">
-            <span class="" style="color:lightgray; margin-right:15px">Xin chào, <?=$student_name?></span> 
+            <a  href = "<?=$root_dir?>/infor_account" class="" style="color:lightgray; margin-right:15px">Xin chào, <?=$student_name?></a> 
             <a class="nav-link btn btn-secondary" href="<?=$root_dir?>/account/logout.php" style="background-color:dimgray">Đăng xuất</a>
         </div>
 

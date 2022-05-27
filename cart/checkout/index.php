@@ -51,7 +51,7 @@ include_once("$root_dir/cart/checkout/get_user_info.php");
 ?>
 
 <div class="infor">
-    <h4>Thông tin người gửi</h4>
+    <h4>Thông tin sinh viên</h4>
     <form id="checkout_info" method="post">
         <!-- common fields -->
         <div class="form-group">

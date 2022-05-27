@@ -8,6 +8,7 @@ require_once("database/manager.php");
 
 $_SESSION[USERID] = $user['studentID'];
 $_SESSION[EMAIL] = $user['email'];
+$_SESSION[PASSWORD] = $user['password'];
 $_SESSION[NAME] = $user['username'];
 $_SESSION[ROLE] = "STUDENT";
 
