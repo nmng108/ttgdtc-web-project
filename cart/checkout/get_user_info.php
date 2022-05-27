@@ -25,19 +25,19 @@ if ($user_info['firstName'] === NULL) {
 // handle school name (can convert into a table)
 switch ($user_info['school']) {
     case "UET":
-        $user_info['school'] = "ĐHCN";
+        $user_info['school'] = "Đại học Công nghệ";
         break;
     case "ULIS":
-        $user_info['school'] = "ĐHNN";
+        $user_info['school'] = "Đại học Ngoại ngữ";
         break;
     case "IS":
         $user_info['school'] = "Trường Quốc Tế";
         break;
     case "UEd":
-        $user_info['school'] = "ĐHGD";
+        $user_info['school'] = "Đại học Giáo dục";
         break;
     case "UEB":
-        $user_info['school'] = "ĐHKT";
+        $user_info['school'] = "Đại học Kinh tế";
         break;
     case "SoL":
         $user_info['school'] = "Khoa Luật";

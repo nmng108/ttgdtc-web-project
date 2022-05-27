@@ -1,4 +1,5 @@
 <?php 
+
 $title = 'Yêu cầu';
 $root_dir = "../..";
 
@@ -49,26 +50,26 @@ $submission_disabled = false;
 include_once("$root_dir/cart/checkout/get_user_info.php");
 ?>
 
-<div class="panel-body">
+<div class="infor">
     <h4>Thông tin người gửi</h4>
     <form id="checkout_info" method="post">
         <!-- common fields -->
+        <div class="form-group">
         <label for="student_id">Mã sinh viên </label>
-        <input type="text" name="student_id" value="<?=$_SESSION[USERID]?>" disabled>
-        <br>
-        <br>
+        <input class="form-control"   type="text" name="student_id" value="<?=$_SESSION[USERID]?>" disabled>
+        </div>
+        <div class="form-group">
         <label for="full_name">Họ Tên </label>
-        <input type="text" name="full_name" value="<?=$user_info['fullName']?>" disabled>
-        <br>
-        <br>
+        <input class="form-control" type="text" name="full_name" value="<?=$user_info['fullName']?>" disabled>
+        </div>
+        <div class="form-group">
         <label for="school">Trường </label>
-        <input type="text" name="school" value="<?=$user_info['school']?>" disabled>
-        <br>
-        <br>
+        <input class="form-control"type="text" name="school" value="<?=$user_info['school']?>" disabled>
+        </div>
+        <div class="form-group">
         <label for="phone_number">Số điện thoại </label>
-        <input type="number" name="phone_number" value="<?=$user_info['phoneNumber']?>" disabled>
-        <br>
-        <br>
+        <input class="form-control" type="number" name="phone_number" value="<?=$user_info['phoneNumber']?>" disabled>
+        </div>
 
         <?php
         if ($_GET['cat'] == SPORT_EQUIPMENT) {
@@ -86,10 +87,10 @@ include_once("$root_dir/cart/checkout/get_user_info.php");
                 include_once("$root_dir/cart/checkout/get_class_info.php");
 
                 ?>
+                <div class="form-group">
                 <label for="class_code">Lớp học phần </label>
-                <input type="text" name="class_code" value="<?=$user_info['classCode']?>" disabled>
-                <br>
-                <br>
+                <input class="form-control" type="text" name="class_code" value="<?=$user_info['classCode']?>" disabled>
+                </div>
                 <div class="form-group">
                     <label for="class_start_datetime">Thời gian mượn: </label>
                     <input type="datetime-local" name="class_start_datetime" value="<?=$class_info['start_datetime']?>" disabled>
@@ -97,17 +98,17 @@ include_once("$root_dir/cart/checkout/get_user_info.php");
 
                 <div class = "form-group">
                     <label for="class_end_datetime">Thời gian trả: </label>
-                    <input type="datetime-local" name="class_end_datetime" value="<?=$class_info['end_datetime']?>" disabled>   
+                    <input class="form-control" type="datetime-local" name="class_end_datetime" value="<?=$class_info['end_datetime']?>" disabled>   
                 </div>
                 <?php
             } else {
                 $submission_disabled = true;
                 ?>
+                <div class="">
                 <label for="class_code">Lớp học phần </label>
-                <input type="text" name="class_code" value="Không tham gia" disabled>
-                <br>
-                <br>
-                <p id="notif_msg">Không thể gửi yêu cầu do không tham gia lớp học nào</p>
+                <input class = "form-group"type="text" name="class_code" value="Không tham gia" disabled>
+                </div>
+                <p style= "color: red; "id="notif_msg">*Không thể gửi yêu cầu do không tham gia lớp học nào</p>
                 <!-- <div class="form-group">
                     <label for="start_time">Thời gian mượn:</label>
                     <input type="time" class="" name="start_time" value="<?=date('H:i:s')?>">
@@ -126,21 +127,22 @@ include_once("$root_dir/cart/checkout/get_user_info.php");
         }
         if ($_GET['cat'] == UNIFORM) {
             ?>
+            <div class="form-group">
             <label for="payment_method">Phương thức thanh toán: </label>
             <select name="payment_method" id="payment_method" required>
                 <option selected disabled hidden>Chọn</option>
                 <option value="BANKING">Chuyển khoản</option>
                 <option value="DIRECT">Trực tiếp</option>
             </select>
-            <br>
-            <br>
+            </div>
             <?php
         }
         ?>
         <!-- common fields -->
+        <div class="form-group">
         <label for="note">Ghi chú </label>
-        <input type="text" name="note" value="">
-        <br>
+        <input class = "form-control" type="text" name="note" value="">
+        </div>
         <!-- Doesn't work with cat = UNIFORM ??? -->
         <input type="button" class="btn" name="submit" value="Gửi yêu cầu" style="width: 20%;" onclick="process('<?=$_GET['cat']?>')">	
         <span id="notification"></span>

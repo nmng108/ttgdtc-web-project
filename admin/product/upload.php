@@ -109,39 +109,77 @@ if (isset($_POST['submit']) && isset($_FILES[ITEM_IMAGE])) {
 <?php
 include_once("$root_dir/admin/layouts/header.php");
 ?>
-<h3>Đăng Dụng Cụ Thể Thao Mới</h3>
+<style>
+    input{
+    
+    text-align: center;
+    vertical-align: middle;
+    margin: 8px 0;
+    border: 2px solid rgb(189, 197, 189);
+    border-radius: 5px;
+}
 
+button{
+    margin: 30px 0;
+    margin-left: 90px;
+    width: 120px;
+    height: 50px;
+    background-color: rgb(245, 249, 245);
+    border: 1px solid;
+    cursor: pointer;
+    
+
+}
+button:hover {
+    transition: 0.5s;
+    background-color: rgb(45, 152, 74);
+}
+.infor{
+    text-align: left;
+    width: 600px; 
+    margin: 0px auto; 
+    margin-top: 10px; 
+    margin-left: 75px;
+    margin-bottom: 50px; 
+    background-color: white; 
+    padding: 10px; 
+    border-radius: 5px; 
+    box-shadow: 2px 2px 2px 2px #53925f;
+}  
+</style>
+
+<h3 style="margin-left: 150px; margin-bottom:30px;margin-top:30px;">Đăng Dụng Cụ Thể Thao Mới</h3>
+<div class="infor">
 <form action="" method="post" enctype='multipart/form-data'>
+    <div class="form-group">
     <label for="<?=ITEM_NAME?>">Tên dụng cụ </label>
-    <input type="text" name="<?=ITEM_NAME?>" id="" required>
-    <br>
-    <br>
+    <input class="form-control" type="text" name="<?=ITEM_NAME?>" id="" required>
+    </div>
+    <div class="form-group">
     <label for="<?=ITEM_QUANTITY?>">Số lượng </label>
-    <input type="number" name="<?=ITEM_QUANTITY?>" id="" required>
-    <br>
-    <br>
+    <input class="form-control" type="number" name="<?=ITEM_QUANTITY?>" id="" required>
+    </div>
+    <div class="form-group">
     <label for="<?=ITEM_CATEGORY?>">Danh mục </label>
-    <select name="<?=ITEM_CATEGORY?>" value="" required>
-        <option value="SPORT_EQUIPMENT">Dụng cụ thể thao</option>
-        <option value="UNIFORM" disabled>Đồng phục</option>
+    <select class="form-group" name="<?=ITEM_CATEGORY?>" value="" required>
+        <option class="form-control"  value="SPORT_EQUIPMENT">Dụng cụ thể thao</option>
+        <option class="form-control"value="UNIFORM" disabled>Đồng phục</option>
     </select>
-    <br>
-    <br>
+    </div >
+    <div >
     <label for="<?=ITEM_IMAGE?>[]">Ảnh </label>
     <input type="file" name="<?=ITEM_IMAGE?>[]" id="<?=ITEM_IMAGE?>" required accept="<?=join(', ', $accepted_file_types)?>" >
-    <br>
+    </div>
     Xem trước
     <div class="image-preview">
-
     </div>
-    <br>
-    <br>
+    <div class="form-group" style="margin-top: 10px;">
     <label>Mô tả</label>
-    <input type="textarea" name=<?=ITEM_DESCRIPTION?> id="">
-    <br>
-    <br>
+    <input class="form-control" type="textarea" name=<?=ITEM_DESCRIPTION?> id="">
+    </div>
     <input type="submit" name="submit" value="Lưu">
 </form>
+</div>
 
 <script type="text/javascript">
 const IMAGE_INPUT = document.getElementById('<?=ITEM_IMAGE?>');

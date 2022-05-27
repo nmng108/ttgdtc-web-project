@@ -12,4 +12,5 @@ if (!isset($_POST['id'])) {
 
 $query = "DELETE FROM products WHERE itemCode = ".$_POST['id'];
 
+
 echo run_mysql_query($query) ? "deleted successfully" : "deleted unsuccessfully";
