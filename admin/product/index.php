@@ -48,13 +48,8 @@ $result = run_mysql_query($query)->fetch_all(MYSQLI_ASSOC);
 					<button class="btn btn-warning">Sửa</button>
 				</a>
 			</td>
-			<td style="width: 50px">
-				<?php
-						?>
+			<td style="width: 50px">	
 			<button onclick="deleteItem(<?=$item['itemCode']?>)" class="btn btn-danger">Xoá</button>
-			<?php
-								
-				?>
 			</td>
 				<!-- <button type="button" class="btn btn-warning" style="overflow: hidden; margin-left: 1em;">Xóa</button> -->
 			
@@ -76,8 +71,7 @@ $result = run_mysql_query($query)->fetch_all(MYSQLI_ASSOC);
 		$.post('delete.php', { 
 			'id': id,
 		}, function(data) { //data we got includes all js scripts(may be all text outside php scripts) intergrated in dest file besides information from echo statements.
-			console.log(data);
-			// location.reload();
+			location.reload()
 		})
 	}
 </script>
