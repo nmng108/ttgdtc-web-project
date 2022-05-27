@@ -1,16 +1,7 @@
 <?php
 include_once("$root_dir/includes/utilities.php");
 
-define('HOSTNAME', 'localhost:3306');
-define('USERNAME', 'root');
-define('PASSWORD', '');
-define('DATABASE', 'pec_database');
-//order
-define('ASCENDING', 'ASC');
-define('DESCENDING', 'DESC');
-
-define('SPORT_EQUIPMENT', 'SPORT_EQUIPMENT');
-define('UNIFORM', 'UNIFORM');
+include_once("config.php");
 
 define('UPLOADED_IMAGE_DIR', "$root_dir/uploads/images/");
 

@@ -55,22 +55,22 @@ $all_status = run_mysql_query($sql)->fetch_all(MYSQLI_ASSOC);
 
 <div class="row" style="margin-top: 20px;">
 	<div class="col-md-12 table-responsive">
-		<h3>Trạng thái yêu cầu</h3>
+		<h3>Trạng thái dụng cụ</h3>
 		<div class="panel panel-primary">
 			<div class="panel-heading">
 			</div>
-			<div class="panel-body">
-				<form method="post">
+			<div class="row">
+				<form method="post" style="margin-left: 20px;">
                     <div class="form-group">
-                    <label for="usr">Tên:</label>
+                    <label for="usr">Tên:</label><br>
 						<input type="text" class="form-control" name="itemname" value="<?=$request['itemName']?>" required>
 					</div>
                     <div class="form-group">
-                    <label for="usr">Mô tả:</label>
+                    <label  for="usr">Mô tả:</label>
 						<input type="text" class="form-control" name="description" value="<?=$request['description']?>" required>
 					</div>
                     <div class="form-group">
-						<label for="usr">Số lượng:</label>
+						<label for="usr">Số lượng:</label><br>
 						<input type="text" class="form-control" name="availableQuantity" value="<?=$request['availableQuantity']?>" required>
 					</div>
 					<button class="btn btn-success">Xác nhận</button>

@@ -4,9 +4,18 @@ session_start();
 
 include_once("$root_dir/includes/utilities.php");
 require_once("$root_dir/database/manager.php");
+require_once("$root_dir/utils/utility.php");
+require_once("$root_dir/database/dbhelper.php"); 
+//giữ đăng nhập
+$user = getUserToken();
+if($user == null) {
+   header('Location: account/login.php');
+   die();
+}
+$student_name = $user['lastName'];
 
-$_SESSION[USERID] = 20020001;
-
+?>
+<?php
 $query = "SELECT CONCAT(firstName, ' ', lastName) AS fullName FROM Students WHERE studentID = ".$_SESSION[USERID];
 $student_name = run_mysql_query($query);
 if ($student_name->num_rows == 1) {
