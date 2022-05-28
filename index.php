@@ -242,7 +242,16 @@ include_once("includes/user_layouts/cart_icon_bubble.php");
                     setTimeout(function() {
                         $("#notif_" + item_code).html("");
                     }, 2000);
-                    document.querySelector(".cart_count").innerHTML = <?=++$count?>;
+                    
+                    $.ajax({
+                        type : "POST",
+                        url  : "./includes/user_layouts/get_cart_count.php",
+                        data : { },
+                        success: function(res) { 
+                            console.log(res);
+                            $(".cart_count").html(res);
+                        }
+                    });
                 }
             });
         }

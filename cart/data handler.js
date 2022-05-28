@@ -75,8 +75,17 @@ var delete_item = function(element) {
         dataType : "json",
         success: function(response){ 
             console.log(response);
-            if ($response['hasSucceeded'] == true && response['itemCount'] == 0) {
+            if (response['hasSucceeded'] == true && response['itemCount'] == 0) {
                 document.getElementById("category_" + response['category']).remove();
+                $.ajax({
+                    type : "POST",
+                    url  : "../includes/user_layouts/get_cart_count.php",
+                    data : { },
+                    success: function(res) { 
+                        console.log(res);
+                        $(".cart_count").html(res);
+                    }
+                });            
             }
         }
     });

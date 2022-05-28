@@ -21,7 +21,7 @@ if(!(empty($_POST))) {
         WHERE studentID = $id"
     ;
     $result = run_mysql_query($query);
-    $msg = "*Cập nhật thành công!";
+    header("Location: ./");
 }
 ?>
 <style>
@@ -40,6 +40,11 @@ transition: 0.5s;
 }
 
 </style>
+<?php
+$query = "SELECT * FROM Students WHERE studentID = " . $_SESSION[USERID];
+$student_info = run_mysql_query($query)->fetch_array();
+?>
+
 <div class="infor" >
     <h4>Thay đổi thông tin</h4>
     <h5 style="color: green;"><?=$msg?></h5>
@@ -48,24 +53,24 @@ transition: 0.5s;
         <form action="" method="post">
         <div class="form-group">
         <label for="full_name">Họ:</label>
-        <input class="form-control" type="text" name="firstName" >
+        <input class="form-control" type="text" name="firstName" value="<?=$student_info['firstName']?>" required>
         </div>
         <div class="form-group">
         <label for="full_name">Tên:</label>
-        <input class="form-control" type="text" name="lastName" >
+        <input class="form-control" type="text" name="lastName" value="<?=$student_info['lastName']?>" required>
         </div>
         <div class="form-group">
         <label for="school">Email </label>
-        <input class="form-control"type="text" name="email"  >
+        <input class="form-control"type="text" name="email" value="<?=$student_info['email']?>" required>
         </div>
         <div class="form-group">
         <label for="phone_number">Số điện thoại </label>
-        <input class="form-control" type="number" name="phone_number" >
+        <input class="form-control" type="number" name="phone_number" value="<?=$student_info['phoneNumber']?>" required>
         </div>
         <button>
            Cập nhật
         </button>
-        <a href="../index.php">
+        <a href="./">
             Thoát
         </a>
         </form>

@@ -6,13 +6,14 @@ include_once("$root_dir/includes/utilities.php");
 require_once("$root_dir/database/manager.php");
 require_once("$root_dir/utils/utility.php");
 require_once("$root_dir/database/dbhelper.php"); 
+
 //giữ đăng nhập
 $user = getUserToken();
 if($user == null) {
-   header('Location: account/login.php');
-   die();
-}
-$student_name = $user['lastName'];
+    header('Location: account/login.php');
+} 
+
+$student_name = $user['firstName'] . " " . $user['lastName'];
 
 ?>
 
@@ -66,7 +67,7 @@ $student_name = $user['lastName'];
             </ul>
         </div> 
         <div class="justify-content-end collapse navbar-collapse">
-            <a  href = "<?=$root_dir?>/infor_account" class="" style="color:lightgray; margin-right:15px">Xin chào, <?=$student_name?></a> 
+            <a  href = "<?=$root_dir?>/infor_account" class="" style="color:lightgray; margin-right:15px">Xin chào, <b><?=$student_name?></b> </a> 
             <a class="nav-link btn btn-secondary" href="<?=$root_dir?>/account/logout.php" style="background-color:dimgray">Đăng xuất</a>
         </div>
 

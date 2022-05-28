@@ -47,14 +47,14 @@ function getSecurityMD5($pwd) {
 }
 
 function getUserToken() {
-	if(isset($_SESSION['students'])) {
-		return $_SESSION['students'];
+	if(isset($_SESSION['student'])) {
+		return $_SESSION['student'];
 	}
 	$token = getCookie('token');
-	$sql = "select * from Tokens inner join students on tokens.user_id = students.studentID where token = '$token' ";
+	$sql = "SELECT * from UserTokens inner join students on UserTokens.userID = students.studentID where token = '$token'";
 	$item = executeResult($sql, true);
 	if($item != null) {
-		$_SESSION['students'] = $item;
+		$_SESSION['student'] = $item;
 		return $item;
 	}
 	return null;
@@ -65,7 +65,7 @@ function getAdminToken() {
 		return $_SESSION['admin'];
 	}
 	$token = getCookie('token');
-	$sql = "select * from Tokens inner join admins on tokens.user_id = admins.adminID where token = '$token' ";
+	$sql = "SELECT * from UserTokens inner join admins on UserTokens.userID = admins.adminID where token = '$token' ";
 	$item = executeResult($sql, true);
 	if($item != null) {
 		$_SESSION['admin'] = $item;

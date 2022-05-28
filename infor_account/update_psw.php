@@ -79,7 +79,7 @@ transition: 0.5s;
         <button>
            Cập nhật
         </button>
-        <a href="../index.php">
+        <a href="./">
             Thoát
         </a>
         </form>
